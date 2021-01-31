@@ -11,7 +11,7 @@ public class User {
 	private HikingHistory hikingHistory;
 	
 	
-	public UserInfo(String username, String password, String firstName, String lastName, String phoneNumber,
+	public User(String username, String password, String firstName, String lastName, String phoneNumber,
 			String image, AccountType accountType, HikingHistory hikingHistory) {
 		super();
 		this.username = username;
