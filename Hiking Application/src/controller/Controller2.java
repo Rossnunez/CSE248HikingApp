@@ -134,11 +134,14 @@ public class Controller2 implements Initializable{
 		
 		try {
 			bufferedImage = ImageIO.read(filePath);
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			imageField.setImage(image);
 		} catch (IOException e) {
-			e.printStackTrace();
+			defaultImage = imageField.getImage();
+			image = "\\RawData\\user.png";
 		}
-		Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-		imageField.setImage(image);
+		//Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+		//imageField.setImage(image);
 		
 		username = Controller1.getUsername();
 		user = Controller1.getUser();
