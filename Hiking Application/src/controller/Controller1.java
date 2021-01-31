@@ -17,6 +17,7 @@ import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.AccountType;
 import model.Trail;
@@ -65,8 +66,8 @@ public class Controller1 implements Initializable {
 		}
 	}
 	
-	public void createAccountPane(ActionEvent event) throws IOException{
-		Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/view3.fxml"));
+	public void createAccountPane(MouseEvent event) throws IOException{
+		Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/view4.fxml"));
 		Scene secondScene = new Scene(secondRoot);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(secondScene);
