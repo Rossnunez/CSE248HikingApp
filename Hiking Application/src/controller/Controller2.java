@@ -77,6 +77,7 @@ public class Controller2 implements Initializable {
 
 	// start trails tab
 	public CheckComboBox<String> difficultyBox;
+	public CheckComboBox<String> typeBox;
 	
 	static HikeType answerType;
 	static Level answerLevel;
@@ -340,12 +341,17 @@ public class Controller2 implements Initializable {
 		lastnameField.setText(user.getLastName());
 		phonenumberField.setText(user.getPhoneNumber());
 		
-		final ObservableList<String> strings = FXCollections.observableArrayList();
-		strings.add("HARD");
-		strings.add("MODERATE");
-		strings.add("EASY");
+		final ObservableList<String> difficultyStrings = FXCollections.observableArrayList();
+		difficultyStrings.add("HARD");
+		difficultyStrings.add("MODERATE");
+		difficultyStrings.add("EASY");
+		difficultyBox.getItems().addAll(difficultyStrings);
 		
-		difficultyBox.getItems().addAll(strings);
+		final ObservableList<String> typeStrings = FXCollections.observableArrayList();
+		typeStrings.add("LOOP");
+		typeStrings.add("OUT AND BACK");
+		typeStrings.add("POINT TO POINT");
+		typeBox.getItems().addAll(typeStrings);
 
 		// start trails tab
 		trail = FXCollections.observableArrayList();

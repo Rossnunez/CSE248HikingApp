@@ -105,6 +105,7 @@
                            </font>
                         </Button>
                         <CheckComboBox fx:id="difficultyBox" layoutX="378.0" layoutY="85.0" prefHeight="25.0" prefWidth="92.0" title="Difficulty" />
+                        <CheckComboBox fx:id="typeBox" layoutX="493.0" layoutY="85.0" prefHeight="25.0" prefWidth="74.0" title="Type" />
                      </children></AnchorPane>
             </content>
           </Tab>
