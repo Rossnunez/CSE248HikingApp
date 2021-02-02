@@ -205,7 +205,7 @@
                               <TableColumn fx:id="trailNameHistory" prefWidth="77.93660986423492" text="Trail Name" />
                               <TableColumn fx:id="lengthHistory" prefWidth="69.09709167480469" text="Length(mi)" />
                               <TableColumn fx:id="elevationHistory" prefWidth="122.90292358398438" text="Evelation Gain(ft)" />
-                              <TableColumn fx:id="levelHistory" minWidth="1.0" prefWidth="69.32095336914062" text="Level" />
+                              <TableColumn fx:id="difficultyHistory" minWidth="1.0" prefWidth="69.32095336914062" text="Difficulty" />
                               <TableColumn fx:id="typeHistory" prefWidth="41.809783935546875" text="Type" />
                               <TableColumn fx:id="trailDurationHistory" prefWidth="114.06340026855469" text="Duration" />
                               <TableColumn fx:id="trailPaceHistory" prefWidth="114.06340026855469" text="Pace(min/mi)" />
@@ -226,10 +226,10 @@
                            </font>
                         </Text>
                         <Button layoutX="620.0" layoutY="414.0" mnemonicParsing="false" onAction="#addPicturesHistory" prefHeight="25.0" prefWidth="84.0" text="Add Pictures" />
-                        <CheckComboBox fx:id="difficultyBoxUncompleted1" layoutX="324.0" layoutY="78.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
-                        <CheckComboBox fx:id="typeBoxUncompleted1" layoutX="433.0" layoutY="77.0" prefHeight="25.0" prefWidth="68.0" title="Type" />
-                        <Slider fx:id="lengthSliderUncompleted1" layoutX="524.0" layoutY="81.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
-                        <Slider fx:id="evelationSliderUncompleted1" layoutX="652.0" layoutY="80.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <CheckComboBox fx:id="difficultyBoxHistory" layoutX="324.0" layoutY="78.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
+                        <CheckComboBox fx:id="typeBoxHistory" layoutX="433.0" layoutY="77.0" prefHeight="25.0" prefWidth="68.0" title="Type" />
+                        <Slider fx:id="lengthSliderHistory" layoutX="524.0" layoutY="81.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Slider fx:id="evelationSliderHistory" layoutX="652.0" layoutY="80.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
                         <Text layoutX="531.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />

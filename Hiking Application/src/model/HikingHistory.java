@@ -20,6 +20,26 @@ public class HikingHistory implements Comparable<HikingHistory> {
 		this.images = images;
 		this.pace = pace;
 	}
+	
+	public String getTrailName() {
+		return trail.getTrailName();
+	}
+	
+	public Level getDifficulty() {
+		return trail.getDifficulty();
+	}
+	
+	public HikeType getType() {
+		return trail.getType();
+	}
+	
+	public double getLength() {
+		return trail.getLength();
+	}
+	
+	public double getElevation() {
+		return trail.getElevation();
+	}
 
 	public Trail getTrail() {
 		return trail;
