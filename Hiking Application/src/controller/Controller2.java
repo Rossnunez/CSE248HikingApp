@@ -33,6 +33,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
+import javafx.scene.control.Slider;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -73,42 +74,44 @@ public class Controller2 implements Initializable {
 	public ImageView imageField;
 	public Image defaultImage;
 	public BufferedImage bufferedImage;
-	
 
 	// start trails tab
 	public CheckComboBox<String> difficultyBox;
 	public CheckComboBox<String> typeBox;
-	
+
+	public Slider lengthSlider;
+	public Slider evelationSlider;
+
 	static HikeType answerType;
 	static Level answerLevel;
-	
+
 	public Text selectedTrail;
 	public ComboBox<String> sortByBox;
-	public ObservableList<String> searchList = FXCollections.observableArrayList("NAME", "LENGTH", "EVALATION", "LEVEL",
+	public ObservableList<String> searchList = FXCollections.observableArrayList("NAME", "LENGTH", "ELEVATION", "DIFFICULTY",
 			"TYPE");
 	public ObservableList<Trail> trail;
 	public TableView<Trail> table = new TableView<Trail>();
 	public TableColumn<Trail, String> trailName;
 	public TableColumn<Trail, String> trailAddress;
 	public TableColumn<Trail, String> length;
-	public TableColumn<Trail, String> evelation;
-	public TableColumn<Trail, String> level;
+	public TableColumn<Trail, String> elevation;
+	public TableColumn<Trail, String> difficulty;
 	public TableColumn<Trail, String> type;
 	public TextField searchField;
 
-	
-	//hiking history tab//
+	// hiking history tab//
 	public void searchForTrailsHistory(ActionEvent event) {
-		
+
 	}
-	
+
 	public void completeTrail(ActionEvent event) {
-		
+
 	}
-	
+
 	public void selectedTrailHistory(MouseEvent event) {
-		
+
 	}
+
 	// start trail tab//
 	public void selectedTrail(MouseEvent event) {
 		try {
@@ -117,20 +120,20 @@ public class Controller2 implements Initializable {
 			//
 		}
 	}
-	
+
 	public void startTrail(ActionEvent event) {
 		Trail trail = table.getSelectionModel().getSelectedItem();
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY hh:mm:ss");
 		Date currentTime = new Date(System.currentTimeMillis());
 		String current = sdf.format(currentTime);
 		TreeSet<String> images = new TreeSet<String>();
-		HikingHistory hikingHistory = new HikingHistory(trail.getTrailAddress(), current, "In Progress", trail.getMiles(), "In Progress", images, "In Progress");
+		HikingHistory hikingHistory = new HikingHistory(trail.getTrailAddress(), current, "In Progress",
+				trail.getLength(), "In Progress", images, "In Progress");
 		user.getHikingHistorySet().add(hikingHistory);
 		table.getItems().remove(table.getSelectionModel().getSelectedItem());
-		
-		
+
 	}
-	
+
 	public static void displayLevel() {
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
@@ -140,35 +143,35 @@ public class Controller2 implements Initializable {
 		Label label = new Label();
 		label.setText("Select a Trail Level");
 		label.setAlignment(Pos.TOP_CENTER);
-		
+
 		Button easyButton = new Button("Hard Difficulty");
 		Button modButton = new Button("Moderate Difficulty");
 		Button hardButton = new Button("Easy Difficulty");
-		
-		easyButton.setOnAction(e ->{
+
+		easyButton.setOnAction(e -> {
 			answerLevel = Level.EASY;
 			window.close();
 		});
-		
-		modButton.setOnAction(e ->{
+
+		modButton.setOnAction(e -> {
 			answerLevel = Level.MODERATE;
 			window.close();
 		});
-		
-		hardButton.setOnAction(e ->{
+
+		hardButton.setOnAction(e -> {
 			answerLevel = Level.HARD;
 			window.close();
 		});
-		
+
 		VBox layout = new VBox(10);
 		layout.getChildren().addAll(label, easyButton, modButton, hardButton);
 		layout.setAlignment(Pos.CENTER);
-		
+
 		Scene scene = new Scene(layout);
 		window.setScene(scene);
 		window.showAndWait();
 	}
-	
+
 	public static void displayType() {
 		Stage window = new Stage();
 		window.initModality(Modality.APPLICATION_MODAL);
@@ -178,69 +181,166 @@ public class Controller2 implements Initializable {
 		Label label = new Label();
 		label.setText("Select a Trail Type");
 		label.setAlignment(Pos.TOP_CENTER);
-		
+
 		Button loopButton = new Button("Loop Trail");
 		Button outButton = new Button("Out and Back Trail");
 		Button pointButton = new Button("Point Trail");
-		
-		loopButton.setOnAction(e ->{
+
+		loopButton.setOnAction(e -> {
 			answerType = HikeType.LOOP;
 			window.close();
 		});
-		
-		outButton.setOnAction(e ->{
+
+		outButton.setOnAction(e -> {
 			answerType = HikeType.OUT_AND_BACK;
 			window.close();
 		});
-		
-		pointButton.setOnAction(e ->{
+
+		pointButton.setOnAction(e -> {
 			answerType = HikeType.POINT_TO_POINT;
 			window.close();
 		});
-		
+
 		VBox layout = new VBox(10);
 		layout.getChildren().addAll(label, pointButton, outButton, loopButton);
 		layout.setAlignment(Pos.CENTER);
-		
+
 		Scene scene = new Scene(layout);
 		window.setScene(scene);
 		window.showAndWait();
 	}
-	
+
 	public void searchForTrails(ActionEvent event) {
 		trail.clear();
-		
 		String search = searchField.getText();
-		String type = sortByBox.getValue();
-		
-		if(type.contentEquals("NAME")) {
-			List<Trail> result = trailSet.stream()
-					.filter(trail -> trail.getTrailName().startsWith(search)).collect(Collectors.toList());
-			trail.addAll(result);
-			table.setItems(trail);
-		}else if(type.contentEquals("EVELATION")) {
-			List<Trail> result = trailSet.stream()
-					.filter(trail -> String.valueOf(trail.getElevation()).startsWith(search)).collect(Collectors.toList());
-			trail.addAll(result);
-			table.setItems(trail);
-		} else if(type.contentEquals("LENGTH")) {
-			List<Trail> result = trailSet.stream()
-					.filter(trail -> String.valueOf(trail.getMiles()).startsWith(search)).collect(Collectors.toList());
-			trail.addAll(result);
-			table.setItems(trail);
-		} else if(type.contentEquals("TYPE")) {
-			displayType();
-			List<Trail> result = trailSet.stream()
-					.filter(trail -> trail.getType().equals(answerType)).collect(Collectors.toList());
-			trail.addAll(result);
-			table.setItems(trail);
-		} else if(type.contentEquals("LEVEL")) {
-			displayLevel();
-			List<Trail> result = trailSet.stream()
-					.filter(trail -> trail.getDifficulty().equals(answerLevel)).collect(Collectors.toList());
-			trail.addAll(result);
-			table.setItems(trail);
+
+		List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().startsWith(search))
+				.collect(Collectors.toList());
+		List<Trail> difficultyResult = null;
+		List<Trail> typeResult = null;
+		List<Trail> rangeResult;
+
+		ObservableList<String> difficultyList = difficultyBox.getCheckModel().getCheckedItems();
+		if (difficultyList.size() == 2) {
+
+			if (difficultyList.get(0).toString().contentEquals("HARD")
+					&& difficultyList.get(1).toString().contentEquals("MODERATE")) {
+
+				difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.HARD)
+						|| trail.getDifficulty().equals(Level.MODERATE)).collect(Collectors.toList());
+
+			} else if (difficultyList.get(0).toString().contentEquals("HARD")
+					&& difficultyList.get(1).toString().contentEquals("EASY")) {
+
+				difficultyResult = firstResult.stream().filter(
+						trail -> trail.getDifficulty().equals(Level.HARD) || trail.getDifficulty().equals(Level.EASY))
+						.collect(Collectors.toList());
+
+			} else if (difficultyList.get(0).toString().contentEquals("MODERATE")
+					&& difficultyList.get(1).toString().contentEquals("EASY")) {
+
+				difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.MODERATE)
+						|| trail.getDifficulty().equals(Level.EASY)).collect(Collectors.toList());
+
+			}
+
+		} else if (difficultyList.size() == 1) {
+
+			if (difficultyList.get(0).toString().contentEquals("HARD")) {
+
+				difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.HARD))
+						.collect(Collectors.toList());
+
+			} else if (difficultyList.get(0).toString().contentEquals("MODERATE")) {
+
+				difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.MODERATE))
+						.collect(Collectors.toList());
+
+			} else if (difficultyList.get(0).toString().contentEquals("EASY")) {
+
+				difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.EASY))
+						.collect(Collectors.toList());
+			}
+		} else {
+			difficultyResult = firstResult;
 		}
+
+		ObservableList<String> typeList = typeBox.getCheckModel().getCheckedItems();
+		if (typeList.size() == 2) {
+
+			if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("OUT AND BACK")) {
+
+				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.LOOP)
+						|| trail.getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+
+				typeResult = difficultyResult.stream().filter(
+						trail -> trail.getType().equals(HikeType.LOOP) || trail.getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+
+				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.OUT_AND_BACK)
+						|| trail.getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+
+			}
+
+		} else if (typeList.size() == 1) {
+			
+			if (typeList.get(0).toString().contentEquals("LOOP")) {
+
+				typeResult = difficultyResult.stream()
+						.filter(trail -> trail.getType().equals(HikeType.LOOP)).collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("POINT TO POINT")) {
+
+				typeResult = difficultyResult.stream()
+						.filter(trail -> trail.getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")) {
+
+				typeResult = difficultyResult.stream()
+						.filter(trail -> trail.getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
+			}
+		} else {
+			typeResult = difficultyResult;
+		}
+		
+		int length = (int)lengthSlider.getValue();
+		int evelation = (int)evelationSlider.getValue();
+		
+		rangeResult = typeResult.stream()
+				.filter(trail -> trail.getElevation() <= evelation && trail.getLength() <= length).collect(Collectors.toList());
+		
+		trail.addAll(rangeResult);
+		table.setItems(trail);
+		
+		
+
+		/*
+		 * String type = sortByBox.getValue();
+		 * 
+		 * if(type.contentEquals("NAME")) { List<Trail> result = trailSet.stream()
+		 * .filter(trail ->
+		 * trail.getTrailName().startsWith(search)).collect(Collectors.toList());
+		 * trail.addAll(result); table.setItems(trail); }else
+		 * if(type.contentEquals("EVELATION")) { List<Trail> result = trailSet.stream()
+		 * .filter(trail ->
+		 * String.valueOf(trail.getElevation()).startsWith(search)).collect(Collectors.
+		 * toList()); trail.addAll(result); table.setItems(trail); } else
+		 * if(type.contentEquals("LENGTH")) { List<Trail> result = trailSet.stream()
+		 * .filter(trail ->
+		 * String.valueOf(trail.getMiles()).startsWith(search)).collect(Collectors.
+		 * toList()); trail.addAll(result); table.setItems(trail); } else
+		 * if(type.contentEquals("TYPE")) { displayType(); List<Trail> result =
+		 * trailSet.stream() .filter(trail ->
+		 * trail.getType().equals(answerType)).collect(Collectors.toList());
+		 * trail.addAll(result); table.setItems(trail); } else
+		 * if(type.contentEquals("LEVEL")) { displayLevel(); List<Trail> result =
+		 * trailSet.stream() .filter(trail ->
+		 * trail.getDifficulty().equals(answerLevel)).collect(Collectors.toList());
+		 * trail.addAll(result); table.setItems(trail); }
+		 */
 	}
 
 	// edit tab
@@ -251,7 +351,7 @@ public class Controller2 implements Initializable {
 		this.setFilePath(fileChooser.showOpenDialog(stage));
 
 		try {
-			//image = filePath.getPath();
+			// image = filePath.getPath();
 			BufferedImage bufferedImage = ImageIO.read(filePath);
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			imageField.setImage(image);
@@ -321,17 +421,17 @@ public class Controller2 implements Initializable {
 
 		File file = new File(Controller1.getUser().getImage());
 		setFilePath(file);
-		
-		//update user tab
+
+		// update user tab
 		try {
 			bufferedImage = ImageIO.read(filePath);
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			imageField.setImage(image);
 		} catch (IOException e) {
 			defaultImage = imageField.getImage();
-			//image = "\\RawData\\user.png";
+			// image = "\\RawData\\user.png";
 		}
-		
+
 		username = Controller1.getUsername();
 		user = Controller1.getUser();
 
@@ -340,28 +440,28 @@ public class Controller2 implements Initializable {
 		firstnameField.setText(user.getFirstName());
 		lastnameField.setText(user.getLastName());
 		phonenumberField.setText(user.getPhoneNumber());
-		
+
+		// start trails tab
 		final ObservableList<String> difficultyStrings = FXCollections.observableArrayList();
 		difficultyStrings.add("HARD");
 		difficultyStrings.add("MODERATE");
 		difficultyStrings.add("EASY");
 		difficultyBox.getItems().addAll(difficultyStrings);
-		
+
 		final ObservableList<String> typeStrings = FXCollections.observableArrayList();
 		typeStrings.add("LOOP");
 		typeStrings.add("OUT AND BACK");
 		typeStrings.add("POINT TO POINT");
 		typeBox.getItems().addAll(typeStrings);
 
-		// start trails tab
 		trail = FXCollections.observableArrayList();
-		trailAddress.setCellValueFactory(new PropertyValueFactory<Trail, String>("trail address"));
-		trailName.setCellValueFactory(new PropertyValueFactory<Trail, String>("trail name"));
-		level.setCellValueFactory(new PropertyValueFactory<Trail, String>("level"));
-		evelation.setCellValueFactory(new PropertyValueFactory<Trail, String>("evelation"));
+		trailAddress.setCellValueFactory(new PropertyValueFactory<Trail, String>("trailAddress"));
+		trailName.setCellValueFactory(new PropertyValueFactory<Trail, String>("trailName"));
+		difficulty.setCellValueFactory(new PropertyValueFactory<Trail, String>("difficulty"));
+		elevation.setCellValueFactory(new PropertyValueFactory<Trail, String>("elevation"));
 		type.setCellValueFactory(new PropertyValueFactory<Trail, String>("type"));
+		length.setCellValueFactory(new PropertyValueFactory<Trail, String>("length"));
 		sortByBox.setItems(searchList);
-		//trail = FXCollections.observableArrayList();
 
 	}
 

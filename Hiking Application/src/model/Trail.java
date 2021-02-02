@@ -1,19 +1,21 @@
 package model;
 
-public class Trail {
+import java.io.Serializable;
+
+public class Trail implements Serializable{
 	private String trailName;
 	private String trailAddress;
-	private double miles;
+	private double length;
 	private double elevation;
 	private Level difficulty;
 	private HikeType type;
 
-	public Trail(String trailName, String trailAddress, double miles, double elevation, Level difficulty,
+	public Trail(String trailName, String trailAddress, double length, double elevation, Level difficulty,
 			HikeType type) {
 		super();
 		this.trailName = trailName;
 		this.trailAddress = trailAddress;
-		this.miles = miles;
+		this.length = length;
 		this.elevation = elevation;
 		this.difficulty = difficulty;
 		this.type = type;
@@ -35,12 +37,12 @@ public class Trail {
 		this.trailAddress = trailAddress;
 	}
 
-	public double getMiles() {
-		return miles;
+	public double getLength() {
+		return length;
 	}
 
-	public void setMiles(double miles) {
-		this.miles = miles;
+	public void setLength(double length) {
+		this.length = length;
 	}
 
 	public double getElevation() {
@@ -69,7 +71,7 @@ public class Trail {
 
 	@Override
 	public String toString() {
-		return "Trail [trailName=" + trailName + ", trailAddress=" + trailAddress + ", miles=" + miles + ", elevation="
+		return "Trail [trailName=" + trailName + ", trailAddress=" + trailAddress + ", length=" + length + ", elevation="
 				+ elevation + ", difficulty=" + difficulty + ", type=" + type + "]";
 	}
 }
