@@ -114,25 +114,8 @@ public class Controller2 implements Initializable {
 	public TableColumn<HikingUncompleted, String> typeUncompleted;
 	public TextField searchFieldUncompleted;
 	
-	//hiking history tab//
-	public CheckComboBox<String> difficultyBox;
-	public CheckComboBox<String> typeBox;
-
-	public Slider lengthSlider;
-	public Slider evelationSlider;
-
-	public Text selectedTrail;
-	public ObservableList<Trail> trail;
-	public TableView<Trail> table = new TableView<Trail>();
-	public TableColumn<Trail, String> trailName;
-	public TableColumn<Trail, String> trailAddress;
-	public TableColumn<Trail, String> length;
-	public TableColumn<Trail, String> elevation;
-	public TableColumn<Trail, String> difficulty;
-	public TableColumn<Trail, String> type;
-	public TextField searchField;
 	
-	//hikes in progress tab//
+	//hiking history tab//
 	public CheckComboBox<String> difficultyBoxHistory;
 	public CheckComboBox<String> typeBoxHistory;
 
