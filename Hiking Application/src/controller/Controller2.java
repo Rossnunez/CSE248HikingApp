@@ -114,6 +114,47 @@ public class Controller2 implements Initializable {
 	public TableColumn<HikingUncompleted, String> typeUncompleted;
 	public TextField searchFieldUncompleted;
 	
+	//hiking history tab//
+	public CheckComboBox<String> difficultyBox;
+	public CheckComboBox<String> typeBox;
+
+	public Slider lengthSlider;
+	public Slider evelationSlider;
+
+	public Text selectedTrail;
+	public ObservableList<Trail> trail;
+	public TableView<Trail> table = new TableView<Trail>();
+	public TableColumn<Trail, String> trailName;
+	public TableColumn<Trail, String> trailAddress;
+	public TableColumn<Trail, String> length;
+	public TableColumn<Trail, String> elevation;
+	public TableColumn<Trail, String> difficulty;
+	public TableColumn<Trail, String> type;
+	public TextField searchField;
+	
+	//hikes in progress tab//
+	public CheckComboBox<String> difficultyBoxHistory;
+	public CheckComboBox<String> typeBoxHistory;
+
+	public Slider lengthSliderHistory;
+	public Slider evelationSliderHistory;
+
+	public Text selectedTrailHistory;
+	public ObservableList<HikingHistory> trailHistory;
+	public TableView<HikingHistory> tableHistory = new TableView<HikingHistory>();
+	public TableColumn<HikingHistory, String> dateStartedHistory;
+	public TableColumn<HikingHistory, String> trailNameHistory;
+	public TableColumn<HikingHistory, String> trailAddressHistory;
+	public TableColumn<HikingHistory, String> lengthHistory;
+	public TableColumn<HikingHistory, String> elevationHistory;
+	public TableColumn<HikingHistory, String> difficultyHistory;
+	public TableColumn<HikingHistory, String> typeHistory;
+	public TableColumn<HikingHistory, String> trailDurationHistory;
+	public TableColumn<HikingHistory, String> trailPaceHistory;
+	public TableColumn<HikingHistory, String> dateCompletedHistory;
+	public TextField searchFieldHistory;
+	
+	
 
 	// hiking history tab//
 	public void searchForTrailsHistory(ActionEvent event) {
@@ -122,6 +163,10 @@ public class Controller2 implements Initializable {
 
 	public void selectedTrailHistory(MouseEvent event) {
 
+	}
+	
+	public void addPicturesHistory(ActionEvent event) {
+		
 	}
 	
 	//hikes in progress tab//

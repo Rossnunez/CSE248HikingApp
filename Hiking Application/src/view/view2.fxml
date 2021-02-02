@@ -201,14 +201,15 @@
                         </Button>
                         <TableView fx:id="tableHistory" layoutY="124.0" onMouseClicked="#selectedTrail" prefHeight="279.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0">
                            <columns>
+                              <TableColumn fx:id="dateStartedHistory" prefWidth="149.19024658203125" text="Date Started" />
                               <TableColumn fx:id="trailNameHistory" prefWidth="77.93660986423492" text="Trail Name" />
-                              <TableColumn fx:id="trailAddressHistory" prefWidth="114.06340026855469" text="Trail Address" />
                               <TableColumn fx:id="lengthHistory" prefWidth="69.09709167480469" text="Length(mi)" />
-                              <TableColumn fx:id="evelationHistory" prefWidth="122.90292358398438" text="Evelation Gain(ft)" />
+                              <TableColumn fx:id="elevationHistory" prefWidth="122.90292358398438" text="Evelation Gain(ft)" />
                               <TableColumn fx:id="levelHistory" minWidth="1.0" prefWidth="69.32095336914062" text="Level" />
                               <TableColumn fx:id="typeHistory" prefWidth="41.809783935546875" text="Type" />
-                              <TableColumn fx:id="dateStarted" prefWidth="149.19024658203125" text="Date Started" />
-                              <TableColumn fx:id="dateStarted1" prefWidth="163.6416015625" text="Date Completed" />
+                              <TableColumn fx:id="trailDurationHistory" prefWidth="114.06340026855469" text="Duration" />
+                              <TableColumn fx:id="trailPaceHistory" prefWidth="114.06340026855469" text="Pace(min/mi)" />
+                              <TableColumn fx:id="dateCompletedHistory" prefWidth="163.6416015625" text="Date Completed" />
                            </columns>
                            <columnResizePolicy>
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
@@ -224,7 +225,7 @@
                               <Font name="Microsoft JhengHei Bold" size="17.0" />
                            </font>
                         </Text>
-                        <Button layoutX="620.0" layoutY="414.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="84.0" text="Add Pictures" />
+                        <Button layoutX="620.0" layoutY="414.0" mnemonicParsing="false" onAction="#addPicturesHistory" prefHeight="25.0" prefWidth="84.0" text="Add Pictures" />
                         <CheckComboBox fx:id="difficultyBoxUncompleted1" layoutX="324.0" layoutY="78.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
                         <CheckComboBox fx:id="typeBoxUncompleted1" layoutX="433.0" layoutY="77.0" prefHeight="25.0" prefWidth="68.0" title="Type" />
                         <Slider fx:id="lengthSliderUncompleted1" layoutX="524.0" layoutY="81.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
