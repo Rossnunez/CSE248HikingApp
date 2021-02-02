@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
@@ -49,6 +50,7 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import model.HikeType;
 import model.HikingHistory;
+import model.HikingUncompleted;
 import model.Level;
 import model.Trail;
 import model.User;
@@ -63,7 +65,7 @@ public class Controller2 implements Initializable {
 	public User user;
 	public String username;
 
-	// edit tab
+	// edit tab //
 	public Text usernameText;
 	public TextField passwordField;
 	public TextField firstnameField;
@@ -75,20 +77,14 @@ public class Controller2 implements Initializable {
 	public Image defaultImage;
 	public BufferedImage bufferedImage;
 
-	// start trails tab
+	// start trails tab //
 	public CheckComboBox<String> difficultyBox;
 	public CheckComboBox<String> typeBox;
 
 	public Slider lengthSlider;
 	public Slider evelationSlider;
 
-	static HikeType answerType;
-	static Level answerLevel;
-
 	public Text selectedTrail;
-	public ComboBox<String> sortByBox;
-	public ObservableList<String> searchList = FXCollections.observableArrayList("NAME", "LENGTH", "ELEVATION", "DIFFICULTY",
-			"TYPE");
 	public ObservableList<Trail> trail;
 	public TableView<Trail> table = new TableView<Trail>();
 	public TableColumn<Trail, String> trailName;
@@ -98,19 +94,76 @@ public class Controller2 implements Initializable {
 	public TableColumn<Trail, String> difficulty;
 	public TableColumn<Trail, String> type;
 	public TextField searchField;
+	
+	//hikes in progress tab//
+	public CheckComboBox<String> difficultyBoxUncompleted;
+	public CheckComboBox<String> typeBoxUncompleted;
+
+	public Slider lengthSliderUncompleted;
+	public Slider evelationSliderUncompleted;
+
+	public Text selectedTrailUncompleted;
+	public ObservableList<HikingUncompleted> trailUncompleted;
+	public TableView<HikingUncompleted> tableUncompleted = new TableView<HikingUncompleted>();
+	public TableColumn<HikingUncompleted, String> dateStartedUncompleted;
+	public TableColumn<HikingUncompleted, String> trailNameUncompleted;
+	public TableColumn<HikingUncompleted, String> trailAddressUncompleted;
+	public TableColumn<HikingUncompleted, String> lengthUncompleted;
+	public TableColumn<HikingUncompleted, String> elevationUncompleted;
+	public TableColumn<HikingUncompleted, String> difficultyUncompleted;
+	public TableColumn<HikingUncompleted, String> typeUncompleted;
+	public TextField searchFieldUncompleted;
+	
 
 	// hiking history tab//
 	public void searchForTrailsHistory(ActionEvent event) {
 
 	}
 
-	public void completeTrail(ActionEvent event) {
-
-	}
-
 	public void selectedTrailHistory(MouseEvent event) {
 
 	}
+	
+	//hikes in progress tab//
+	public void selectedTrailUncompleted(MouseEvent event) {
+		try {
+			selectedTrailUncompleted.setText(tableUncompleted.getSelectionModel().getSelectedItem().getTrail().getTrailName());
+		} catch(NullPointerException e) {
+			//
+		}
+	}
+	
+	public void completeTrail(ActionEvent event) throws ParseException {
+		
+		HikingUncompleted hikingUncompleted = tableUncompleted.getSelectionModel().getSelectedItem();
+		
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY hh:mm:ss");
+		Date currentDoneTime = new Date(System.currentTimeMillis());
+		String completedTime = sdf.format(currentDoneTime);
+		
+		Date completedDate = sdf.parse(completedTime);
+		Date current = sdf.parse(hikingUncompleted.getDate());
+		
+		long difference = completedDate.getTime() - current.getTime();
+		long duration = (difference / 1000) / 60;
+		double pace = duration / hikingUncompleted.getTrail().getLength();
+		
+		//Date date = new Date(difference);
+		//String duration = sdf.format(date);
+		TreeSet<String> images = new TreeSet<String>();
+		HikingHistory hikingHistory = new HikingHistory(hikingUncompleted.getTrail(), hikingUncompleted.getDate(), completedTime, String.valueOf(duration)
+				,images,String.valueOf(pace));
+		
+		user.getHikingHistorySet().add(hikingHistory);
+		user.getHikingUncompletedSet().removeIf(e -> hikingUncompleted.getTrail().getTrailName().contentEquals(hikingUncompleted.getTrail().getTrailName()));
+		
+		tableUncompleted.getItems().remove(tableUncompleted.getSelectionModel().getSelectedItem());	
+	}
+	
+	public void searchForTrailsUncompleted(ActionEvent event) {
+		
+	}
+	
 
 	// start trail tab//
 	public void selectedTrail(MouseEvent event) {
@@ -126,88 +179,14 @@ public class Controller2 implements Initializable {
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY hh:mm:ss");
 		Date currentTime = new Date(System.currentTimeMillis());
 		String current = sdf.format(currentTime);
-		TreeSet<String> images = new TreeSet<String>();
-		HikingHistory hikingHistory = new HikingHistory(trail.getTrailAddress(), current, "In Progress",
-				trail.getLength(), "In Progress", images, "In Progress");
-		user.getHikingHistorySet().add(hikingHistory);
+
+		HikingUncompleted hikingUncompleted = new HikingUncompleted(current, trail);
+		user.getHikingUncompletedSet().add(hikingUncompleted);
 		table.getItems().remove(table.getSelectionModel().getSelectedItem());
+		//idea for later//
+		//remove trail from trail set entirely so it doesnt show up on the table at all ;)//
+		//DONT FORGET ABOUT THIS//
 
-	}
-
-	public static void displayLevel() {
-		Stage window = new Stage();
-		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle("Types of Levels");
-		window.setMinWidth(300);
-		window.setMinHeight(250);
-		Label label = new Label();
-		label.setText("Select a Trail Level");
-		label.setAlignment(Pos.TOP_CENTER);
-
-		Button easyButton = new Button("Hard Difficulty");
-		Button modButton = new Button("Moderate Difficulty");
-		Button hardButton = new Button("Easy Difficulty");
-
-		easyButton.setOnAction(e -> {
-			answerLevel = Level.EASY;
-			window.close();
-		});
-
-		modButton.setOnAction(e -> {
-			answerLevel = Level.MODERATE;
-			window.close();
-		});
-
-		hardButton.setOnAction(e -> {
-			answerLevel = Level.HARD;
-			window.close();
-		});
-
-		VBox layout = new VBox(10);
-		layout.getChildren().addAll(label, easyButton, modButton, hardButton);
-		layout.setAlignment(Pos.CENTER);
-
-		Scene scene = new Scene(layout);
-		window.setScene(scene);
-		window.showAndWait();
-	}
-
-	public static void displayType() {
-		Stage window = new Stage();
-		window.initModality(Modality.APPLICATION_MODAL);
-		window.setTitle("Types of Trails");
-		window.setMinWidth(300);
-		window.setMinHeight(250);
-		Label label = new Label();
-		label.setText("Select a Trail Type");
-		label.setAlignment(Pos.TOP_CENTER);
-
-		Button loopButton = new Button("Loop Trail");
-		Button outButton = new Button("Out and Back Trail");
-		Button pointButton = new Button("Point Trail");
-
-		loopButton.setOnAction(e -> {
-			answerType = HikeType.LOOP;
-			window.close();
-		});
-
-		outButton.setOnAction(e -> {
-			answerType = HikeType.OUT_AND_BACK;
-			window.close();
-		});
-
-		pointButton.setOnAction(e -> {
-			answerType = HikeType.POINT_TO_POINT;
-			window.close();
-		});
-
-		VBox layout = new VBox(10);
-		layout.getChildren().addAll(label, pointButton, outButton, loopButton);
-		layout.setAlignment(Pos.CENTER);
-
-		Scene scene = new Scene(layout);
-		window.setScene(scene);
-		window.showAndWait();
 	}
 
 	public void searchForTrails(ActionEvent event) {
@@ -461,7 +440,29 @@ public class Controller2 implements Initializable {
 		elevation.setCellValueFactory(new PropertyValueFactory<Trail, String>("elevation"));
 		type.setCellValueFactory(new PropertyValueFactory<Trail, String>("type"));
 		length.setCellValueFactory(new PropertyValueFactory<Trail, String>("length"));
-		sortByBox.setItems(searchList);
+		
+		//hiking uncompleted tab//
+		final ObservableList<String> difficultyStringsUncompleted = FXCollections.observableArrayList();
+		difficultyStringsUncompleted.add("HARD");
+		difficultyStringsUncompleted.add("MODERATE");
+		difficultyStringsUncompleted.add("EASY");
+		difficultyBoxUncompleted.getItems().addAll(difficultyStringsUncompleted);
+
+		final ObservableList<String> typeStringsUncompleted = FXCollections.observableArrayList();
+		typeStringsUncompleted.add("LOOP");
+		typeStringsUncompleted.add("OUT AND BACK");
+		typeStringsUncompleted.add("POINT TO POINT");
+		typeBoxUncompleted.getItems().addAll(typeStringsUncompleted);
+
+		trailUncompleted = FXCollections.observableArrayList();
+		dateStartedUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("date"));
+		trailAddressUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("trailAddress"));
+		trailNameUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("trailName"));
+		difficultyUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("difficulty"));
+		elevationUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("elevation"));
+		typeUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("type"));
+		lengthUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("length"));
+		
 
 	}
 

@@ -11,9 +11,11 @@ public class User {
 	private String image;
 	private AccountType accountType;
 	private TreeSet<HikingHistory> hikingHistorySet;
+	private TreeSet<HikingUncompleted> hikingUncompletedSet;
 
 	public User(String username, String password, String firstName, String lastName, String phoneNumber, String image,
-			AccountType accountType, TreeSet<HikingHistory> hikingHistorySet) {
+			AccountType accountType, TreeSet<HikingHistory> hikingHistorySet,
+			TreeSet<HikingUncompleted> hikingUncompletedSet) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -23,14 +25,7 @@ public class User {
 		this.image = image;
 		this.accountType = accountType;
 		this.hikingHistorySet = hikingHistorySet;
-	}
-
-	public TreeSet<HikingHistory> getHikingHistorySet() {
-		return hikingHistorySet;
-	}
-
-	public void setHikingHistorySet(TreeSet<HikingHistory> hikingHistorySet) {
-		this.hikingHistorySet = hikingHistorySet;
+		this.hikingUncompletedSet = hikingUncompletedSet;
 	}
 
 	public String getUsername() {
@@ -89,11 +84,27 @@ public class User {
 		this.accountType = accountType;
 	}
 
+	public TreeSet<HikingHistory> getHikingHistorySet() {
+		return hikingHistorySet;
+	}
+
+	public void setHikingHistorySet(TreeSet<HikingHistory> hikingHistorySet) {
+		this.hikingHistorySet = hikingHistorySet;
+	}
+
+	public TreeSet<HikingUncompleted> getHikingUncompletedSet() {
+		return hikingUncompletedSet;
+	}
+
+	public void setHikingUncompleted(TreeSet<HikingUncompleted> hikingUncompletedSet) {
+		this.hikingUncompletedSet = hikingUncompletedSet;
+	}
+
 	@Override
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", phoneNumber=" + phoneNumber + ", image=" + image + ", accountType=" + accountType
-				+ ", hikingHistorySet=" + hikingHistorySet + "]";
+				+ ", hikingHistorySet=" + hikingHistorySet + ", hikingUncompleted=" + hikingUncompletedSet + "]";
 	}
 
 }

@@ -3,32 +3,30 @@ package model;
 import java.util.TreeSet;
 
 public class HikingHistory implements Comparable<HikingHistory> {
-	private String trailName;
+	private Trail trail;
 	private String date;
 	private String dateDone;
-	private double distance;
 	private String duration;
 	private TreeSet<String> images;
 	private String pace;
 
-	public HikingHistory(String trailName, String date, String dateDone, double distance, String duration,
-			TreeSet<String> images, String pace) {
+	public HikingHistory(Trail trail, String date, String dateDone, String duration, TreeSet<String> images,
+			String pace) {
 		super();
-		this.trailName = trailName;
+		this.trail = trail;
 		this.date = date;
 		this.dateDone = dateDone;
-		this.distance = distance;
 		this.duration = duration;
 		this.images = images;
 		this.pace = pace;
 	}
 
-	public String getTrailName() {
-		return trailName;
+	public Trail getTrail() {
+		return trail;
 	}
 
-	public void setTrailName(String trailName) {
-		this.trailName = trailName;
+	public void setTrail(Trail trail) {
+		this.trail = trail;
 	}
 
 	public String getDate() {
@@ -45,14 +43,6 @@ public class HikingHistory implements Comparable<HikingHistory> {
 
 	public void setDateDone(String dateDone) {
 		this.dateDone = dateDone;
-	}
-
-	public double getDistance() {
-		return distance;
-	}
-
-	public void setDistance(double distance) {
-		this.distance = distance;
 	}
 
 	public String getDuration() {
@@ -81,21 +71,19 @@ public class HikingHistory implements Comparable<HikingHistory> {
 
 	@Override
 	public String toString() {
-		return "HikingHistory [trailName=" + trailName + ", date=" + date + ", dateDone=" + dateDone + ", distance="
-				+ distance + ", duration=" + duration + ", images=" + images + ", pace=" + pace + "]";
+		return "HikingHistory [trail=" + trail + ", date=" + date + ", dateDone=" + dateDone + ", duration=" + duration
+				+ ", images=" + images + ", pace=" + pace + "]";
 	}
 
 	@Override
 	public int compareTo(HikingHistory o) {
-		if(date.compareTo(o.getDate()) == 0) {
+		if (date.compareTo(o.getDate()) == 0) {
 			return 0;
-		} else if(date.compareTo(o.getDate()) > 0) {
+		} else if (date.compareTo(o.getDate()) > 0) {
 			return 1;
 		} else {
 			return -1;
 		}
 	}
-
-
 
 }
