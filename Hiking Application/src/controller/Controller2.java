@@ -155,12 +155,115 @@ public class Controller2 implements Initializable {
 				,images,String.valueOf(pace));
 		
 		user.getHikingHistorySet().add(hikingHistory);
-		user.getHikingUncompletedSet().removeIf(e -> hikingUncompleted.getTrail().getTrailName().contentEquals(hikingUncompleted.getTrail().getTrailName()));
+		user.getHikingUncompletedSet().removeIf(e -> e.getTrail().getTrailName().compareTo(hikingUncompleted.getTrail().getTrailName())==0);
 		
 		tableUncompleted.getItems().remove(tableUncompleted.getSelectionModel().getSelectedItem());	
 	}
 	
 	public void searchForTrailsUncompleted(ActionEvent event) {
+		trailUncompleted.clear();
+		String search = searchFieldUncompleted.getText();
+
+		List<HikingUncompleted> firstResult = user.getHikingUncompletedSet().stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().startsWith(search))
+				.collect(Collectors.toList());
+		List<HikingUncompleted> difficultyResult = null;
+		List<HikingUncompleted> typeResult = null;
+		List<HikingUncompleted> rangeResult;
+
+		ObservableList<String> difficultyList = difficultyBoxUncompleted.getCheckModel().getCheckedItems();
+		if (difficultyList.size() == 2) {
+
+			if (difficultyList.get(0).toString().contentEquals("HARD")
+					&& difficultyList.get(1).toString().contentEquals("MODERATE")) {
+
+				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.HARD)
+						|| hikingUncompleted.getTrail().getDifficulty().equals(Level.MODERATE)).collect(Collectors.toList());
+
+			} else if (difficultyList.get(0).toString().contentEquals("HARD")
+					&& difficultyList.get(1).toString().contentEquals("EASY")) {
+
+				difficultyResult = firstResult.stream().filter(
+						hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.HARD) || hikingUncompleted.getTrail().getDifficulty().equals(Level.EASY))
+						.collect(Collectors.toList());
+
+			} else if (difficultyList.get(0).toString().contentEquals("MODERATE")
+					&& difficultyList.get(1).toString().contentEquals("EASY")) {
+
+				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.MODERATE)
+						|| hikingUncompleted.getTrail().getDifficulty().equals(Level.EASY)).collect(Collectors.toList());
+
+			}
+
+		} else if (difficultyList.size() == 1) {
+
+			if (difficultyList.get(0).toString().contentEquals("HARD")) {
+
+				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.HARD))
+						.collect(Collectors.toList());
+
+			} else if (difficultyList.get(0).toString().contentEquals("MODERATE")) {
+
+				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.MODERATE))
+						.collect(Collectors.toList());
+
+			} else if (difficultyList.get(0).toString().contentEquals("EASY")) {
+
+				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.EASY))
+						.collect(Collectors.toList());
+			}
+		} else {
+			difficultyResult = firstResult;
+		}
+
+		ObservableList<String> typeList = typeBoxUncompleted.getCheckModel().getCheckedItems();
+		if (typeList.size() == 2) {
+
+			if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("OUT AND BACK")) {
+
+				typeResult = difficultyResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.LOOP)
+						|| hikingUncompleted.getTrail().getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+
+				typeResult = difficultyResult.stream().filter(
+						hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.LOOP) || hikingUncompleted.getTrail().getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+
+				typeResult = difficultyResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.OUT_AND_BACK)
+						|| hikingUncompleted.getTrail().getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+
+			}
+
+		} else if (typeList.size() == 1) {
+			
+			if (typeList.get(0).toString().contentEquals("LOOP")) {
+
+				typeResult = difficultyResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.LOOP)).collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("POINT TO POINT")) {
+
+				typeResult = difficultyResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")) {
+
+				typeResult = difficultyResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
+			}
+		} else {
+			typeResult = difficultyResult;
+		}
+		
+		int length = (int)lengthSliderUncompleted.getValue();
+		int evelation = (int)evelationSliderUncompleted.getValue();
+		
+		rangeResult = typeResult.stream()
+				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getElevation() <= evelation && hikingUncompleted.getTrail().getLength() <= length).collect(Collectors.toList());
+		
+		trailUncompleted.addAll(rangeResult);
+		tableUncompleted.setItems(trailUncompleted);
 		
 	}
 	
@@ -293,33 +396,6 @@ public class Controller2 implements Initializable {
 		
 		trail.addAll(rangeResult);
 		table.setItems(trail);
-		
-		
-
-		/*
-		 * String type = sortByBox.getValue();
-		 * 
-		 * if(type.contentEquals("NAME")) { List<Trail> result = trailSet.stream()
-		 * .filter(trail ->
-		 * trail.getTrailName().startsWith(search)).collect(Collectors.toList());
-		 * trail.addAll(result); table.setItems(trail); }else
-		 * if(type.contentEquals("EVELATION")) { List<Trail> result = trailSet.stream()
-		 * .filter(trail ->
-		 * String.valueOf(trail.getElevation()).startsWith(search)).collect(Collectors.
-		 * toList()); trail.addAll(result); table.setItems(trail); } else
-		 * if(type.contentEquals("LENGTH")) { List<Trail> result = trailSet.stream()
-		 * .filter(trail ->
-		 * String.valueOf(trail.getMiles()).startsWith(search)).collect(Collectors.
-		 * toList()); trail.addAll(result); table.setItems(trail); } else
-		 * if(type.contentEquals("TYPE")) { displayType(); List<Trail> result =
-		 * trailSet.stream() .filter(trail ->
-		 * trail.getType().equals(answerType)).collect(Collectors.toList());
-		 * trail.addAll(result); table.setItems(trail); } else
-		 * if(type.contentEquals("LEVEL")) { displayLevel(); List<Trail> result =
-		 * trailSet.stream() .filter(trail ->
-		 * trail.getDifficulty().equals(answerLevel)).collect(Collectors.toList());
-		 * trail.addAll(result); table.setItems(trail); }
-		 */
 	}
 
 	// edit tab

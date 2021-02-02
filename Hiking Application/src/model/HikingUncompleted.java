@@ -10,6 +10,30 @@ public class HikingUncompleted implements Comparable<HikingUncompleted> {
 		this.date = date;
 		this.trail = trail;
 	}
+	
+	public String getTrailName() {
+		return trail.getTrailName();
+	}
+	
+	public String getTrailAddress() {
+		return trail.getTrailAddress();
+	}
+	
+	public double getLength() {
+		return trail.getLength();
+	}
+	
+	public double getElevation() {
+		return trail.getElevation();
+	}
+	
+	public Level getDifficulty() {
+		return trail.getDifficulty();
+	}
+	
+	public HikeType getType() {
+		return trail.getType();
+	}
 
 	public String getDate() {
 		return date;
