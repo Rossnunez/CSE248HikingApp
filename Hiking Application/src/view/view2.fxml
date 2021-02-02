@@ -71,7 +71,6 @@
                         </Text>
                         <TextField fx:id="searchField" layoutX="14.0" layoutY="81.0" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" />
                         <Separator layoutY="57.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0" />
-                        <ComboBox fx:id="sortByBox" accessibleRole="CHECK_BOX" layoutX="290.0" layoutY="20.0" prefHeight="25.0" prefWidth="82.0" promptText="Sort By" />
                         <Button layoutX="229.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchForTrails" prefHeight="19.0" prefWidth="59.0" text="Search">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="12.0" />

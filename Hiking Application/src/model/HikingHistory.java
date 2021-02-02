@@ -2,7 +2,7 @@ package model;
 
 import java.util.TreeSet;
 
-public class HikingHistory {
+public class HikingHistory implements Comparable<HikingHistory> {
 	private String trailName;
 	private String date;
 	private String dateDone;
@@ -84,5 +84,18 @@ public class HikingHistory {
 		return "HikingHistory [trailName=" + trailName + ", date=" + date + ", dateDone=" + dateDone + ", distance="
 				+ distance + ", duration=" + duration + ", images=" + images + ", pace=" + pace + "]";
 	}
+
+	@Override
+	public int compareTo(HikingHistory o) {
+		if(date.compareTo(o.getDate()) == 0) {
+			return 0;
+		} else if(date.compareTo(o.getDate()) > 0) {
+			return 1;
+		} else {
+			return -1;
+		}
+	}
+
+
 
 }
