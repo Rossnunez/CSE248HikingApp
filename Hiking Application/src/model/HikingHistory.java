@@ -1,5 +1,6 @@
 package model;
 
+import java.util.LinkedList;
 import java.util.TreeSet;
 
 public class HikingHistory implements Comparable<HikingHistory> {
@@ -7,10 +8,10 @@ public class HikingHistory implements Comparable<HikingHistory> {
 	private String date;
 	private String dateDone;
 	private String duration;
-	private TreeSet<String> images;
+	private LinkedList<String> images;
 	private String pace;
 
-	public HikingHistory(Trail trail, String date, String dateDone, String duration, TreeSet<String> images,
+	public HikingHistory(Trail trail, String date, String dateDone, String duration, LinkedList<String> images,
 			String pace) {
 		super();
 		this.trail = trail;
@@ -73,11 +74,11 @@ public class HikingHistory implements Comparable<HikingHistory> {
 		this.duration = duration;
 	}
 
-	public TreeSet<String> getImages() {
+	public LinkedList<String> getImages() {
 		return images;
 	}
 
-	public void setImages(TreeSet<String> images) {
+	public void setImages(LinkedList<String> images) {
 		this.images = images;
 	}
 

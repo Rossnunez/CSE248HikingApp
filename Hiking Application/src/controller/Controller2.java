@@ -8,6 +8,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
@@ -31,6 +32,8 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
@@ -256,7 +259,25 @@ public class Controller2 implements Initializable {
 	}
 	
 	public void addPicturesHistory(ActionEvent event) {
+		HikingHistory hikingHistory = tableHistory.getSelectionModel().getSelectedItem();
 		
+		FileChooser fileChooser = new FileChooser();
+		fileChooser.setTitle("Open Multiple Images to you Hike");
+		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		
+		List<File> picturesList = fileChooser.showOpenMultipleDialog(stage);
+		
+		if(picturesList != null) {
+			for(File file : picturesList) {
+				hikingHistory.getImages().add(file.toString());
+			}
+			Alert alert = new Alert(AlertType.CONFIRMATION);
+			alert.setHeaderText("Process Complete");
+			alert.setContentText("Your images have been uploaded!");
+			alert.setTitle("Images Added to Hiking Trail");
+			alert.showAndWait();
+		}
+
 	}
 	
 	
@@ -286,7 +307,7 @@ public class Controller2 implements Initializable {
 		
 		//Date date = new Date(difference);
 		//String duration = sdf.format(date);
-		TreeSet<String> images = new TreeSet<String>();
+		LinkedList<String> images = new LinkedList<String>();
 		HikingHistory hikingHistory = new HikingHistory(hikingUncompleted.getTrail(), hikingUncompleted.getDate(), completedTime, String.valueOf(duration)
 				,images,String.valueOf(pace));
 		
