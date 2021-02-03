@@ -12,8 +12,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.ResourceBundle;
 import java.util.TreeMap;
-import java.util.TreeSet;
-import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
@@ -67,6 +65,7 @@ public class Controller2 implements Initializable {
 	public HashSet<Trail> trailSet;
 	public User user;
 	public String username;
+	public static HikingHistory hikingHistoryForPictures;
 
 	// edit tab //
 	public Text usernameText;
@@ -97,8 +96,8 @@ public class Controller2 implements Initializable {
 	public TableColumn<Trail, String> difficulty;
 	public TableColumn<Trail, String> type;
 	public TextField searchField;
-	
-	//hikes in progress tab//
+
+	// hikes in progress tab//
 	public CheckComboBox<String> difficultyBoxUncompleted;
 	public CheckComboBox<String> typeBoxUncompleted;
 
@@ -116,9 +115,8 @@ public class Controller2 implements Initializable {
 	public TableColumn<HikingUncompleted, String> difficultyUncompleted;
 	public TableColumn<HikingUncompleted, String> typeUncompleted;
 	public TextField searchFieldUncompleted;
-	
-	
-	//hiking history tab//
+
+	// hiking history tab//
 	public CheckComboBox<String> difficultyBoxHistory;
 	public CheckComboBox<String> typeBoxHistory;
 
@@ -138,15 +136,18 @@ public class Controller2 implements Initializable {
 	public TableColumn<HikingHistory, String> trailPaceHistory;
 	public TableColumn<HikingHistory, String> dateCompletedHistory;
 	public TextField searchFieldHistory;
-	
-	
 
 	// hiking history tab//
+	public static HikingHistory getHikingHistory() {
+		return hikingHistoryForPictures;
+	}
+	
 	public void searchForTrailsHistory(ActionEvent event) {
 		trailHistory.clear();
 		String search = searchFieldHistory.getText();
 
-		List<HikingHistory> firstResult = user.getHikingHistorySet().stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().startsWith(search))
+		List<HikingHistory> firstResult = user.getHikingHistorySet().stream()
+				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().startsWith(search))
 				.collect(Collectors.toList());
 		List<HikingHistory> difficultyResult = null;
 		List<HikingHistory> typeResult = null;
@@ -158,21 +159,26 @@ public class Controller2 implements Initializable {
 			if (difficultyList.get(0).toString().contentEquals("HARD")
 					&& difficultyList.get(1).toString().contentEquals("MODERATE")) {
 
-				difficultyResult = firstResult.stream().filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.HARD)
-						|| hikingHistory.getTrail().getDifficulty().equals(Level.MODERATE)).collect(Collectors.toList());
+				difficultyResult = firstResult.stream()
+						.filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.HARD)
+								|| hikingHistory.getTrail().getDifficulty().equals(Level.MODERATE))
+						.collect(Collectors.toList());
 
 			} else if (difficultyList.get(0).toString().contentEquals("HARD")
 					&& difficultyList.get(1).toString().contentEquals("EASY")) {
 
-				difficultyResult = firstResult.stream().filter(
-						hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.HARD) || hikingHistory.getTrail().getDifficulty().equals(Level.EASY))
+				difficultyResult = firstResult.stream()
+						.filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.HARD)
+								|| hikingHistory.getTrail().getDifficulty().equals(Level.EASY))
 						.collect(Collectors.toList());
 
 			} else if (difficultyList.get(0).toString().contentEquals("MODERATE")
 					&& difficultyList.get(1).toString().contentEquals("EASY")) {
 
-				difficultyResult = firstResult.stream().filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.MODERATE)
-						|| hikingHistory.getTrail().getDifficulty().equals(Level.EASY)).collect(Collectors.toList());
+				difficultyResult = firstResult.stream()
+						.filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.MODERATE)
+								|| hikingHistory.getTrail().getDifficulty().equals(Level.EASY))
+						.collect(Collectors.toList());
 
 			}
 
@@ -180,17 +186,20 @@ public class Controller2 implements Initializable {
 
 			if (difficultyList.get(0).toString().contentEquals("HARD")) {
 
-				difficultyResult = firstResult.stream().filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.HARD))
+				difficultyResult = firstResult.stream()
+						.filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.HARD))
 						.collect(Collectors.toList());
 
 			} else if (difficultyList.get(0).toString().contentEquals("MODERATE")) {
 
-				difficultyResult = firstResult.stream().filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.MODERATE))
+				difficultyResult = firstResult.stream()
+						.filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.MODERATE))
 						.collect(Collectors.toList());
 
 			} else if (difficultyList.get(0).toString().contentEquals("EASY")) {
 
-				difficultyResult = firstResult.stream().filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.EASY))
+				difficultyResult = firstResult.stream()
+						.filter(hikingHistory -> hikingHistory.getTrail().getDifficulty().equals(Level.EASY))
 						.collect(Collectors.toList());
 			}
 		} else {
@@ -200,75 +209,100 @@ public class Controller2 implements Initializable {
 		ObservableList<String> typeList = typeBoxHistory.getCheckModel().getCheckedItems();
 		if (typeList.size() == 2) {
 
-			if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("OUT AND BACK")) {
+			if (typeList.get(0).toString().contentEquals("LOOP")
+					&& typeList.get(1).toString().contentEquals("OUT AND BACK")) {
 
-				typeResult = difficultyResult.stream().filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.LOOP)
-						|| hikingHistory.getTrail().getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
+				typeResult = difficultyResult.stream()
+						.filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.LOOP)
+								|| hikingHistory.getTrail().getType().equals(HikeType.OUT_AND_BACK))
+						.collect(Collectors.toList());
 
-			} else if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+			} else if (typeList.get(0).toString().contentEquals("LOOP")
+					&& typeList.get(1).toString().contentEquals("POINT TO POINT")) {
 
-				typeResult = difficultyResult.stream().filter(
-						hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.LOOP) || hikingHistory.getTrail().getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+				typeResult = difficultyResult.stream()
+						.filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.LOOP)
+								|| hikingHistory.getTrail().getType().equals(HikeType.POINT_TO_POINT))
+						.collect(Collectors.toList());
 
-			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")
+					&& typeList.get(1).toString().contentEquals("POINT TO POINT")) {
 
-				typeResult = difficultyResult.stream().filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.OUT_AND_BACK)
-						|| hikingHistory.getTrail().getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+				typeResult = difficultyResult.stream()
+						.filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.OUT_AND_BACK)
+								|| hikingHistory.getTrail().getType().equals(HikeType.POINT_TO_POINT))
+						.collect(Collectors.toList());
 
 			}
 
 		} else if (typeList.size() == 1) {
-			
+
 			if (typeList.get(0).toString().contentEquals("LOOP")) {
 
 				typeResult = difficultyResult.stream()
-						.filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.LOOP)).collect(Collectors.toList());
+						.filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.LOOP))
+						.collect(Collectors.toList());
 
 			} else if (typeList.get(0).toString().contentEquals("POINT TO POINT")) {
 
 				typeResult = difficultyResult.stream()
-						.filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+						.filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.POINT_TO_POINT))
+						.collect(Collectors.toList());
 
 			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")) {
 
 				typeResult = difficultyResult.stream()
-						.filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
+						.filter(hikingHistory -> hikingHistory.getTrail().getType().equals(HikeType.OUT_AND_BACK))
+						.collect(Collectors.toList());
 			}
 		} else {
 			typeResult = difficultyResult;
 		}
-		
-		int length = (int)lengthSliderHistory.getValue();
-		int evelation = (int)evelationSliderHistory.getValue();
-		
+
+		int length = (int) lengthSliderHistory.getValue();
+		int evelation = (int) evelationSliderHistory.getValue();
+
 		rangeResult = typeResult.stream()
-				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getElevation() <= evelation && hikingUncompleted.getTrail().getLength() <= length).collect(Collectors.toList());
-		
+				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getElevation() <= evelation
+						&& hikingUncompleted.getTrail().getLength() <= length)
+				.collect(Collectors.toList());
+
 		trailHistory.addAll(rangeResult);
 		tableHistory.setItems(trailHistory);
 
 	}
 
-	public void selectedTrailHistory(MouseEvent event) {
-		try {
-			selectedTrailHistory.setText(tableHistory.getSelectionModel().getSelectedItem().getTrail().getTrailName());
-		}catch(NullPointerException e) {
-			//
+	public void selectedTrailHistory(MouseEvent event) throws IOException {
+		if (event.getClickCount() == 2) {
+			hikingHistoryForPictures = tableHistory.getSelectionModel().getSelectedItem();
+			Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/viewImages.fxml"));
+			Scene secondScene = new Scene(secondRoot);
+			Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+			window.setScene(secondScene);
+			window.show();
+			
+		} else {
+			try {
+				selectedTrailHistory
+						.setText(tableHistory.getSelectionModel().getSelectedItem().getTrail().getTrailName());
+			} catch (NullPointerException e) {
+				//
+			}
 		}
 
 	}
-	
+
 	public void addPicturesHistory(ActionEvent event) {
 		HikingHistory hikingHistory = tableHistory.getSelectionModel().getSelectedItem();
-		
+
 		FileChooser fileChooser = new FileChooser();
 		fileChooser.setTitle("Open Multiple Images to you Hike");
-		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-		
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+
 		List<File> picturesList = fileChooser.showOpenMultipleDialog(stage);
-		
-		if(picturesList != null) {
-			for(File file : picturesList) {
+
+		if (picturesList != null) {
+			for (File file : picturesList) {
 				hikingHistory.getImages().add(file.toString());
 			}
 			Alert alert = new Alert(AlertType.CONFIRMATION);
@@ -279,49 +313,51 @@ public class Controller2 implements Initializable {
 		}
 
 	}
-	
-	
-	//hikes in progress tab//
+
+	// hikes in progress tab//
 	public void selectedTrailUncompleted(MouseEvent event) {
 		try {
-			selectedTrailUncompleted.setText(tableUncompleted.getSelectionModel().getSelectedItem().getTrail().getTrailName());
-		} catch(NullPointerException e) {
+			selectedTrailUncompleted
+					.setText(tableUncompleted.getSelectionModel().getSelectedItem().getTrail().getTrailName());
+		} catch (NullPointerException e) {
 			//
 		}
 	}
-	
+
 	public void completeTrail(ActionEvent event) throws ParseException {
-		
+
 		HikingUncompleted hikingUncompleted = tableUncompleted.getSelectionModel().getSelectedItem();
-		
+
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY hh:mm:ss");
 		Date currentDoneTime = new Date(System.currentTimeMillis());
 		String completedTime = sdf.format(currentDoneTime);
-		
+
 		Date completedDate = sdf.parse(completedTime);
 		Date current = sdf.parse(hikingUncompleted.getDate());
-		
+
 		long difference = completedDate.getTime() - current.getTime();
 		long duration = (difference / 1000) / 60;
 		double pace = duration / hikingUncompleted.getTrail().getLength();
-		
-		//Date date = new Date(difference);
-		//String duration = sdf.format(date);
+
+		// Date date = new Date(difference);
+		// String duration = sdf.format(date);
 		LinkedList<String> images = new LinkedList<String>();
-		HikingHistory hikingHistory = new HikingHistory(hikingUncompleted.getTrail(), hikingUncompleted.getDate(), completedTime, String.valueOf(duration)
-				,images,String.valueOf(pace));
-		
+		HikingHistory hikingHistory = new HikingHistory(hikingUncompleted.getTrail(), hikingUncompleted.getDate(),
+				completedTime, String.valueOf(duration), images, String.valueOf(pace));
+
 		user.getHikingHistorySet().add(hikingHistory);
-		user.getHikingUncompletedSet().removeIf(e -> e.getTrail().getTrailName().compareTo(hikingUncompleted.getTrail().getTrailName())==0);
-		
-		tableUncompleted.getItems().remove(tableUncompleted.getSelectionModel().getSelectedItem());	
+		user.getHikingUncompletedSet()
+				.removeIf(e -> e.getTrail().getTrailName().compareTo(hikingUncompleted.getTrail().getTrailName()) == 0);
+
+		tableUncompleted.getItems().remove(tableUncompleted.getSelectionModel().getSelectedItem());
 	}
-	
+
 	public void searchForTrailsUncompleted(ActionEvent event) {
 		trailUncompleted.clear();
 		String search = searchFieldUncompleted.getText();
 
-		List<HikingUncompleted> firstResult = user.getHikingUncompletedSet().stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().startsWith(search))
+		List<HikingUncompleted> firstResult = user.getHikingUncompletedSet().stream()
+				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().startsWith(search))
 				.collect(Collectors.toList());
 		List<HikingUncompleted> difficultyResult = null;
 		List<HikingUncompleted> typeResult = null;
@@ -333,21 +369,26 @@ public class Controller2 implements Initializable {
 			if (difficultyList.get(0).toString().contentEquals("HARD")
 					&& difficultyList.get(1).toString().contentEquals("MODERATE")) {
 
-				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.HARD)
-						|| hikingUncompleted.getTrail().getDifficulty().equals(Level.MODERATE)).collect(Collectors.toList());
+				difficultyResult = firstResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.HARD)
+								|| hikingUncompleted.getTrail().getDifficulty().equals(Level.MODERATE))
+						.collect(Collectors.toList());
 
 			} else if (difficultyList.get(0).toString().contentEquals("HARD")
 					&& difficultyList.get(1).toString().contentEquals("EASY")) {
 
-				difficultyResult = firstResult.stream().filter(
-						hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.HARD) || hikingUncompleted.getTrail().getDifficulty().equals(Level.EASY))
+				difficultyResult = firstResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.HARD)
+								|| hikingUncompleted.getTrail().getDifficulty().equals(Level.EASY))
 						.collect(Collectors.toList());
 
 			} else if (difficultyList.get(0).toString().contentEquals("MODERATE")
 					&& difficultyList.get(1).toString().contentEquals("EASY")) {
 
-				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.MODERATE)
-						|| hikingUncompleted.getTrail().getDifficulty().equals(Level.EASY)).collect(Collectors.toList());
+				difficultyResult = firstResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.MODERATE)
+								|| hikingUncompleted.getTrail().getDifficulty().equals(Level.EASY))
+						.collect(Collectors.toList());
 
 			}
 
@@ -355,17 +396,20 @@ public class Controller2 implements Initializable {
 
 			if (difficultyList.get(0).toString().contentEquals("HARD")) {
 
-				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.HARD))
+				difficultyResult = firstResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.HARD))
 						.collect(Collectors.toList());
 
 			} else if (difficultyList.get(0).toString().contentEquals("MODERATE")) {
 
-				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.MODERATE))
+				difficultyResult = firstResult.stream().filter(
+						hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.MODERATE))
 						.collect(Collectors.toList());
 
 			} else if (difficultyList.get(0).toString().contentEquals("EASY")) {
 
-				difficultyResult = firstResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.EASY))
+				difficultyResult = firstResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(Level.EASY))
 						.collect(Collectors.toList());
 			}
 		} else {
@@ -375,55 +419,68 @@ public class Controller2 implements Initializable {
 		ObservableList<String> typeList = typeBoxUncompleted.getCheckModel().getCheckedItems();
 		if (typeList.size() == 2) {
 
-			if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("OUT AND BACK")) {
+			if (typeList.get(0).toString().contentEquals("LOOP")
+					&& typeList.get(1).toString().contentEquals("OUT AND BACK")) {
 
-				typeResult = difficultyResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.LOOP)
-						|| hikingUncompleted.getTrail().getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
+				typeResult = difficultyResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.LOOP)
+								|| hikingUncompleted.getTrail().getType().equals(HikeType.OUT_AND_BACK))
+						.collect(Collectors.toList());
 
-			} else if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+			} else if (typeList.get(0).toString().contentEquals("LOOP")
+					&& typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+
+				typeResult = difficultyResult.stream()
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.LOOP)
+								|| hikingUncompleted.getTrail().getType().equals(HikeType.POINT_TO_POINT))
+						.collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")
+					&& typeList.get(1).toString().contentEquals("POINT TO POINT")) {
 
 				typeResult = difficultyResult.stream().filter(
-						hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.LOOP) || hikingUncompleted.getTrail().getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
-
-			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
-
-				typeResult = difficultyResult.stream().filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.OUT_AND_BACK)
-						|| hikingUncompleted.getTrail().getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+						hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.OUT_AND_BACK)
+								|| hikingUncompleted.getTrail().getType().equals(HikeType.POINT_TO_POINT))
+						.collect(Collectors.toList());
 
 			}
 
 		} else if (typeList.size() == 1) {
-			
+
 			if (typeList.get(0).toString().contentEquals("LOOP")) {
 
 				typeResult = difficultyResult.stream()
-						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.LOOP)).collect(Collectors.toList());
+						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.LOOP))
+						.collect(Collectors.toList());
 
 			} else if (typeList.get(0).toString().contentEquals("POINT TO POINT")) {
 
-				typeResult = difficultyResult.stream()
-						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+				typeResult = difficultyResult.stream().filter(
+						hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.POINT_TO_POINT))
+						.collect(Collectors.toList());
 
 			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")) {
 
-				typeResult = difficultyResult.stream()
-						.filter(hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
+				typeResult = difficultyResult.stream().filter(
+						hikingUncompleted -> hikingUncompleted.getTrail().getType().equals(HikeType.OUT_AND_BACK))
+						.collect(Collectors.toList());
 			}
 		} else {
 			typeResult = difficultyResult;
 		}
-		
-		int length = (int)lengthSliderUncompleted.getValue();
-		int evelation = (int)evelationSliderUncompleted.getValue();
-		
+
+		int length = (int) lengthSliderUncompleted.getValue();
+		int evelation = (int) evelationSliderUncompleted.getValue();
+
 		rangeResult = typeResult.stream()
-				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getElevation() <= evelation && hikingUncompleted.getTrail().getLength() <= length).collect(Collectors.toList());
-		
+				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getElevation() <= evelation
+						&& hikingUncompleted.getTrail().getLength() <= length)
+				.collect(Collectors.toList());
+
 		trailUncompleted.addAll(rangeResult);
 		tableUncompleted.setItems(trailUncompleted);
-		
+
 	}
-	
 
 	// start trail tab//
 	public void selectedTrail(MouseEvent event) {
@@ -443,9 +500,10 @@ public class Controller2 implements Initializable {
 		HikingUncompleted hikingUncompleted = new HikingUncompleted(current, trail);
 		user.getHikingUncompletedSet().add(hikingUncompleted);
 		table.getItems().remove(table.getSelectionModel().getSelectedItem());
-		//idea for later//
-		//remove trail from trail set entirely so it doesnt show up on the table at all ;)//
-		//DONT FORGET ABOUT THIS//
+		// idea for later//
+		// remove trail from trail set entirely so it doesnt show up on the table at all
+		// ;)//
+		// DONT FORGET ABOUT THIS//
 
 	}
 
@@ -507,17 +565,21 @@ public class Controller2 implements Initializable {
 		ObservableList<String> typeList = typeBox.getCheckModel().getCheckedItems();
 		if (typeList.size() == 2) {
 
-			if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("OUT AND BACK")) {
-
-				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.LOOP)
-						|| trail.getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
-
-			} else if (typeList.get(0).toString().contentEquals("LOOP") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+			if (typeList.get(0).toString().contentEquals("LOOP")
+					&& typeList.get(1).toString().contentEquals("OUT AND BACK")) {
 
 				typeResult = difficultyResult.stream().filter(
-						trail -> trail.getType().equals(HikeType.LOOP) || trail.getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+						trail -> trail.getType().equals(HikeType.LOOP) || trail.getType().equals(HikeType.OUT_AND_BACK))
+						.collect(Collectors.toList());
 
-			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK") && typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+			} else if (typeList.get(0).toString().contentEquals("LOOP")
+					&& typeList.get(1).toString().contentEquals("POINT TO POINT")) {
+
+				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.LOOP)
+						|| trail.getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+
+			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")
+					&& typeList.get(1).toString().contentEquals("POINT TO POINT")) {
 
 				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.OUT_AND_BACK)
 						|| trail.getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
@@ -525,32 +587,33 @@ public class Controller2 implements Initializable {
 			}
 
 		} else if (typeList.size() == 1) {
-			
+
 			if (typeList.get(0).toString().contentEquals("LOOP")) {
 
-				typeResult = difficultyResult.stream()
-						.filter(trail -> trail.getType().equals(HikeType.LOOP)).collect(Collectors.toList());
+				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.LOOP))
+						.collect(Collectors.toList());
 
 			} else if (typeList.get(0).toString().contentEquals("POINT TO POINT")) {
 
-				typeResult = difficultyResult.stream()
-						.filter(trail -> trail.getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
+				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.POINT_TO_POINT))
+						.collect(Collectors.toList());
 
 			} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")) {
 
-				typeResult = difficultyResult.stream()
-						.filter(trail -> trail.getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
+				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.OUT_AND_BACK))
+						.collect(Collectors.toList());
 			}
 		} else {
 			typeResult = difficultyResult;
 		}
-		
-		int length = (int)lengthSlider.getValue();
-		int evelation = (int)evelationSlider.getValue();
-		
+
+		int length = (int) lengthSlider.getValue();
+		int evelation = (int) evelationSlider.getValue();
+
 		rangeResult = typeResult.stream()
-				.filter(trail -> trail.getElevation() <= evelation && trail.getLength() <= length).collect(Collectors.toList());
-		
+				.filter(trail -> trail.getElevation() <= evelation && trail.getLength() <= length)
+				.collect(Collectors.toList());
+
 		trail.addAll(rangeResult);
 		table.setItems(trail);
 	}
@@ -673,8 +736,8 @@ public class Controller2 implements Initializable {
 		elevation.setCellValueFactory(new PropertyValueFactory<Trail, String>("elevation"));
 		type.setCellValueFactory(new PropertyValueFactory<Trail, String>("type"));
 		length.setCellValueFactory(new PropertyValueFactory<Trail, String>("length"));
-		
-		//hiking uncompleted tab//
+
+		// hiking uncompleted tab//
 		final ObservableList<String> difficultyStringsUncompleted = FXCollections.observableArrayList();
 		difficultyStringsUncompleted.add("HARD");
 		difficultyStringsUncompleted.add("MODERATE");
@@ -689,14 +752,15 @@ public class Controller2 implements Initializable {
 
 		trailUncompleted = FXCollections.observableArrayList();
 		dateStartedUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("date"));
-		trailAddressUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("trailAddress"));
+		trailAddressUncompleted
+				.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("trailAddress"));
 		trailNameUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("trailName"));
 		difficultyUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("difficulty"));
 		elevationUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("elevation"));
 		typeUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("type"));
 		lengthUncompleted.setCellValueFactory(new PropertyValueFactory<HikingUncompleted, String>("length"));
-		
-		//hiking history tab
+
+		// hiking history tab
 		final ObservableList<String> difficultyStringsHistory = FXCollections.observableArrayList();
 		difficultyStringsHistory.add("HARD");
 		difficultyStringsHistory.add("MODERATE");
