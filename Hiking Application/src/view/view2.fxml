@@ -120,7 +120,7 @@
                      </children></AnchorPane>
             </content>
           </Tab>
-            <Tab text="Hikes in Progress">
+            <Tab onSelectionChanged="#showUncompletedHikes" text="Hikes in Progress">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
@@ -183,7 +183,7 @@
                   </AnchorPane>
                </content>
             </Tab>
-            <Tab text="Hiking History">
+            <Tab onSelectionChanged="#showHistoryHikes" text="Hiking History">
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>

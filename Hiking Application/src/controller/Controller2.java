@@ -23,6 +23,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -138,6 +139,13 @@ public class Controller2 implements Initializable {
 	public TextField searchFieldHistory;
 
 	// hiking history tab//
+	public void showHistoryHikes(Event event) {
+		trailHistory.clear();
+		trailHistory.addAll(user.getHikingHistorySet());
+		tableHistory.setItems(trailHistory);
+		
+	}
+	
 	public static HikingHistory getHikingHistory() {
 		return hikingHistoryForPictures;
 	}
@@ -315,6 +323,13 @@ public class Controller2 implements Initializable {
 	}
 
 	// hikes in progress tab//
+	public void showUncompletedHikes(Event event) {
+		trailUncompleted.clear();
+		trailUncompleted.addAll(user.getHikingUncompletedSet());
+		tableUncompleted.setItems(trailUncompleted);
+		
+	}
+	
 	public void selectedTrailUncompleted(MouseEvent event) {
 		try {
 			selectedTrailUncompleted
