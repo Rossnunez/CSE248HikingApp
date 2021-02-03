@@ -33,6 +33,7 @@ public class Controller1 implements Initializable {
 	private static String username;
 	private static User userInfo;
 	
+	
 	public void signInPane(ActionEvent event) throws IOException {
 		String user = usernameField.getText();
 		String pass = passwordField.getText();
