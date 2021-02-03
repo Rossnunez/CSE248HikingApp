@@ -8,6 +8,7 @@ import java.util.TreeSet;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import model.AccountType;
 import model.HikeType;
 import model.HikingHistory;
 import model.Level;
@@ -37,6 +38,9 @@ public class Main extends Application {
 		trailSet.add(trail3);
 		trailSet.add(trail4);
 		trailSet.add(trail5);
+		
+		User admin = new User("user", "", "","","","",AccountType.ADMIN,null,null);
+		userMap.put("user", admin);
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/view1.fxml"));
 		Scene scene = new Scene(root);
