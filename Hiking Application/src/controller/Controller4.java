@@ -95,6 +95,7 @@ public class Controller4 implements Initializable {
 			lastnameField.clear();
 			phonenumberField.clear();
 			imageField.setImage(defaultImage);
+			image = "C:\\Users\\nross\\Desktop\\CSE248Portfolio\\CSE248HikingApp\\Hiking Application\\RawData\\user.png";
 			
 			Alert alert = new Alert(AlertType.CONFIRMATION);
 			alert.setTitle("ACCOUNT COMPLETE");

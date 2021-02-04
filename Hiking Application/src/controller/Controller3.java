@@ -33,7 +33,7 @@ public class Controller3 implements Initializable {
 	}
 	
 	public void editTrailsPane(ActionEvent event) throws IOException {
-		Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/viewEditTrails"));
+		Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/viewEditTrails.fxml"));
 		Scene secondScene = new Scene(secondRoot);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(secondScene);
@@ -41,7 +41,7 @@ public class Controller3 implements Initializable {
 	}
 	
 	public void userViewPane(ActionEvent event) throws IOException {
-		Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/viewUser"));
+		Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/view2.fxml"));
 		Scene secondScene = new Scene(secondRoot);
 		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
 		window.setScene(secondScene);

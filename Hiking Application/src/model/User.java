@@ -28,6 +28,14 @@ public class User {
 		this.hikingUncompletedSet = hikingUncompletedSet;
 	}
 
+	public int getUncompletedHikeSize() {
+		return hikingUncompletedSet.size();
+	}
+	
+	public int getHikingHistorySize() {
+		return hikingHistorySet.size();
+	}
+	
 	public String getUsername() {
 		return username;
 	}

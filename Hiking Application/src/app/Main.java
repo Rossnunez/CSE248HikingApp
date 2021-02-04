@@ -11,6 +11,7 @@ import javafx.stage.Stage;
 import model.AccountType;
 import model.HikeType;
 import model.HikingHistory;
+import model.HikingUncompleted;
 import model.Level;
 import model.Trail;
 import model.User;
@@ -39,7 +40,9 @@ public class Main extends Application {
 		trailSet.add(trail4);
 		trailSet.add(trail5);
 		
-		User admin = new User("user", "", "","","","",AccountType.ADMIN,null,null);
+		TreeSet<HikingHistory> hikingHistorySet = new TreeSet<HikingHistory>();
+		TreeSet<HikingUncompleted> hikingUncompletedSet = new TreeSet<HikingUncompleted>();
+		User admin = new User("user", "", "","","","",AccountType.ADMIN,hikingHistorySet,hikingUncompletedSet);
 		userMap.put("user", admin);
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/view1.fxml"));
