@@ -1,5 +1,6 @@
 package controller;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -7,9 +8,11 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -27,6 +30,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
 import javafx.stage.Stage;
+import model.HikeType;
 import model.Level;
 import model.Trail;
 
@@ -41,6 +45,15 @@ public class ControllerSelectedTrail implements Initializable {
 	public TextField elevationField;
 	public TextField difficultyField;
 	public TextField typeField;
+	//
+	
+	public void goBackPane(ActionEvent event) throws IOException {
+		Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/viewEditTrails.fxml"));
+		Scene secondScene = new Scene(secondRoot);
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		window.setScene(secondScene);
+		window.show();
+	}
 
 	public void editName(ActionEvent event) {
 		TextInputDialog tid = new TextInputDialog("Enter a new Trail Name");
@@ -103,6 +116,7 @@ public class ControllerSelectedTrail implements Initializable {
 		rHard.setToggleGroup(toggleGroup);
 		rModerate.setToggleGroup(toggleGroup);
 		rEasy.setToggleGroup(toggleGroup);
+		
 		label.setAlignment(Pos.TOP_CENTER);
 		tilePane.setAlignment(Pos.CENTER);
 		tilePane.getChildren().addAll(label, rHard,rModerate,rEasy);
@@ -124,19 +138,50 @@ public class ControllerSelectedTrail implements Initializable {
 		
 		dialog.setScene(sc);
 		dialog.show();
-		
-		/*		
-		VBox dialogVbox = new VBox(20);
-		dialogVbox.getChildren().add(new Text("This is a Dialog"));
-		Scene dialogScene = new Scene(dialogVbox, 300, 200);
-		dialog.setScene(dialogScene);
-		dialog.show();
-		*/
-
 	}
 
 	public void editType(ActionEvent event) {
-
+		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		final Stage dialog = new Stage();
+		
+		dialog.initModality(Modality.APPLICATION_MODAL);
+		dialog.initOwner(window);
+		
+		TilePane tilePane = new TilePane();
+		
+		Label label = new Label("Select Trail Type");
+		
+		ToggleGroup toggleGroup = new ToggleGroup();
+		
+		RadioButton rPoint = new RadioButton("POINT_TO_POINT");
+		RadioButton rLoop = new RadioButton("LOOP");
+		RadioButton rOut = new RadioButton("OUT_AND_BACK");
+		
+		rPoint.setToggleGroup(toggleGroup);
+		rLoop.setToggleGroup(toggleGroup);
+		rOut.setToggleGroup(toggleGroup);
+		
+		tilePane.setAlignment(Pos.CENTER);
+		label.setAlignment(Pos.TOP_CENTER);
+		tilePane.getChildren().addAll(label, rPoint, rLoop, rOut);
+		Scene sc = new Scene(tilePane, 200,200);
+		
+		toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+			public void changed(ObservableValue<? extends Toggle> ob, Toggle o, Toggle n)
+			{
+				RadioButton radioButton = (RadioButton) toggleGroup.getSelectedToggle();
+				if(radioButton != null) {
+					String s = radioButton.getText();
+					trail.setType(HikeType.valueOf(s));
+					typeField.setText(trail.getType().name());
+					dialog.close();
+				}
+			}
+		});
+		
+		dialog.setScene(sc);
+		dialog.show();
+		
 	}
 
 	@Override

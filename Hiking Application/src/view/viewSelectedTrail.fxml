@@ -38,5 +38,10 @@
       <Button layoutX="346.0" layoutY="292.0" mnemonicParsing="false" onAction="#editElevation" text="Edit" />
       <Button layoutX="346.0" layoutY="347.0" mnemonicParsing="false" onAction="#editDifficulty" text="Edit" />
       <Button layoutX="346.0" layoutY="401.0" mnemonicParsing="false" onAction="#editType" text="Edit" />
+      <Button layoutX="219.0" layoutY="461.0" mnemonicParsing="false" onAction="#goBackPane" prefHeight="17.0" prefWidth="61.0" text="Go Back">
+         <font>
+            <Font name="Microsoft JhengHei Light" size="12.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>
