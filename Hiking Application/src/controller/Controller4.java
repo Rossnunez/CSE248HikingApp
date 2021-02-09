@@ -31,6 +31,7 @@ import javafx.stage.Stage;
 import model.AccountType;
 import model.HikingHistory;
 import model.HikingUncompleted;
+import model.Status;
 import model.Trail;
 import model.User;
 
@@ -86,7 +87,7 @@ public class Controller4 implements Initializable {
 			TreeSet<HikingUncompleted> hikingUncompletedSet = new TreeSet<HikingUncompleted>();
 
 			User user = new User(username, password, firstname, lastname, phonenumber, image, AccountType.USER,
-					hikingHistorySet,hikingUncompletedSet);
+					hikingHistorySet,hikingUncompletedSet, Status.ENABLED);
 			userMap.put(username, user);
 
 			usernameField.clear();

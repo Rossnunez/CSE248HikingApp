@@ -10,12 +10,13 @@ public class User {
 	private String phoneNumber;
 	private String image;
 	private AccountType accountType;
+	private Status status;
 	private TreeSet<HikingHistory> hikingHistorySet;
 	private TreeSet<HikingUncompleted> hikingUncompletedSet;
 
 	public User(String username, String password, String firstName, String lastName, String phoneNumber, String image,
 			AccountType accountType, TreeSet<HikingHistory> hikingHistorySet,
-			TreeSet<HikingUncompleted> hikingUncompletedSet) {
+			TreeSet<HikingUncompleted> hikingUncompletedSet, Status status) {
 		super();
 		this.username = username;
 		this.password = password;
@@ -26,6 +27,7 @@ public class User {
 		this.accountType = accountType;
 		this.hikingHistorySet = hikingHistorySet;
 		this.hikingUncompletedSet = hikingUncompletedSet;
+		this.status = status;
 	}
 
 	public int getUncompletedHikeSize() {
@@ -112,7 +114,15 @@ public class User {
 	public String toString() {
 		return "User [username=" + username + ", password=" + password + ", firstName=" + firstName + ", lastName="
 				+ lastName + ", phoneNumber=" + phoneNumber + ", image=" + image + ", accountType=" + accountType
-				+ ", hikingHistorySet=" + hikingHistorySet + ", hikingUncompleted=" + hikingUncompletedSet + "]";
+				+ ", hikingHistorySet=" + hikingHistorySet + ", hikingUncompleted=" + hikingUncompletedSet + ", status= " + status + "]";
+	}
+
+	public Status getStatus() {
+		return status;
+	}
+
+	public void setStatus(Status status) {
+		this.status = status;
 	}
 
 }

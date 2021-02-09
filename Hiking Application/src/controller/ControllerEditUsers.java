@@ -1,5 +1,7 @@
 package controller;
 
+import java.awt.BorderLayout;
+import java.awt.Label;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -10,6 +12,8 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import com.sun.prism.paint.Paint.Type;
 
@@ -36,6 +40,7 @@ import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import model.AccountType;
+import model.Status;
 import model.User;
 
 public class ControllerEditUsers implements Initializable {
@@ -46,6 +51,7 @@ public class ControllerEditUsers implements Initializable {
 	public File filePath;
 
 	public ComboBox<String> accountTypeBox;
+	public ComboBox<String> statusBox;
 
 	public String image;
 	public ImageView imageView;
@@ -65,15 +71,29 @@ public class ControllerEditUsers implements Initializable {
 	public TableColumn<User, String> uncompletedCol;
 	public TableColumn<User, String> historyCol;
 	public TableColumn<User, String> typeCol;
- 
+	public TableColumn<User, String> statusCol;
+
 	public void selectAccountType(ActionEvent event) {
-		if(selectedUser != null) {
+		if (selectedUser != null) {
 			String type = accountTypeBox.getSelectionModel().getSelectedItem().toString();
-			if(type.contentEquals("ADMIN")) {
+			if (type.contentEquals("ADMIN")) {
 				selectedUser.setAccountType(AccountType.ADMIN);
 				userTable.refresh();
 			} else {
 				selectedUser.setAccountType(AccountType.USER);
+				userTable.refresh();
+			}
+		}
+	}
+
+	public void selectStatus(ActionEvent event) {
+		if (selectedUser != null) {
+			String status = statusBox.getSelectionModel().getSelectedItem().toString();
+			if (status.contentEquals("ENABLE")) {
+				selectedUser.setStatus(Status.ENABLED);
+				userTable.refresh();
+			} else {
+				selectedUser.setStatus(Status.DISABLED);
 				userTable.refresh();
 			}
 		}
@@ -88,34 +108,57 @@ public class ControllerEditUsers implements Initializable {
 	}
 
 	public void selectUser(MouseEvent event) throws IOException {
-		imageView.setImage(null);
-		selectedUser = userTable.getSelectionModel().getSelectedItem();
-		selectedUserText.setText(selectedUser.getUsername());
+		if (event.getClickCount() == 2) {
+			
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+			
+			if (selectedUser != null) {
+				int n = JOptionPane.showConfirmDialog(
+					    frame,
+					    "Do you want to remove this User?",
+					    "Remove User",
+					    JOptionPane.YES_NO_OPTION);
+				
+				if(n == JOptionPane.YES_OPTION) {
+					userMap.remove(selectedUser.getUsername());
+					userTable.getItems().remove(userTable.getSelectionModel().getSelectedItem());
+					
+				} else if(n == JOptionPane.NO_OPTION) {
+					System.out.println("no");
+				}
+			}
 
-		passwordField.setText(selectedUser.getPassword());
-		firstNameField.setText(selectedUser.getFirstName());
-		lastNameField.setText(selectedUser.getLastName());
-		phonenumberField.setText(selectedUser.getPhoneNumber());
+		} else {
+			imageView.setImage(null);
+			selectedUser = userTable.getSelectionModel().getSelectedItem();
+			selectedUserText.setText(selectedUser.getUsername());
 
-		File file = new File(selectedUser.getImage());
-		setFilePath(file);
+			passwordField.setText(selectedUser.getPassword());
+			firstNameField.setText(selectedUser.getFirstName());
+			lastNameField.setText(selectedUser.getLastName());
+			phonenumberField.setText(selectedUser.getPhoneNumber());
 
-		try {
-			image = filePath.getPath();
-			bufferedImage = ImageIO.read(filePath);
-			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-			imageView.setImage(image);
-		} catch (IOException e) {
-			file = new File(
-					"C:\\Users\\nross\\Desktop\\CSE248Portfolio\\CSE248HikingApp\\Hiking Application\\RawData\\user.png");
+			File file = new File(selectedUser.getImage());
 			setFilePath(file);
-			image = filePath.getPath();
-			bufferedImage = ImageIO.read(filePath);
-			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-			imageView.setImage(image);
 
+			try {
+				image = filePath.getPath();
+				bufferedImage = ImageIO.read(filePath);
+				Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+				imageView.setImage(image);
+			} catch (IOException e) {
+				file = new File(
+						"C:\\Users\\nross\\Desktop\\CSE248Portfolio\\CSE248HikingApp\\Hiking Application\\RawData\\user.png");
+				setFilePath(file);
+				image = filePath.getPath();
+				bufferedImage = ImageIO.read(filePath);
+				Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+				imageView.setImage(image);
+
+			}
+			System.out.println(selectedUser.getImage());
 		}
-		System.out.println(selectedUser.getImage());
 
 	}
 
@@ -221,6 +264,7 @@ public class ControllerEditUsers implements Initializable {
 		uncompletedCol.setCellValueFactory(new PropertyValueFactory<User, String>("uncompletedHikeSize"));
 		historyCol.setCellValueFactory(new PropertyValueFactory<User, String>("hikingHistorySize"));
 		typeCol.setCellValueFactory(new PropertyValueFactory<User, String>("accountType"));
+		statusCol.setCellValueFactory(new PropertyValueFactory<User, String>("status"));
 
 		selectedUser = null;
 
@@ -228,6 +272,11 @@ public class ControllerEditUsers implements Initializable {
 		accountTypeStrings.add("ADMIN");
 		accountTypeStrings.add("USER");
 		accountTypeBox.getItems().addAll(accountTypeStrings);
+
+		final ObservableList<String> statusStrings = FXCollections.observableArrayList();
+		statusStrings.add("ENABLE");
+		statusStrings.add("DISABLE");
+		statusBox.getItems().addAll(statusStrings);
 
 	}
 
