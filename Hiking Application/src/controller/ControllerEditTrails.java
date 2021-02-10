@@ -64,6 +64,13 @@ public class ControllerEditTrails implements Initializable {
 	public TextField searchField;
 	
 	//edit trails tab
+	public void removeTrail(ActionEvent event) {
+		Trail trail = table.getSelectionModel().getSelectedItem();
+		trailSet.remove(trail);
+		table.getItems().remove(table.getSelectionModel().getSelectedItem());
+		selectedTrail.setText("Trail Removed");
+	}
+	
 	public void searchForTrails(ActionEvent event) {
 		trail.clear();
 		String search = searchField.getText();

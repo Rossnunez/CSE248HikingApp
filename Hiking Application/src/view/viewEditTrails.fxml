@@ -76,6 +76,11 @@
                               <Font name="Microsoft JhengHei Light" size="11.0" />
                            </font>
                         </Button>
+                        <Button layoutX="359.0" layoutY="415.0" mnemonicParsing="false" onAction="#removeTrail" prefHeight="28.0" prefWidth="81.0" text="Remove">
+                           <font>
+                              <Font name="Microsoft JhengHei Light" size="11.0" />
+                           </font>
+                        </Button>
                      </children>
                   </AnchorPane>
                </content>

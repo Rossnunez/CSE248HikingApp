@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import model.AccountType;
+import model.Status;
 import model.Trail;
 import model.User;
 
@@ -32,30 +33,38 @@ public class Controller1 implements Initializable {
 
 	private static String username;
 	private static User userInfo;
-	
-	
+
 	public void signInPane(ActionEvent event) throws IOException {
 		String user = usernameField.getText();
 		String pass = passwordField.getText();
-		
-		if(userMap.containsKey(user) && userMap.get(user).getPassword().contentEquals(pass)) {
-			if(userMap.get(user).getAccountType() == AccountType.USER) {
-				username = user;
-				userInfo = userMap.get(user);
-				
-				Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/view2.fxml"));
-				Scene secondScene = new Scene(secondRoot);
-				Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-				window.setScene(secondScene);
-				window.show();
+
+		if (userMap.containsKey(user) && userMap.get(user).getPassword().contentEquals(pass)) {
+
+			if (userMap.get(user).getStatus().equals(Status.ENABLED)) {
+				if (userMap.get(user).getAccountType() == AccountType.USER) {
+					username = user;
+					userInfo = userMap.get(user);
+
+					Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/view2.fxml"));
+					Scene secondScene = new Scene(secondRoot);
+					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					window.setScene(secondScene);
+					window.show();
+				} else {
+					username = user;
+					userInfo = userMap.get(user);
+					Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/view3.fxml"));
+					Scene secondScene = new Scene(secondRoot);
+					Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
+					window.setScene(secondScene);
+					window.show();
+				}
 			} else {
-				username = user;
-				userInfo = userMap.get(user);
-				Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/view3.fxml"));
-				Scene secondScene = new Scene(secondRoot);
-				Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-				window.setScene(secondScene);
-				window.show();
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setTitle("ERROR WARNING");
+				alert.setContentText("Your account has been disabled.");
+				alert.setHeaderText("Disabled Account");
+				alert.showAndWait();
 			}
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
@@ -63,14 +72,14 @@ public class Controller1 implements Initializable {
 			alert.setContentText("Username or Password is incorrect.");
 			alert.setHeaderText("Login Not Found");
 			alert.showAndWait();
-			
+
 		}
 	}
-	
-	public void createAccountPane(MouseEvent event) throws IOException{
+
+	public void createAccountPane(MouseEvent event) throws IOException {
 		Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/view4.fxml"));
 		Scene secondScene = new Scene(secondRoot);
-		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(secondScene);
 		window.show();
 	}
