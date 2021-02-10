@@ -176,12 +176,34 @@ public class ControllerEditTrails implements Initializable {
 			int length = (int) lengthSlider.getValue();
 			int evelation = (int) evelationSlider.getValue();
 
-			rangeResult = typeResult.stream()
-					.filter(trail -> trail.getElevation() <= evelation && trail.getLength() <= length)
-					.collect(Collectors.toList());
+			if (length == 100 && evelation == 100) {
 
-			trail.addAll(rangeResult);
-			table.setItems(trail);
+				trail.addAll(typeResult);
+				table.setItems(trail);
+
+			} else if (length == 100 && evelation != 100) {
+
+				rangeResult = typeResult.stream().filter(trail -> trail.getElevation() <= evelation)
+						.collect(Collectors.toList());
+				trail.addAll(rangeResult);
+				table.setItems(trail);
+
+			} else if (evelation == 100 && length != 100) {
+
+				rangeResult = typeResult.stream().filter(trail -> trail.getLength() <= length)
+						.collect(Collectors.toList());
+				trail.addAll(rangeResult);
+				table.setItems(trail);
+
+			} else {
+
+				rangeResult = typeResult.stream()
+						.filter(trail -> trail.getElevation() <= evelation && trail.getLength() <= length)
+						.collect(Collectors.toList());
+				trail.addAll(rangeResult);
+				table.setItems(trail);
+
+			}
 		}
 	}
 
@@ -289,12 +311,34 @@ public class ControllerEditTrails implements Initializable {
 			int length = (int) lengthSlider.getValue();
 			int evelation = (int) evelationSlider.getValue();
 
-			rangeResult = typeResult.stream()
-					.filter(trail -> trail.getElevation() <= evelation && trail.getLength() <= length)
-					.collect(Collectors.toList());
+			if (length == 100 && evelation == 100) {
 
-			trail.addAll(rangeResult);
-			table.setItems(trail);
+				trail.addAll(typeResult);
+				table.setItems(trail);
+
+			} else if (length == 100 && evelation != 100) {
+
+				rangeResult = typeResult.stream().filter(trail -> trail.getElevation() <= evelation)
+						.collect(Collectors.toList());
+				trail.addAll(rangeResult);
+				table.setItems(trail);
+
+			} else if (evelation == 100 && length != 100) {
+
+				rangeResult = typeResult.stream().filter(trail -> trail.getLength() <= length)
+						.collect(Collectors.toList());
+				trail.addAll(rangeResult);
+				table.setItems(trail);
+
+			} else {
+
+				rangeResult = typeResult.stream()
+						.filter(trail -> trail.getElevation() <= evelation && trail.getLength() <= length)
+						.collect(Collectors.toList());
+				trail.addAll(rangeResult);
+				table.setItems(trail);
+
+			}
 		}
 	}
 

@@ -35,11 +35,19 @@ public class Main extends Application {
 		Trail trail4 = new Trail("green3", "123 bb street", 40, 60, Level.EASY, HikeType.LOOP);
 		Trail trail5 = new Trail("green4", "123 bb street", 10, 70, Level.HARD, HikeType.OUT_AND_BACK);
 		
+		Trail trail6 = new Trail("greEXAMPLE", "123 booboa street", 500, 300, Level.HARD, HikeType.POINT_TO_POINT);
+		Trail trail7 = new Trail("greEXAMPLE2", "123 bb ave", 250, 45, Level.MODERATE, HikeType.LOOP);
+		Trail trail8 = new Trail("greEXAMPLE3", "123 bb corner", 62, 170, Level.EASY, HikeType.POINT_TO_POINT);
+		
 		trailSet.add(trail);
 		trailSet.add(trail2);
 		trailSet.add(trail3);
 		trailSet.add(trail4);
 		trailSet.add(trail5);
+		
+		trailSet.add(trail6);
+		trailSet.add(trail7);
+		trailSet.add(trail8);
 		
 		TreeSet<HikingHistory> hikingHistorySet = new TreeSet<HikingHistory>();
 		TreeSet<HikingUncompleted> hikingUncompletedSet = new TreeSet<HikingUncompleted>();
