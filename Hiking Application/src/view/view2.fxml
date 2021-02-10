@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/15" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller2">
+<AnchorPane prefHeight="500.0" prefWidth="820.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller2">
    <children>
       <TabPane layoutX="-2.0" layoutY="4.0" prefHeight="500.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-2.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="4.0">
         <tabs>
@@ -68,7 +68,7 @@
                               <Font name="Microsoft JhengHei Light" size="29.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="searchField" layoutX="14.0" layoutY="81.0" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" />
+                        <TextField fx:id="searchField" layoutX="14.0" layoutY="81.0" onKeyTyped="#keyPressed" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" />
                         <Separator layoutY="57.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0" />
                         <Button layoutX="212.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchForTrails" prefHeight="25.0" prefWidth="76.0" text="Search">
                            <font>
