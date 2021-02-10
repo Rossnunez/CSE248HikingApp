@@ -19,9 +19,9 @@
          </font>
       </Text>
       <Separator layoutY="54.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="54.0" />
-      <TextField fx:id="usernameField" layoutX="14.0" layoutY="91.0" prefHeight="25.0" prefWidth="252.0" promptText="Username" />
+      <TextField fx:id="usernameField" layoutX="14.0" layoutY="91.0" onKeyTyped="#keyPressed" prefHeight="25.0" prefWidth="252.0" promptText="Username" />
       <Button layoutX="285.0" layoutY="91.0" mnemonicParsing="false" onAction="#searchField" prefHeight="25.0" prefWidth="59.0" text="Search" />
-      <TableView fx:id="userTable" layoutY="146.0" maxWidth="526.0" onMouseClicked="#selectUser" prefHeight="414.0" prefWidth="526.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="273.0" AnchorPane.topAnchor="146.0">
+      <TableView fx:id="userTable" layoutY="146.0" maxWidth="526.0" onMouseClicked="#selectUser" prefHeight="414.0" prefWidth="526.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.topAnchor="146.0">
         <columns>
           <TableColumn fx:id="usernameCol" prefWidth="108.0" text="Username" />
           <TableColumn fx:id="uncompletedCol" prefWidth="134.14112854003906" text="Uncompleted Trails" />

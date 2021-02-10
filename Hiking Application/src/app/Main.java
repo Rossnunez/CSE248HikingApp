@@ -29,7 +29,7 @@ public class Main extends Application {
 		userMap = new TreeMap<String, User>();
 		trailSet = new HashSet<Trail>(50000, (float)0.5);
 		
-		Trail trail = new Trail("green", "123 bb street", 10, 30, Level.EASY, HikeType.LOOP);
+		Trail trail = new Trail("green", "123 bb street", 1000, 30, Level.EASY, HikeType.LOOP);
 		Trail trail2 = new Trail("green1", "123 bb street", 20, 40, Level.EASY, HikeType.OUT_AND_BACK);
 		Trail trail3 = new Trail("green2", "123 bb street", 30, 50, Level.MODERATE, HikeType.POINT_TO_POINT);
 		Trail trail4 = new Trail("green3", "123 bb street", 40, 60, Level.EASY, HikeType.LOOP);

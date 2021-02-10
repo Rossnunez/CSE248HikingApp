@@ -35,6 +35,7 @@ import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import javafx.stage.FileChooser;
@@ -109,22 +110,19 @@ public class ControllerEditUsers implements Initializable {
 
 	public void selectUser(MouseEvent event) throws IOException {
 		if (event.getClickCount() == 2) {
-			
+
 			JFrame frame = new JFrame("FrameDemo");
 			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-			
+
 			if (selectedUser != null) {
-				int n = JOptionPane.showConfirmDialog(
-					    frame,
-					    "Do you want to remove this User?",
-					    "Remove User",
-					    JOptionPane.YES_NO_OPTION);
-				
-				if(n == JOptionPane.YES_OPTION) {
+				int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this User?", "Remove User",
+						JOptionPane.YES_NO_OPTION);
+
+				if (n == JOptionPane.YES_OPTION) {
 					userMap.remove(selectedUser.getUsername());
 					userTable.getItems().remove(userTable.getSelectionModel().getSelectedItem());
-					
-				} else if(n == JOptionPane.NO_OPTION) {
+
+				} else if (n == JOptionPane.NO_OPTION) {
 					System.out.println("no");
 				}
 			}
@@ -189,25 +187,48 @@ public class ControllerEditUsers implements Initializable {
 		this.filePath = filePath;
 	}
 
+	public void keyPressed(KeyEvent event) {
+		userList.clear();
+
+		/*
+		 * selectedUser = null; passwordField.clear(); firstNameField.clear();
+		 * lastNameField.clear(); phonenumberField.clear();
+		 */
+		
+		String search = usernameField.getText();
+
+		if (!search.contentEquals("")) {
+			Map<String, User> result = userMap.entrySet().stream().filter(user -> user.getKey().startsWith(search))
+					.collect(Collectors.toMap(user -> user.getKey(), user -> user.getValue()));
+
+			for (java.util.Map.Entry<String, User> entry : result.entrySet()) {
+				userList.add(entry.getValue());
+			}
+
+			userTable.setItems(userList);
+		}
+	}
+	
 	public void searchField(ActionEvent event) {
 		userList.clear();
 
-		selectedUser = null;
-		passwordField.clear();
-		firstNameField.clear();
-		lastNameField.clear();
-		phonenumberField.clear();
-
+		/*
+		 * selectedUser = null; passwordField.clear(); firstNameField.clear();
+		 * lastNameField.clear(); phonenumberField.clear();
+		 */
+		
 		String search = usernameField.getText();
 
-		Map<String, User> result = userMap.entrySet().stream().filter(user -> user.getKey().startsWith(search))
-				.collect(Collectors.toMap(user -> user.getKey(), user -> user.getValue()));
+		if (!search.contentEquals("")) {
+			Map<String, User> result = userMap.entrySet().stream().filter(user -> user.getKey().startsWith(search))
+					.collect(Collectors.toMap(user -> user.getKey(), user -> user.getValue()));
 
-		for (java.util.Map.Entry<String, User> entry : result.entrySet()) {
-			userList.add(entry.getValue());
+			for (java.util.Map.Entry<String, User> entry : result.entrySet()) {
+				userList.add(entry.getValue());
+			}
+
+			userTable.setItems(userList);
 		}
-
-		userTable.setItems(userList);
 
 	}
 
