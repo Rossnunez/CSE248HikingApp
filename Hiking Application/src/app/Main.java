@@ -1,7 +1,11 @@
 package app;
 	
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.util.HashSet;
+import java.util.Scanner;
 import java.util.TreeMap;
 import java.util.TreeSet;
 
@@ -14,10 +18,13 @@ import model.HikingHistory;
 import model.HikingUncompleted;
 import model.Level;
 import model.Status;
+import model.StorageBag;
 import model.Trail;
 import model.User;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.layout.BorderPane;
 
 
@@ -29,33 +36,29 @@ public class Main extends Application {
 		userMap = new TreeMap<String, User>();
 		trailSet = new HashSet<Trail>(50000, (float)0.5);
 		
-		Trail trail = new Trail("green", "123 bb street", 1000, 30, Level.EASY, HikeType.LOOP);
-		Trail trail2 = new Trail("green1", "123 bb street", 20, 40, Level.EASY, HikeType.OUT_AND_BACK);
-		Trail trail3 = new Trail("green2", "123 bb street", 30, 50, Level.MODERATE, HikeType.POINT_TO_POINT);
-		Trail trail4 = new Trail("green3", "123 bb street", 40, 60, Level.EASY, HikeType.LOOP);
-		Trail trail5 = new Trail("green4", "123 bb street", 10, 70, Level.HARD, HikeType.OUT_AND_BACK);
+		FileInputStream fis = new FileInputStream("RawData/StartUpData.dat");
+		ObjectInputStream ois = new ObjectInputStream(fis);
 		
-		Trail trail6 = new Trail("greEXAMPLE", "123 booboa street", 500, 300, Level.HARD, HikeType.POINT_TO_POINT);
-		Trail trail7 = new Trail("greEXAMPLE2", "123 bb ave", 250, 45, Level.MODERATE, HikeType.LOOP);
-		Trail trail8 = new Trail("greEXAMPLE3", "123 bb corner", 62, 170, Level.EASY, HikeType.POINT_TO_POINT);
+		StorageBag storageBag = null;
+		try {
+			storageBag = (StorageBag) ois.readObject();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		trailSet.add(trail);
-		trailSet.add(trail2);
-		trailSet.add(trail3);
-		trailSet.add(trail4);
-		trailSet.add(trail5);
+		Main.setUserMap(storageBag.getUserMap());
+		Main.setTrailSet(storageBag.getTrailSet());
 		
-		trailSet.add(trail6);
-		trailSet.add(trail7);
-		trailSet.add(trail8);
-		
-		TreeSet<HikingHistory> hikingHistorySet = new TreeSet<HikingHistory>();
-		TreeSet<HikingUncompleted> hikingUncompletedSet = new TreeSet<HikingUncompleted>();
-		User admin = new User("user", "", "","","","",AccountType.ADMIN,hikingHistorySet,hikingUncompletedSet, Status.ENABLED);
-		userMap.put("user", admin);
+		userMap = storageBag.getUserMap();
+		trailSet = storageBag.getTrailSet();
+		ois.close();
+		fis.close();
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/view1.fxml"));
 		Scene scene = new Scene(root);
+		primaryStage.setTitle("Hiking Application");
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}
@@ -70,5 +73,13 @@ public class Main extends Application {
 	
 	public static HashSet<Trail> getTrailSet(){
 		return trailSet;
+	}
+	
+	public static void setUserMap(TreeMap<String,User> treeMap){
+		userMap = treeMap;
+	}
+	
+	public static void setTrailSet(HashSet<Trail> hashSet){
+		trailSet = hashSet;
 	}
 }

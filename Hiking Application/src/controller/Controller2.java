@@ -156,7 +156,7 @@ public class Controller2 implements Initializable {
 		String search = searchFieldHistory.getText();
 
 		List<HikingHistory> firstResult = user.getHikingHistorySet().stream()
-				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().startsWith(search))
+				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().contains(search))
 				.collect(Collectors.toList());
 		List<HikingHistory> difficultyResult = null;
 		List<HikingHistory> typeResult = null;
@@ -395,7 +395,7 @@ public class Controller2 implements Initializable {
 		String search = searchFieldUncompleted.getText();
 
 		List<HikingUncompleted> firstResult = user.getHikingUncompletedSet().stream()
-				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().startsWith(search))
+				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().contains(search))
 				.collect(Collectors.toList());
 		List<HikingUncompleted> difficultyResult = null;
 		List<HikingUncompleted> typeResult = null;
@@ -573,7 +573,7 @@ public class Controller2 implements Initializable {
 		String search = searchField.getText();
 
 		if (!search.contentEquals("")) {
-			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().startsWith(search))
+			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().contains(search))
 					.collect(Collectors.toList());
 			List<Trail> difficultyResult = null;
 			List<Trail> typeResult = null;
@@ -708,7 +708,7 @@ public class Controller2 implements Initializable {
 		String search = searchField.getText();
 
 		if (!search.contentEquals("")) {
-			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().startsWith(search))
+			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().contains(search))
 					.collect(Collectors.toList());
 			List<Trail> difficultyResult = null;
 			List<Trail> typeResult = null;

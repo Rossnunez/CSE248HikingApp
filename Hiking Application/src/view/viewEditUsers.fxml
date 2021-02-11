@@ -27,11 +27,8 @@
           <TableColumn fx:id="uncompletedCol" prefWidth="134.14112854003906" text="Uncompleted Trails" />
             <TableColumn fx:id="historyCol" prefWidth="79.85882568359375" text="Trail History" />
             <TableColumn fx:id="typeCol" prefWidth="116.00006103515625" text="User Type" />
-            <TableColumn fx:id="statusCol" prefWidth="86.6666259765625" text="Status" />
+            <TableColumn fx:id="statusCol" prefWidth="85.0" text="Status" />
         </columns>
-         <columnResizePolicy>
-            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-         </columnResizePolicy>
       </TableView>
       <TextField fx:id="passwordField" editable="false" layoutX="550.0" layoutY="221.0" prefHeight="25.0" prefWidth="107.0" promptText="Password" />
       <TextField fx:id="firstNameField" editable="false" layoutX="550.0" layoutY="295.0" prefHeight="25.0" prefWidth="107.0" promptText="First Name" />

@@ -189,16 +189,11 @@ public class ControllerEditUsers implements Initializable {
 
 	public void keyPressed(KeyEvent event) {
 		userList.clear();
-
-		/*
-		 * selectedUser = null; passwordField.clear(); firstNameField.clear();
-		 * lastNameField.clear(); phonenumberField.clear();
-		 */
 		
 		String search = usernameField.getText();
 
 		if (!search.contentEquals("")) {
-			Map<String, User> result = userMap.entrySet().stream().filter(user -> user.getKey().startsWith(search))
+			Map<String, User> result = userMap.entrySet().stream().filter(user -> user.getKey().contains(search))
 					.collect(Collectors.toMap(user -> user.getKey(), user -> user.getValue()));
 
 			for (java.util.Map.Entry<String, User> entry : result.entrySet()) {
@@ -212,15 +207,10 @@ public class ControllerEditUsers implements Initializable {
 	public void searchField(ActionEvent event) {
 		userList.clear();
 
-		/*
-		 * selectedUser = null; passwordField.clear(); firstNameField.clear();
-		 * lastNameField.clear(); phonenumberField.clear();
-		 */
-		
 		String search = usernameField.getText();
 
 		if (!search.contentEquals("")) {
-			Map<String, User> result = userMap.entrySet().stream().filter(user -> user.getKey().startsWith(search))
+			Map<String, User> result = userMap.entrySet().stream().filter(user -> user.getKey().contains(search))
 					.collect(Collectors.toMap(user -> user.getKey(), user -> user.getValue()));
 
 			for (java.util.Map.Entry<String, User> entry : result.entrySet()) {

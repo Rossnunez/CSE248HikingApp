@@ -77,7 +77,7 @@ public class ControllerEditTrails implements Initializable {
 		String search = searchField.getText();
 
 		if (!search.contentEquals("")) {
-			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().startsWith(search))
+			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().contains(search))
 					.collect(Collectors.toList());
 			List<Trail> difficultyResult = null;
 			List<Trail> typeResult = null;
@@ -212,7 +212,7 @@ public class ControllerEditTrails implements Initializable {
 		String search = searchField.getText();
 
 		if (!search.contentEquals("")) {
-			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().startsWith(search))
+			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().contains(search))
 					.collect(Collectors.toList());
 			List<Trail> difficultyResult = null;
 			List<Trail> typeResult = null;
