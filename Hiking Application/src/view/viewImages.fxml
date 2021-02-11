@@ -9,14 +9,14 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerImageView">
    <children>
-      <Text layoutX="14.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Images For:" wrappingWidth="140.13671875">
+      <Text layoutX="5.0" layoutY="30.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Images For:" wrappingWidth="140.13671875">
          <font>
             <Font name="Microsoft JhengHei Light" size="26.0" />
          </font>
       </Text>
-      <Text fx:id="imageTrail" layoutX="154.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="258.4700927734375">
+      <Text fx:id="imageTrail" layoutX="142.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" wrappingWidth="258.4700927734375">
          <font>
-            <Font name="Microsoft JhengHei Bold" size="26.0" />
+            <Font name="Microsoft JhengHei Bold" size="18.0" />
          </font>
       </Text>
       <Separator layoutY="62.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="62.0" />

@@ -28,7 +28,7 @@
                               <Font name="Microsoft JhengHei" size="33.0" />
                            </font>
                         </Text>
-                        <Text fx:id="usernameText" layoutX="65.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" wrappingWidth="153.80337524414062">
+                        <Text fx:id="usernameText" layoutX="-1.0" layoutY="85.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Username" textAlignment="CENTER" wrappingWidth="267.8033752441406">
                            <font>
                               <Font name="Microsoft JhengHei Bold" size="28.0" />
                            </font>
@@ -93,7 +93,7 @@
                               <Font name="Microsoft JhengHei Light" size="17.0" />
                            </font>
                         </Text>
-                        <Text fx:id="selectedTrail" layoutX="88.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="153.13677978515625">
+                        <Text fx:id="selectedTrail" layoutX="88.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="399.13677978515625">
                            <font>
                               <Font name="Microsoft JhengHei Bold" size="17.0" />
                            </font>
@@ -155,7 +155,7 @@
                               <Font name="Microsoft JhengHei Light" size="17.0" />
                            </font>
                         </Text>
-                        <Text fx:id="selectedTrailUncompleted" layoutX="88.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="153.13677978515625">
+                        <Text fx:id="selectedTrailUncompleted" layoutX="84.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="440.13677978515625">
                            <font>
                               <Font name="Microsoft JhengHei Bold" size="17.0" />
                            </font>
@@ -220,7 +220,7 @@
                               <Font name="Microsoft JhengHei Light" size="17.0" />
                            </font>
                         </Text>
-                        <Text fx:id="selectedTrailHistory" layoutX="88.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="153.13677978515625">
+                        <Text fx:id="selectedTrailHistory" layoutX="84.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="501.13677978515625">
                            <font>
                               <Font name="Microsoft JhengHei Bold" size="17.0" />
                            </font>

@@ -9,12 +9,12 @@
 
 <AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerSelectedTrail">
    <children>
-      <Text layoutX="150.0" layoutY="56.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Trail:">
+      <Text layoutX="150.0" layoutY="35.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected Trail:">
          <font>
             <Font name="Microsoft JhengHei Light" size="32.0" />
          </font>
       </Text>
-      <Text fx:id="trailNameText" layoutX="154.0" layoutY="90.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trail Name" textAlignment="CENTER" wrappingWidth="192.13671875">
+      <Text fx:id="trailNameText" layoutX="7.0" layoutY="67.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Trail Name" textAlignment="CENTER" wrappingWidth="489.13671875">
          <font>
             <Font name="Microsoft JhengHei" size="23.0" />
          </font>
