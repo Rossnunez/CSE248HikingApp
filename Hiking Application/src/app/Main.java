@@ -58,6 +58,7 @@ public class Main extends Application {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/view1.fxml"));
 		Scene scene = new Scene(root);
+		scene.getStylesheets().add(getClass().getResource("WalkinWithStyle.css").toExternalForm());
 		primaryStage.setTitle("Hiking Application");
 		primaryStage.setScene(scene);
 		primaryStage.show();
