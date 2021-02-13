@@ -12,6 +12,7 @@ import java.util.TreeSet;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import model.AccountType;
 import model.HikeType;
 import model.HikingHistory;
@@ -25,6 +26,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Alert.AlertType;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 
 
@@ -58,8 +60,10 @@ public class Main extends Application {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/view1.fxml"));
 		Scene scene = new Scene(root);
-		scene.getStylesheets().add(getClass().getResource("WalkinWithStyle.css").toExternalForm());
+		//scene.getStylesheets().add(getClass().getResource("WalkinWithStyle.css").toExternalForm());
+		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("Hiking Application");
+		primaryStage.getIcons().add(new Image("file:RawData/hiking.png"));
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

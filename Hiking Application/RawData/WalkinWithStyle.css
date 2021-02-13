@@ -1,0 +1,77 @@
+.root{
+	-fx-background-color:#DCEDC8;
+}
+
+.menu-bar{
+	-fx-background-color:#689F38;
+}
+
+.menu:hover, .menu-item:hover, .menu:showing{
+	-fx-background-color:#74b33d;
+}
+
+.menu:pressed{
+	-fx-background-color:#74b33d;
+}
+
+
+.menu-item{
+	-fx-background-color:#689F38;
+}
+
+
+.label {
+    -fx-font-size: 11pt;
+    -fx-font-family: "Microsoft JhengHei Semibold";
+    -fx-text-fill: white;
+    -fx-fill:#689F38;
+}
+
+.context-menu {
+    -fx-background-color: #8BC34A;
+    -fx-padding: 0;
+}
+
+.separator .line {
+	-fx-border-style: none;
+	-fx-border-color: #BDBDBD;
+	-fx-border-style: solid;
+    -fx-border-width: 0 1 1 0;
+}
+
+
+.text-header {
+	-fx-fill: white;
+}
+
+.text-link {
+	-fx-fill:#689F38;
+}
+
+.text-link:hover {
+	-fx-fill:#4e782a;
+	-fx-font-family: "Microsoft JhengHei Semibold";
+	-fx-font-size: 11pt;
+}
+
+.button {
+	-fx-background-color:#9E9E9E;
+	-fx-text-fill: #2b2b2b;
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.button:hover{
+    -fx-background-color: linear-gradient(#9E9E9E, #757575);
+}
+
+
+.text-field:focused{
+    -fx-faint-focus-color: transparent;
+    -fx-focus-color: #689F38;
+}
+
+.pane {
+	-fx-background-color: #8BC34A;
+}
+
+

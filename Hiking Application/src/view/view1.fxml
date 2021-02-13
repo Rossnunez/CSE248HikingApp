@@ -9,44 +9,46 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="500.0" prefWidth="500.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller1">
+<AnchorPane prefHeight="500.0" prefWidth="500.0" stylesheets="WalkinWithStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.Controller1">
    <children>
       <BorderPane prefHeight="500.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <center>
            
-                  <AnchorPane prefHeight="500.0" prefWidth="500.0">
+                  <AnchorPane prefHeight="500.0" prefWidth="500.0" BorderPane.alignment="CENTER">
                      <children>
-                        <Text layoutX="112.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Hiking Tracker App" textAlignment="CENTER" wrappingWidth="276.13671875">
+                  <Pane layoutY="-1.0" prefHeight="153.0" prefWidth="500.0" styleClass="pane" />
+                        <Text layoutX="112.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Hiking Tracker App" textAlignment="CENTER" wrappingWidth="276.13671875">
                            <font>
                               <Font name="Microsoft JhengHei" size="48.0" />
                            </font>
                         </Text>
-                        <Text layoutX="168.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Log In" textAlignment="CENTER" wrappingWidth="164.13671875">
+                        <Text layoutX="168.0" layoutY="200.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-title" text="Log In" textAlignment="CENTER" wrappingWidth="164.13671875">
                            <font>
                               <Font name="Microsoft JhengHei" size="24.0" />
                            </font>
                         </Text>
-                        <Separator layoutY="142.0" prefHeight="32.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="142.0" />
+                        <Separator layoutY="142.0" prefHeight="20.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="142.0" />
                         <TextField fx:id="usernameField" layoutX="176.0" layoutY="250.0" promptText="Username" />
-                        <Text fill="#337be1" layoutX="168.0" layoutY="426.0" onMouseClicked="#createAccountPane" strokeType="OUTSIDE" strokeWidth="0.0" text="Dont Have an Account? Click here to create one." textAlignment="CENTER" underline="true" wrappingWidth="164.13671875">
+                        <Text fill="#337be1" layoutX="168.0" layoutY="426.0" onMouseClicked="#createAccountPane" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-link" text="Dont Have an Account? Click here to create one." textAlignment="CENTER" underline="true" wrappingWidth="164.13671875">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="14.0" />
                            </font>
                         </Text>
                         <Separator layoutX="166.0" layoutY="174.0" prefHeight="3.0" prefWidth="165.0" />
-                        <Separator layoutX="329.0" layoutY="175.0" orientation="VERTICAL" prefHeight="211.0" prefWidth="6.0" />
-                        <Separator layoutX="165.0" layoutY="175.0" orientation="VERTICAL" prefHeight="211.0" prefWidth="6.0" />
+                        <Separator layoutX="327.0" layoutY="175.0" orientation="VERTICAL" prefHeight="212.0" prefWidth="6.0" />
+                        <Separator layoutX="166.0" layoutY="175.0" orientation="VERTICAL" prefHeight="212.0" prefWidth="0.0" />
                         <Separator layoutX="167.0" layoutY="385.0" prefHeight="3.0" prefWidth="164.0" />
                         <PasswordField fx:id="passwordField" layoutX="174.0" layoutY="317.0" promptText="Password" />
-                        <Text layoutX="176.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Username:" wrappingWidth="110.13671875">
+                        <Text layoutX="176.0" layoutY="246.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-text" text="Enter Username:" wrappingWidth="110.13671875">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
                         </Text>
-                        <Text layoutX="176.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Enter Password:" wrappingWidth="110.13671875">
+                        <Text layoutX="176.0" layoutY="313.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-text" text="Enter Password:" wrappingWidth="110.13671875">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
