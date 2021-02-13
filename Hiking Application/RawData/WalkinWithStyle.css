@@ -47,6 +47,10 @@
 	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
 }
 
+.button .text{
+	-fx-font-family: "Microsoft JhengHei Bold";
+}
+
 .button:hover{
     -fx-background-color: linear-gradient(#9E9E9E, #757575);
 }
@@ -112,6 +116,11 @@
 
 }
 
+.table-row-cell:pressed{
+	-fx-faint-focus-color: transparent;
+    -fx-focus-color: #689F38;
+}
+
 .table-row-cell:odd{
     -fx-background-color: -fx-table-cell-border-color, #f3ffe6;
     -fx-background-insets: 0, 0 0 1 0;
@@ -125,6 +134,75 @@
 .table-view {
   -fx-table-cell-border-color: #BDBDBD;
 }
+
+.table-view:focused{
+	-fx-faint-focus-color: transparent;
+    -fx-focus-color: #689F38;
+}
+
+.table-row-cell:selected {
+	-fx-border-color: rgba(79,128,47,1);
+    -fx-table-cell-border-color: rgba(79,128,47,1);
+}
+
+
+
+
+
+
+
+
+.combo-box .list-cell:filled:selected .text{
+	-fx-font-family: "Microsoft JhengHei Semibold";
+	-fx-text-fill: white;
+}
+
+.combo-box:hover{
+	 -fx-background-color: linear-gradient(#9E9E9E, #757575);
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: black;
+    -fx-font-family: "Microsoft JhengHei Semibold";
+    -fx-background-color:#f3f5f2;
+    -fx-font-size: 8pt;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-text-fill: #212121;
+    -fx-background-color:white;
+    -fx-font-weight:bold;
+}
+
+.combo-box-popup .list-view{
+	-fx-pref-width: 123;
+}
+
+
+.menu-bar .container .menu:openvertically .label {
+   -fx-font-size: 11pt;
+    -fx-font-family: "Microsoft JhengHei Semibold";
+    -fx-text-fill: white;
+    -fx-fill:#689F38;
+    -fx-background-color:none;
+}
+
+.combo-box .list-cell:filled:selected .text{
+	-fx-font-family: "Microsoft JhengHei Semibold";
+	-fx-text-fill: white;
+}
+
+.combo-box{
+	-fx-background-color:#9E9E9E;
+	-fx-text-fill: white;
+	-fx-effect: dropshadow( three-pass-box , rgba(0,0,0,0.6) , 5, 0.0 , 0 , 1 );
+}
+
+.combo-box .list-cell{
+	-fx-text-fill:white;
+}
+
+
 
 
 

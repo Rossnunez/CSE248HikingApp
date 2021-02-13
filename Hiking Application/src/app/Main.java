@@ -60,8 +60,6 @@ public class Main extends Application {
 		
 		Parent root = FXMLLoader.load(getClass().getResource("/view/view1.fxml"));
 		Scene scene = new Scene(root);
-		//scene.getStylesheets().add(getClass().getResource("WalkinWithStyle.css").toExternalForm());
-		//primaryStage.initStyle(StageStyle.UNDECORATED);
 		primaryStage.setTitle("Hiking Application");
 		primaryStage.getIcons().add(new Image("file:RawData/hiking.png"));
 		primaryStage.setScene(scene);

@@ -68,7 +68,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane prefHeight="58.0" prefWidth="821.0" styleClass="pane" AnchorPane.rightAnchor="-1.0" />
+                        <Pane prefHeight="58.0" prefWidth="821.0" styleClass="pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" />
                         <Text layoutX="8.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Start Hiking Today!" wrappingWidth="428.4978942871094">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="34.0" />
@@ -78,7 +78,7 @@
                         <Separator layoutY="57.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0" />
                         <Button layoutX="212.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchForTrails" prefHeight="25.0" prefWidth="75.0" text="Search">
                            <font>
-                              <Font name="Microsoft JhengHei Light" size="12.0" />
+                              <Font name="Microsoft JhengHei Bold" size="12.0" />
                            </font>
                         </Button>
                         <TableView fx:id="table" layoutY="124.0" onMouseClicked="#selectedTrail" prefHeight="279.0" prefWidth="826.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-3.0">
@@ -115,12 +115,12 @@
                         <Slider fx:id="evelationSlider" layoutX="691.0" layoutY="83.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
                         <Text layoutX="554.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
-                              <Font name="Microsoft JhengHei" size="12.0" />
+                              <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
                         </Text>
                         <Text layoutX="699.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
-                              <Font name="Microsoft JhengHei" size="12.0" />
+                              <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
                         </Text>
                      </children></AnchorPane>
@@ -130,7 +130,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane prefHeight="58.0" prefWidth="821.0" styleClass="pane" AnchorPane.rightAnchor="-1.0" />
+                        <Pane prefHeight="58.0" prefWidth="821.0" styleClass="pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" />
                         <Text layoutX="8.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Uncompleted Hikes" wrappingWidth="415.3275451660156">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="34.0" />
@@ -183,7 +183,7 @@
                         </Text>
                         <Text layoutX="699.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
-                              <Font name="Microsoft JhengHei" size="12.0" />
+                              <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
                         </Text>
                      </children>
@@ -194,7 +194,7 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane prefHeight="58.0" prefWidth="821.0" styleClass="pane" AnchorPane.rightAnchor="-1.0" />
+                        <Pane prefHeight="58.0" prefWidth="821.0" styleClass="pane" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-1.0" />
                         <Text layoutX="8.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Your Hiking History" wrappingWidth="367.036376953125">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="34.0" />
@@ -240,12 +240,12 @@
                         <Slider fx:id="evelationSliderHistory" layoutX="691.0" layoutY="83.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
                         <Text layoutX="554.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
-                              <Font name="Microsoft JhengHei" size="12.0" />
+                              <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
                         </Text>
                         <Text layoutX="699.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
-                              <Font name="Microsoft JhengHei" size="12.0" />
+                              <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
                         </Text>
                      </children>
