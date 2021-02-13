@@ -56,7 +56,6 @@ public class Controller1 implements Initializable {
 			fis.close();
 			return;
 		}
-		//ObjectInputStream ois = new ObjectInputStream(fis);
 		
 		storageBag = (StorageBag) ois.readObject();
 		

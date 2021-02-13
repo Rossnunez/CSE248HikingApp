@@ -68,6 +68,14 @@
 .text-field:focused{
     -fx-faint-focus-color: transparent;
     -fx-focus-color: #689F38;
+    -fx-control-inner-background:#f5fced;
+}
+
+.text-field{
+	-fx-background-radius: 15px;
+	-fx-min-height: 26;
+	-fx-font-size: 13px;
+	-fx-max-width:150px;
 }
 
 .pane {
