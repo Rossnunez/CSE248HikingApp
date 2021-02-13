@@ -25,12 +25,12 @@
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
                         <Pane layoutX="-1.0" prefHeight="112.0" prefWidth="460.0" styleClass="pane" />
-                        <Text layoutX="4.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Welcome," wrappingWidth="324.80340576171875">
+                        <Text layoutX="16.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Welcome," wrappingWidth="324.80340576171875">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="38.0" />
                            </font>
                         </Text>
-                        <Text fx:id="usernameText" layoutX="143.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Username" wrappingWidth="299.8033752441406">
+                        <Text fx:id="usernameText" layoutX="151.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Username" wrappingWidth="299.8033752441406">
                            <font>
                               <Font name="Microsoft JhengHei Bold" size="30.0" />
                            </font>
@@ -68,14 +68,15 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="14.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Start Hiking Today!" wrappingWidth="278.1366882324219">
+                        <Pane prefHeight="58.0" prefWidth="821.0" styleClass="pane" AnchorPane.rightAnchor="-1.0" />
+                        <Text layoutX="8.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Start Hiking Today!" wrappingWidth="428.4978942871094">
                            <font>
-                              <Font name="Microsoft JhengHei Light" size="29.0" />
+                              <Font name="Microsoft JhengHei Light" size="34.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="searchField" layoutX="14.0" layoutY="81.0" onKeyTyped="#keyPressed" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" />
+                        <TextField fx:id="searchField" layoutX="14.0" layoutY="81.0" onKeyTyped="#keyPressed" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" styleClass="searchbar" />
                         <Separator layoutY="57.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0" />
-                        <Button layoutX="212.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchForTrails" prefHeight="25.0" prefWidth="76.0" text="Search">
+                        <Button layoutX="212.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchForTrails" prefHeight="25.0" prefWidth="75.0" text="Search">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
@@ -103,21 +104,21 @@
                               <Font name="Microsoft JhengHei Bold" size="17.0" />
                            </font>
                         </Text>
-                        <Button layoutX="674.0" layoutY="414.0" mnemonicParsing="false" onAction="#startTrail" prefHeight="25.0" prefWidth="80.0" text="Start Trail">
+                        <Button layoutX="674.0" layoutY="414.0" mnemonicParsing="false" onAction="#startTrail" prefHeight="25.0" prefWidth="96.0" text="Start Trail">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
                         </Button>
-                        <CheckComboBox fx:id="difficultyBox" layoutX="302.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
-                        <CheckComboBox fx:id="typeBox" layoutX="412.0" layoutY="81.0" prefHeight="25.0" prefWidth="68.0" title="Type" />
-                        <Slider fx:id="lengthSlider" layoutX="503.0" layoutY="89.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
-                        <Slider fx:id="evelationSlider" layoutX="657.0" layoutY="89.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
-                        <Text layoutX="512.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
+                        <CheckComboBox fx:id="difficultyBox" layoutX="316.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
+                        <CheckComboBox fx:id="typeBox" layoutX="434.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Type" />
+                        <Slider fx:id="lengthSlider" layoutX="546.0" layoutY="83.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Slider fx:id="evelationSlider" layoutX="691.0" layoutY="83.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Text layoutX="554.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
                         </Text>
-                        <Text layoutX="663.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
+                        <Text layoutX="699.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
@@ -129,14 +130,15 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="14.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Uncompleted Hikes" wrappingWidth="278.1366882324219">
+                        <Pane prefHeight="58.0" prefWidth="821.0" styleClass="pane" AnchorPane.rightAnchor="-1.0" />
+                        <Text layoutX="8.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Uncompleted Hikes" wrappingWidth="415.3275451660156">
                            <font>
-                              <Font name="Microsoft JhengHei Light" size="29.0" />
+                              <Font name="Microsoft JhengHei Light" size="34.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="searchFieldUncompleted" layoutX="16.0" layoutY="73.0" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" />
-                        <Separator layoutY="58.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="58.0" />
-                        <Button layoutX="222.0" layoutY="74.0" mnemonicParsing="false" onAction="#searchForTrailsUncompleted" prefHeight="20.0" prefWidth="77.0" text="Search">
+                        <TextField fx:id="searchFieldUncompleted" layoutX="14.0" layoutY="81.0" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" styleClass="searchbar" />
+                        <Separator layoutY="57.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0" />
+                        <Button layoutX="212.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchForTrailsUncompleted" prefHeight="25.0" prefWidth="75.0" text="Search">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
@@ -155,31 +157,31 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Text layoutX="14.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected:" wrappingWidth="74.13671875">
+                        <Text layoutX="14.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected:" wrappingWidth="74.13671875">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="17.0" />
                            </font>
                         </Text>
-                        <Text fx:id="selectedTrailUncompleted" layoutX="84.0" layoutY="433.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="440.13677978515625">
+                        <Text fx:id="selectedTrailUncompleted" layoutX="88.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="440.13677978515625">
                            <font>
                               <Font name="Microsoft JhengHei Bold" size="17.0" />
                            </font>
                         </Text>
-                        <Button layoutX="610.0" layoutY="414.0" mnemonicParsing="false" onAction="#completeTrail" prefHeight="25.0" prefWidth="97.0" text="Complete Trail">
+                        <Button layoutX="674.0" layoutY="414.0" mnemonicParsing="false" onAction="#completeTrail" prefHeight="25.0" prefWidth="96.0" text="Complete Trail">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
                         </Button>
-                        <CheckComboBox fx:id="difficultyBoxUncompleted" layoutX="317.0" layoutY="73.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
-                        <CheckComboBox fx:id="typeBoxUncompleted" layoutX="429.0" layoutY="73.0" prefHeight="25.0" prefWidth="68.0" title="Type" />
-                        <Slider fx:id="lengthSliderUncompleted" layoutX="519.0" layoutY="78.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
-                        <Slider fx:id="evelationSliderUncompleted" layoutX="652.0" layoutY="78.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
-                        <Text layoutX="526.0" layoutY="76.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
+                        <CheckComboBox fx:id="difficultyBoxUncompleted" layoutX="316.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
+                        <CheckComboBox fx:id="typeBoxUncompleted" layoutX="434.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Type" />
+                        <Slider fx:id="lengthSliderUncompleted" layoutX="546.0" layoutY="83.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Slider fx:id="evelationSliderUncompleted" layoutX="691.0" layoutY="83.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Text layoutX="554.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
                         </Text>
-                        <Text layoutX="661.0" layoutY="75.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
+                        <Text layoutX="699.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
@@ -192,14 +194,15 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="14.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Your Hiking History" wrappingWidth="278.1366882324219">
+                        <Pane prefHeight="58.0" prefWidth="821.0" styleClass="pane" AnchorPane.rightAnchor="-1.0" />
+                        <Text layoutX="8.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Your Hiking History" wrappingWidth="367.036376953125">
                            <font>
-                              <Font name="Microsoft JhengHei Light" size="29.0" />
+                              <Font name="Microsoft JhengHei Light" size="34.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="searchFieldHistory" layoutX="14.0" layoutY="80.0" prefHeight="25.0" prefWidth="195.0" promptText="Search for Trails" />
-                        <Separator layoutY="59.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0" />
-                        <Button layoutX="231.0" layoutY="79.0" mnemonicParsing="false" onAction="#searchForTrailsHistory" prefHeight="25.0" prefWidth="74.0" text="Search">
+                        <TextField fx:id="searchFieldHistory" layoutX="14.0" layoutY="81.0" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" styleClass="searchbar" />
+                        <Separator layoutY="59.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0" />
+                        <Button layoutX="212.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchForTrailsHistory" prefHeight="25.0" prefWidth="75.0" text="Search">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
@@ -220,27 +223,27 @@
                               <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                            </columnResizePolicy>
                         </TableView>
-                        <Text layoutX="14.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected:" wrappingWidth="74.13671875">
+                        <Text layoutX="14.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Selected:" wrappingWidth="74.13671875">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="17.0" />
                            </font>
                         </Text>
-                        <Text fx:id="selectedTrailHistory" layoutX="84.0" layoutY="432.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="501.13677978515625">
+                        <Text fx:id="selectedTrailHistory" layoutX="88.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="None" wrappingWidth="501.13677978515625">
                            <font>
                               <Font name="Microsoft JhengHei Bold" size="17.0" />
                            </font>
                         </Text>
-                        <Button layoutX="620.0" layoutY="414.0" mnemonicParsing="false" onAction="#addPicturesHistory" prefHeight="25.0" prefWidth="84.0" text="Add Pictures" />
-                        <CheckComboBox fx:id="difficultyBoxHistory" layoutX="324.0" layoutY="78.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
-                        <CheckComboBox fx:id="typeBoxHistory" layoutX="433.0" layoutY="77.0" prefHeight="25.0" prefWidth="68.0" title="Type" />
-                        <Slider fx:id="lengthSliderHistory" layoutX="524.0" layoutY="81.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
-                        <Slider fx:id="evelationSliderHistory" layoutX="652.0" layoutY="80.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
-                        <Text layoutX="531.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
+                        <Button layoutX="674.0" layoutY="414.0" mnemonicParsing="false" onAction="#addPicturesHistory" prefHeight="25.0" prefWidth="96.0" text="Add Pictures" />
+                        <CheckComboBox fx:id="difficultyBoxHistory" layoutX="316.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
+                        <CheckComboBox fx:id="typeBoxHistory" layoutX="434.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Type" />
+                        <Slider fx:id="lengthSliderHistory" layoutX="546.0" layoutY="83.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Slider fx:id="evelationSliderHistory" layoutX="691.0" layoutY="83.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Text layoutX="554.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
                         </Text>
-                        <Text layoutX="659.0" layoutY="77.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
+                        <Text layoutX="699.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
