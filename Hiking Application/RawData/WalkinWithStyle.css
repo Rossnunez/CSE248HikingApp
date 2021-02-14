@@ -90,6 +90,20 @@
 	-fx-max-width:200px;
 }
 
+.createtrails-bar{
+	-fx-background-radius: 15px;
+	-fx-min-height: 26;
+	-fx-font-size: 13px;
+	-fx-max-width:300px;
+}
+
+.user-bar{
+	-fx-background-radius: 15px;
+	-fx-min-height: 26;
+	-fx-font-size: 13px;
+	-fx-max-width:350px;
+}
+
 /* text field and searchbar ABOVE */
 
 .pane {
@@ -108,10 +122,18 @@
 
 /* imageview ABOVE */
 
+.tab {
+	-fx-background-color:white;
+}
+
 .tab:selected:top{
 	-fx-background-color:#DCEDC8;
 	-fx-faint-focus-color: transparent;
     -fx-focus-color: #689F38;
+}
+
+.tab-pane .tab-header-background{
+	-fx-background-color:#f5fced;
 }
 
 /* tab ABOVE */

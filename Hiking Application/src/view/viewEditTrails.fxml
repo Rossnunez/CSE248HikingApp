@@ -10,11 +10,12 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerEditTrails" stylesheets="WalkinWithStyle.css">
+<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="WalkinWithStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerEditTrails">
    <children>
       <TabPane layoutX="77.0" layoutY="32.0" prefHeight="500.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -89,19 +90,20 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="215.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create a Hiking Trail" textAlignment="CENTER" wrappingWidth="352.876953125">
+                        <Pane layoutY="-1.0" prefHeight="78.0" prefWidth="800.0" styleClass="pane" />
+                        <Text layoutX="215.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Create a Hiking Trail" textAlignment="CENTER" wrappingWidth="352.876953125">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="36.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="lengthField" layoutX="277.0" layoutY="223.0" prefHeight="25.0" prefWidth="237.0" />
-                        <TextField fx:id="trailNameField" layoutX="275.0" layoutY="108.0" prefHeight="25.0" prefWidth="239.0" />
-                        <TextField fx:id="elevationField" layoutX="277.0" layoutY="281.0" prefHeight="25.0" prefWidth="238.0" />
-                        <TextField fx:id="trailAddressField" layoutX="276.0" layoutY="163.0" prefHeight="25.0" prefWidth="240.0" />
-                        <ComboBox fx:id="difficultyBox" layoutX="277.0" layoutY="342.0" prefHeight="25.0" prefWidth="93.0" promptText="Difficulty" />
-                        <ComboBox fx:id="typeBox" layoutX="421.0" layoutY="342.0" prefHeight="25.0" prefWidth="94.0" promptText="Type" />
+                        <TextField fx:id="lengthField" layoutX="277.0" layoutY="223.0" prefHeight="25.0" prefWidth="237.0" styleClass="createtrails-bar" />
+                        <TextField fx:id="trailNameField" layoutX="275.0" layoutY="108.0" prefHeight="25.0" prefWidth="239.0" styleClass="createtrails-bar" />
+                        <TextField fx:id="elevationField" layoutX="277.0" layoutY="281.0" prefHeight="25.0" prefWidth="238.0" styleClass="createtrails-bar" />
+                        <TextField fx:id="trailAddressField" layoutX="276.0" layoutY="163.0" prefHeight="25.0" prefWidth="240.0" styleClass="createtrails-bar" />
+                        <ComboBox fx:id="difficultyBox" layoutX="422.0" layoutY="330.0" prefHeight="25.0" prefWidth="134.0" promptText="Difficulty" />
+                        <ComboBox fx:id="typeBox" layoutX="238.0" layoutY="330.0" prefHeight="25.0" prefWidth="135.0" promptText="Type" />
                         <Separator layoutY="76.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="76.0" />
-                        <Button layoutX="340.0" layoutY="426.0" mnemonicParsing="false" onAction="#createTrail" prefHeight="12.0" prefWidth="103.0" text="Create Trail">
+                        <Button layoutX="344.0" layoutY="421.0" mnemonicParsing="false" onAction="#createTrail" prefHeight="12.0" prefWidth="103.0" text="Create Trail">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="11.0" />
                            </font>
