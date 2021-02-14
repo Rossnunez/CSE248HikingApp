@@ -19,6 +19,16 @@
     -fx-padding: 0;
 }
 
+.menu-bar .container .menu:openvertically .label {
+   -fx-font-size: 11pt;
+    -fx-font-family: "Microsoft JhengHei Semibold";
+    -fx-text-fill: white;
+    -fx-fill:#689F38;
+    -fx-background-color:none;
+}
+
+/*context and menu bar ABOVE */
+
 .separator .line {
 	-fx-border-style: none;
 	-fx-border-color: #BDBDBD;
@@ -26,6 +36,7 @@
     -fx-border-width: 0 1 1 0;
 }
 
+/* separator ABOVE */
 
 .text-header {
 	-fx-fill: white;
@@ -41,6 +52,8 @@
 	-fx-font-size: 11pt;
 }
 
+/* text titles/links ABOVE */
+
 .button {
 	-fx-background-color:#9E9E9E;
 	-fx-text-fill: white;
@@ -55,6 +68,7 @@
     -fx-background-color: linear-gradient(#9E9E9E, #757575);
 }
 
+/* buttons ABOVE */
 
 .text-field:focused{
     -fx-faint-focus-color: transparent;
@@ -76,19 +90,27 @@
 	-fx-max-width:200px;
 }
 
+/* text field and searchbar ABOVE */
+
 .pane {
 	-fx-background-color: #8BC34A;
 }
 
+/* pane ABOVE */
+
 .image-view:hover{
 	-fx-opacity:0.7;
 }
+
+/* imageview ABOVE */
 
 .tab:selected:top{
 	-fx-background-color:#DCEDC8;
 	-fx-faint-focus-color: transparent;
     -fx-focus-color: #689F38;
 }
+
+/* tab ABOVE */
 
 .label {
     -fx-font-size: 11pt;
@@ -97,6 +119,8 @@
     -fx-fill:#689F38;
     -fx-background-color: #689F38;
 }
+
+/* label ABOVE */
 
 .table-view .column-header, .table-view .filler{
     -fx-background-color: #689F38;
@@ -145,12 +169,7 @@
     -fx-table-cell-border-color: rgba(79,128,47,1);
 }
 
-
-
-
-
-
-
+/* table view and table columns ABOVE */
 
 .combo-box .list-cell:filled:selected .text{
 	-fx-font-family: "Microsoft JhengHei Semibold";
@@ -178,15 +197,6 @@
 	-fx-pref-width: 123;
 }
 
-
-.menu-bar .container .menu:openvertically .label {
-   -fx-font-size: 11pt;
-    -fx-font-family: "Microsoft JhengHei Semibold";
-    -fx-text-fill: white;
-    -fx-fill:#689F38;
-    -fx-background-color:none;
-}
-
 .combo-box .list-cell:filled:selected .text{
 	-fx-font-family: "Microsoft JhengHei Semibold";
 	-fx-text-fill: white;
@@ -202,9 +212,23 @@
 	-fx-text-fill:white;
 }
 
+/* combo box ABOVE */
 
+.slider .thumb {
+    -fx-focus-color: #689F38;
+    -fx-body-color:white;
+    -fx-inner-border:white;
+    -fx-padding:10px;
+    -fx-pref-width:6px;
+}
 
+.slider .track{
+	-fx-background-color:#f5fced;
+	-fx-border-color:rgba(79,128,47,1);
+	-fx-border-radius:15px;
+}
 
+/*slider ABOVE */
 
 
 

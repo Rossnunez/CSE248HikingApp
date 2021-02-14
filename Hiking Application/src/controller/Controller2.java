@@ -161,7 +161,7 @@ public class Controller2 implements Initializable {
 		List<HikingHistory> difficultyResult = null;
 		List<HikingHistory> typeResult = null;
 		List<HikingHistory> rangeResult;
-
+		///////////////////////////////
 		ObservableList<Level> difficultyList = difficultyBoxHistory.getCheckModel().getCheckedItems();
 		if (difficultyList.size() == 2) {
 			difficultyResult = firstResult.stream()

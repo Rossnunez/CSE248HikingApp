@@ -130,34 +130,35 @@ public class ControllerEditUsers implements Initializable {
 		} else {
 			imageView.setImage(null);
 			selectedUser = userTable.getSelectionModel().getSelectedItem();
-			selectedUserText.setText(selectedUser.getUsername());
-
-			passwordField.setText(selectedUser.getPassword());
-			firstNameField.setText(selectedUser.getFirstName());
-			lastNameField.setText(selectedUser.getLastName());
-			phonenumberField.setText(selectedUser.getPhoneNumber());
-
-			File file = new File(selectedUser.getImage());
-			setFilePath(file);
-
 			try {
-				image = filePath.getPath();
-				bufferedImage = ImageIO.read(filePath);
-				Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-				imageView.setImage(image);
-			} catch (IOException e) {
-				file = new File(
-						"C:\\Users\\nross\\Desktop\\CSE248Portfolio\\CSE248HikingApp\\Hiking Application\\RawData\\user.png");
+				selectedUserText.setText(selectedUser.getUsername());
+
+				passwordField.setText(selectedUser.getPassword());
+				firstNameField.setText(selectedUser.getFirstName());
+				lastNameField.setText(selectedUser.getLastName());
+				phonenumberField.setText(selectedUser.getPhoneNumber());
+
+				File file = new File(selectedUser.getImage());
 				setFilePath(file);
-				image = filePath.getPath();
-				bufferedImage = ImageIO.read(filePath);
-				Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-				imageView.setImage(image);
 
+				try {
+					image = filePath.getPath();
+					bufferedImage = ImageIO.read(filePath);
+					Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+					imageView.setImage(image);
+				} catch (IOException e) {
+					file = new File(
+							"C:\\Users\\nross\\Desktop\\CSE248Portfolio\\CSE248HikingApp\\Hiking Application\\RawData\\user.png");
+					setFilePath(file);
+					image = filePath.getPath();
+					bufferedImage = ImageIO.read(filePath);
+					Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+					imageView.setImage(image);
+				}
+			} catch (NullPointerException e) {
+				//
 			}
-			System.out.println(selectedUser.getImage());
 		}
-
 	}
 
 	public void changeImage(MouseEvent event) {
@@ -189,7 +190,7 @@ public class ControllerEditUsers implements Initializable {
 
 	public void keyPressed(KeyEvent event) {
 		userList.clear();
-		
+
 		String search = usernameField.getText();
 
 		if (!search.contentEquals("")) {
@@ -203,7 +204,7 @@ public class ControllerEditUsers implements Initializable {
 			userTable.setItems(userList);
 		}
 	}
-	
+
 	public void searchField(ActionEvent event) {
 		userList.clear();
 

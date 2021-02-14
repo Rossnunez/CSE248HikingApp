@@ -38,13 +38,12 @@ public class ControllerEditTrails implements Initializable {
 	public HashSet<Trail> trailSet;
 	public static Trail trailToEdit;
 
-	//create trails
+	// create trails
 	public TextField trailNameField;
 	public TextField trailAddressField;
 	public TextField lengthField;
 	public TextField elevationField;
-	
-	
+
 	public ComboBox<String> difficultyBox;
 	public ComboBox<String> typeBox;
 
@@ -68,12 +67,14 @@ public class ControllerEditTrails implements Initializable {
 
 	// edit trails tab
 	public void removeTrail(ActionEvent event) {
-		Trail trail = table.getSelectionModel().getSelectedItem();
-		trailSet.remove(trail);
-		table.getItems().remove(table.getSelectionModel().getSelectedItem());
-		selectedTrail.setText("Trail Removed");
+		if (table.getSelectionModel().getSelectedItem() != null) {
+			Trail trail = table.getSelectionModel().getSelectedItem();
+			trailSet.remove(trail);
+			table.getItems().remove(table.getSelectionModel().getSelectedItem());
+			selectedTrail.setText("Trail Removed");
+		}
 	}
-	
+
 	public void keyPressed(KeyEvent event) {
 		trail.clear();
 		String search = searchField.getText();
@@ -222,10 +223,13 @@ public class ControllerEditTrails implements Initializable {
 
 			ObservableList<Level> difficultyList = difficultyCheckBox.getCheckModel().getCheckedItems();
 			if (difficultyList.size() == 2) {
-				difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(difficultyList.get(0))
-						|| trail.getDifficulty().equals(difficultyList.get(1))).collect(Collectors.toList());
+				difficultyResult = firstResult.stream()
+						.filter(trail -> trail.getDifficulty().equals(difficultyList.get(0))
+								|| trail.getDifficulty().equals(difficultyList.get(1)))
+						.collect(Collectors.toList());
 			} else if (difficultyList.size() == 1) {
-				difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(difficultyList.get(0)))
+				difficultyResult = firstResult.stream()
+						.filter(trail -> trail.getDifficulty().equals(difficultyList.get(0)))
 						.collect(Collectors.toList());
 			} else {
 				difficultyResult = firstResult;
@@ -233,8 +237,9 @@ public class ControllerEditTrails implements Initializable {
 
 			ObservableList<HikeType> typeList = typeCheckBox.getCheckModel().getCheckedItems();
 			if (typeList.size() == 2) {
-				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(typeList.get(0))
-						|| trail.getType().equals(typeList.get(1))).collect(Collectors.toList());
+				typeResult = difficultyResult.stream().filter(
+						trail -> trail.getType().equals(typeList.get(0)) || trail.getType().equals(typeList.get(1)))
+						.collect(Collectors.toList());
 			} else if (typeList.size() == 1) {
 				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(typeList.get(0)))
 						.collect(Collectors.toList());

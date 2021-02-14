@@ -178,7 +178,7 @@
                         <Slider fx:id="evelationSliderUncompleted" layoutX="691.0" layoutY="83.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
                         <Text layoutX="554.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
-                              <Font name="Microsoft JhengHei" size="12.0" />
+                              <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
                         </Text>
                         <Text layoutX="699.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
