@@ -96,6 +96,10 @@
 	-fx-background-color: #8BC34A;
 }
 
+.light-pane{
+	-fx-background-color: #f5fced;
+}
+
 /* pane ABOVE */
 
 .image-view:hover{
@@ -229,6 +233,8 @@
 }
 
 /*slider ABOVE */
+
+
 
 
 
