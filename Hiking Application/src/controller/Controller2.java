@@ -714,7 +714,6 @@ public class Controller2 implements Initializable {
 
 		username = Controller1.getUsername();
 		user = Controller1.getUser();
-
 		usernameText.setText(username);
 		passwordField.setText(user.getPassword());
 		firstnameField.setText(user.getFirstName());

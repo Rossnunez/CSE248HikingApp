@@ -156,7 +156,7 @@ public class ControllerEditTrails implements Initializable {
 	public void searchForTrails(ActionEvent event) {
 		trail.clear();
 		String search = searchField.getText().toLowerCase();
-
+		
 		if (!search.contentEquals("")) {
 			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().toLowerCase().contains(search))
 					.collect(Collectors.toList());
