@@ -191,10 +191,10 @@ public class ControllerEditUsers implements Initializable {
 	public void keyPressed(KeyEvent event) {
 		userList.clear();
 
-		String search = usernameField.getText();
+		String search = usernameField.getText().toLowerCase();
 
 		if (!search.contentEquals("")) {
-			Map<String, User> result = userMap.entrySet().stream().filter(user -> user.getKey().contains(search))
+			Map<String, User> result = userMap.entrySet().stream().filter(user -> user.getKey().toLowerCase().contains(search))
 					.collect(Collectors.toMap(user -> user.getKey(), user -> user.getValue()));
 
 			for (java.util.Map.Entry<String, User> entry : result.entrySet()) {

@@ -77,11 +77,11 @@ public class ControllerEditTrails implements Initializable {
 
 	public void keyPressed(KeyEvent event) {
 		trail.clear();
-		String search = searchField.getText();
+		String search = searchField.getText().toLowerCase();
 
 		if (!search.contentEquals("")) {
-			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().contains(search))
-					.collect(Collectors.toList());
+			List<Trail> firstResult = trailSet.stream()
+					.filter(trail -> trail.getTrailName().toLowerCase().contains(search)).collect(Collectors.toList());
 			List<Trail> difficultyResult = null;
 			List<Trail> typeResult = null;
 			List<Trail> rangeResult;
@@ -89,43 +89,17 @@ public class ControllerEditTrails implements Initializable {
 			ObservableList<Level> difficultyList = difficultyCheckBox.getCheckModel().getCheckedItems();
 			if (difficultyList.size() == 2) {
 
-				if (difficultyList.get(0).toString().contentEquals("HARD")
-						&& difficultyList.get(1).toString().contentEquals("MODERATE")) {
-
-					difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.HARD)
-							|| trail.getDifficulty().equals(Level.MODERATE)).collect(Collectors.toList());
-
-				} else if (difficultyList.get(0).toString().contentEquals("HARD")
-						&& difficultyList.get(1).toString().contentEquals("EASY")) {
-
-					difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.HARD)
-							|| trail.getDifficulty().equals(Level.EASY)).collect(Collectors.toList());
-
-				} else if (difficultyList.get(0).toString().contentEquals("MODERATE")
-						&& difficultyList.get(1).toString().contentEquals("EASY")) {
-
-					difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.MODERATE)
-							|| trail.getDifficulty().equals(Level.EASY)).collect(Collectors.toList());
-
-				}
+				difficultyResult = firstResult.stream()
+						.filter(trail -> trail.getDifficulty().equals(difficultyList.get(0))
+								|| trail.getDifficulty().equals(difficultyList.get(1)))
+						.collect(Collectors.toList());
 
 			} else if (difficultyList.size() == 1) {
 
-				if (difficultyList.get(0).toString().contentEquals("HARD")) {
-
-					difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.HARD))
-							.collect(Collectors.toList());
-
-				} else if (difficultyList.get(0).toString().contentEquals("MODERATE")) {
-
-					difficultyResult = firstResult.stream()
-							.filter(trail -> trail.getDifficulty().equals(Level.MODERATE)).collect(Collectors.toList());
-
-				} else if (difficultyList.get(0).toString().contentEquals("EASY")) {
-
-					difficultyResult = firstResult.stream().filter(trail -> trail.getDifficulty().equals(Level.EASY))
-							.collect(Collectors.toList());
-				}
+				difficultyResult = firstResult.stream()
+						.filter(trail -> trail.getDifficulty().equals(difficultyList.get(0)))
+						.collect(Collectors.toList());
+				
 			} else {
 				difficultyResult = firstResult;
 			}
@@ -133,45 +107,14 @@ public class ControllerEditTrails implements Initializable {
 			ObservableList<HikeType> typeList = typeCheckBox.getCheckModel().getCheckedItems();
 			if (typeList.size() == 2) {
 
-				if (typeList.get(0).toString().contentEquals("LOOP")
-						&& typeList.get(1).toString().contentEquals("OUT AND BACK")) {
-
-					typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.LOOP)
-							|| trail.getType().equals(HikeType.OUT_AND_BACK)).collect(Collectors.toList());
-
-				} else if (typeList.get(0).toString().contentEquals("LOOP")
-						&& typeList.get(1).toString().contentEquals("POINT TO POINT")) {
-
-					typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.LOOP)
-							|| trail.getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
-
-				} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")
-						&& typeList.get(1).toString().contentEquals("POINT TO POINT")) {
-
-					typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.OUT_AND_BACK)
-							|| trail.getType().equals(HikeType.POINT_TO_POINT)).collect(Collectors.toList());
-
-				}
+				typeResult = difficultyResult.stream().filter(
+						trail -> trail.getType().equals(typeList.get(0)) || trail.getType().equals(typeList.get(1)))
+						.collect(Collectors.toList());
 
 			} else if (typeList.size() == 1) {
 
-				if (typeList.get(0).toString().contentEquals("LOOP")) {
-
-					typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(HikeType.LOOP))
-							.collect(Collectors.toList());
-
-				} else if (typeList.get(0).toString().contentEquals("POINT TO POINT")) {
-
-					typeResult = difficultyResult.stream()
-							.filter(trail -> trail.getType().equals(HikeType.POINT_TO_POINT))
-							.collect(Collectors.toList());
-
-				} else if (typeList.get(0).toString().contentEquals("OUT AND BACK")) {
-
-					typeResult = difficultyResult.stream()
-							.filter(trail -> trail.getType().equals(HikeType.OUT_AND_BACK))
-							.collect(Collectors.toList());
-				}
+				typeResult = difficultyResult.stream().filter(trail -> trail.getType().equals(typeList.get(0)))
+						.collect(Collectors.toList());
 			} else {
 				typeResult = difficultyResult;
 			}
@@ -212,10 +155,10 @@ public class ControllerEditTrails implements Initializable {
 
 	public void searchForTrails(ActionEvent event) {
 		trail.clear();
-		String search = searchField.getText();
+		String search = searchField.getText().toLowerCase();
 
 		if (!search.contentEquals("")) {
-			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().contains(search))
+			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().toLowerCase().contains(search))
 					.collect(Collectors.toList());
 			List<Trail> difficultyResult = null;
 			List<Trail> typeResult = null;
@@ -322,43 +265,53 @@ public class ControllerEditTrails implements Initializable {
 				&& typeBox.getSelectionModel().getSelectedItem() != null) {
 			String trailName = trailNameField.getText();
 			String trailAddress = trailAddressField.getText();
-			double length = Double.valueOf(lengthField.getText());
-			double elevation = Double.valueOf(elevationField.getText());
-			Level level = null;
-			HikeType hikeType = null;
+			try {
+				double length = Double.valueOf(lengthField.getText());
+				double elevation = Double.valueOf(elevationField.getText());
+				Level level = null;
+				HikeType hikeType = null;
 
-			String difficulty = difficultyBox.getSelectionModel().getSelectedItem();
-			String type = typeBox.getSelectionModel().getSelectedItem();
+				String difficulty = difficultyBox.getSelectionModel().getSelectedItem();
+				String type = typeBox.getSelectionModel().getSelectedItem();
 
-			if (difficulty.contentEquals("HARD")) {
-				level = Level.HARD;
-			} else if (difficulty.contentEquals("MODERATE")) {
-				level = Level.MODERATE;
-			} else if (difficulty.contentEquals("EASY")) {
-				level = Level.EASY;
+				if (difficulty.contentEquals("HARD")) {
+					level = Level.HARD;
+				} else if (difficulty.contentEquals("MODERATE")) {
+					level = Level.MODERATE;
+				} else if (difficulty.contentEquals("EASY")) {
+					level = Level.EASY;
+				}
+
+				if (type.contentEquals("LOOP")) {
+					hikeType = HikeType.LOOP;
+				} else if (type.contentEquals("OUT AND BACK")) {
+					hikeType = HikeType.OUT_AND_BACK;
+				} else if (type.contentEquals("POINT TO POINT")) {
+					hikeType = HikeType.POINT_TO_POINT;
+				}
+
+				Trail trail = new Trail(trailName, trailAddress, length, elevation, level, hikeType);
+				trailSet.add(trail);
+
+				trailNameField.clear();
+				trailAddressField.clear();
+				lengthField.clear();
+				elevationField.clear();
+
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setContentText("Hiking Trail is Created!");
+				alert.setHeaderText("Trail added to Database");
+				alert.setTitle("TRAIL CONFIRMATION");
+				alert.showAndWait();
+
+			} catch (NumberFormatException e) {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("Length and Elevation need to be a Integer or Double");
+				alert.setTitle("INTEGER ERROR");
+				alert.setHeaderText("Only use numbers");
+				alert.showAndWait();
 			}
 
-			if (type.contentEquals("LOOP")) {
-				hikeType = HikeType.LOOP;
-			} else if (type.contentEquals("OUT AND BACK")) {
-				hikeType = HikeType.OUT_AND_BACK;
-			} else if (type.contentEquals("POINT TO POINT")) {
-				hikeType = HikeType.POINT_TO_POINT;
-			}
-
-			Trail trail = new Trail(trailName, trailAddress, length, elevation, level, hikeType);
-			trailSet.add(trail);
-
-			trailNameField.clear();
-			trailAddressField.clear();
-			lengthField.clear();
-			elevationField.clear();
-
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setContentText("Hiking Trail is Created!");
-			alert.setHeaderText("Trail added to Database");
-			alert.setTitle("TRAIL CONFIRMATION");
-			alert.showAndWait();
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setContentText("Select difficulty and type");

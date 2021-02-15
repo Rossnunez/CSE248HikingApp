@@ -61,49 +61,106 @@ public class Controller4 implements Initializable {
 	}
 
 	public void changeImage(MouseEvent event) throws IOException {
-		Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		fileChooser = new FileChooser();
-		
+
 		this.setFilePath(fileChooser.showOpenDialog(stage));
-		
+
 		try {
 			image = filePath.getPath();
 			BufferedImage bufferedImage = ImageIO.read(filePath);
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			imageField.setImage(image);
-		} catch(IOException e) {
-			System.out.println(e.getMessage());
+		} catch (NullPointerException e) {
+			//
 		}
 	}
 
 	public void signUp(ActionEvent event) {
 		String username = usernameField.getText();
+		String passAttempt = passwordField.getText();
+		String phoneNumberAtt = phonenumberField.getText();
+		boolean hasDigit = false;
+		boolean isFormatted = false;
+
+		if (phoneNumberAtt.length() == 12) {
+			for (int i = 0; i < phoneNumberAtt.length(); i++) {
+				if (!(i == 3 || i ==  7)) {
+					if (!(phoneNumberAtt.charAt(i) >= '0'
+			                && phoneNumberAtt.charAt(i) <= '9')) {
+						isFormatted = false;
+						break;
+					} else {
+						isFormatted = true;
+					}
+				} else {
+					if(phoneNumberAtt.charAt(i) == '-') {
+						isFormatted = true;
+					}
+				}
+			}
+
+			if (isFormatted && phoneNumberAtt.charAt(3) == '-' && phoneNumberAtt.charAt(7) == '-') {
+				isFormatted = true;
+
+			} else {
+				isFormatted = false;
+			}
+		}
+
+		for (int i = 0; i < passAttempt.length(); i++) {
+			if (passAttempt.charAt(i) >= '0' && passAttempt.charAt(i) <= '9') {
+				hasDigit = true;
+				break;
+			}
+		}
+
 		if (!userMap.containsKey(username)) {
-			String firstname = firstnameField.getText();
-			String lastname = lastnameField.getText();
-			String password = passwordField.getText();
-			String phonenumber = phonenumberField.getText();
-			TreeSet<HikingHistory> hikingHistorySet = new TreeSet<HikingHistory>();
-			TreeSet<HikingUncompleted> hikingUncompletedSet = new TreeSet<HikingUncompleted>();
 
-			User user = new User(username, password, firstname, lastname, phonenumber, image, AccountType.USER,
-					hikingHistorySet,hikingUncompletedSet, Status.ENABLED);
-			userMap.put(username, user);
+			if (passAttempt.length() >= 8 && hasDigit) {
 
-			usernameField.clear();
-			passwordField.clear();
-			firstnameField.clear();
-			lastnameField.clear();
-			phonenumberField.clear();
-			imageField.setImage(defaultImage);
-			image = "C:\\Users\\nross\\Desktop\\CSE248Portfolio\\CSE248HikingApp\\Hiking Application\\RawData\\user.png";
-			
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setTitle("ACCOUNT COMPLETE");
-			alert.setHeaderText("Thank's for signing up!");
-			alert.setContentText("Account has been created");
-			alert.showAndWait();
-			
+				if (isFormatted) {
+					String firstname = firstnameField.getText();
+					String lastname = lastnameField.getText();
+					String password = passwordField.getText();
+					String phonenumber = phonenumberField.getText();
+					TreeSet<HikingHistory> hikingHistorySet = new TreeSet<HikingHistory>();
+					TreeSet<HikingUncompleted> hikingUncompletedSet = new TreeSet<HikingUncompleted>();
+
+					User user = new User(username, password, firstname, lastname, phonenumber, image, AccountType.USER,
+							hikingHistorySet, hikingUncompletedSet, Status.ENABLED);
+					userMap.put(username, user);
+
+					usernameField.clear();
+					passwordField.clear();
+					firstnameField.clear();
+					lastnameField.clear();
+					phonenumberField.clear();
+					imageField.setImage(defaultImage);
+					image = "C:\\Users\\nross\\Desktop\\CSE248Portfolio\\CSE248HikingApp\\Hiking Application\\RawData\\user.png";
+
+					Alert alert = new Alert(AlertType.CONFIRMATION);
+					alert.setTitle("ACCOUNT COMPLETE");
+					alert.setHeaderText("Thank's for signing up!");
+					alert.setContentText("Account has been created");
+					alert.showAndWait();
+
+				} else {
+					Alert alert = new Alert(AlertType.ERROR);
+					alert.setContentText("Format: ###-###-####");
+					alert.setTitle("PHONENUMBER ERROR");
+					alert.setHeaderText("Phonenumber needs to formatted correctly");
+					alert.showAndWait();
+				}
+
+			} else {
+				Alert alert = new Alert(AlertType.ERROR);
+				alert.setContentText("Your password needs to be 8 char long and contain atleast one number");
+				alert.setTitle("PASSWORD ERROR");
+				alert.setHeaderText("Your password is weak");
+				alert.showAndWait();
+			}
+
 		} else {
 			Alert alert = new Alert(AlertType.ERROR);
 			alert.setTitle("ACCOUNT ERROR");

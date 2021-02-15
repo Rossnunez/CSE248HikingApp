@@ -153,10 +153,10 @@ public class Controller2 implements Initializable {
 
 	public void searchForTrailsHistory(ActionEvent event) {
 		trailHistory.clear();
-		String search = searchFieldHistory.getText();
+		String search = searchFieldHistory.getText().toLowerCase();
 
 		List<HikingHistory> firstResult = user.getHikingHistorySet().stream()
-				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().contains(search))
+				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().toLowerCase().contains(search))
 				.collect(Collectors.toList());
 		List<HikingHistory> difficultyResult = null;
 		List<HikingHistory> typeResult = null;
@@ -246,22 +246,23 @@ public class Controller2 implements Initializable {
 
 	public void addPicturesHistory(ActionEvent event) {
 		HikingHistory hikingHistory = tableHistory.getSelectionModel().getSelectedItem();
+		if (hikingHistory != null) {
+			FileChooser fileChooser = new FileChooser();
+			fileChooser.setTitle("Open Multiple Images to you Hike");
+			Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 
-		FileChooser fileChooser = new FileChooser();
-		fileChooser.setTitle("Open Multiple Images to you Hike");
-		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+			List<File> picturesList = fileChooser.showOpenMultipleDialog(stage);
 
-		List<File> picturesList = fileChooser.showOpenMultipleDialog(stage);
-
-		if (picturesList != null) {
-			for (File file : picturesList) {
-				hikingHistory.getImages().add(file.toString());
+			if (picturesList != null) {
+				for (File file : picturesList) {
+					hikingHistory.getImages().add(file.toString());
+				}
+				Alert alert = new Alert(AlertType.CONFIRMATION);
+				alert.setHeaderText("Process Complete");
+				alert.setContentText("Your images have been uploaded!");
+				alert.setTitle("Images Added to Hiking Trail");
+				alert.showAndWait();
 			}
-			Alert alert = new Alert(AlertType.CONFIRMATION);
-			alert.setHeaderText("Process Complete");
-			alert.setContentText("Your images have been uploaded!");
-			alert.setTitle("Images Added to Hiking Trail");
-			alert.showAndWait();
 		}
 
 	}
@@ -286,38 +287,39 @@ public class Controller2 implements Initializable {
 	public void completeTrail(ActionEvent event) throws ParseException {
 
 		HikingUncompleted hikingUncompleted = tableUncompleted.getSelectionModel().getSelectedItem();
+		if (hikingUncompleted != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY hh:mm:ss");
+			Date currentDoneTime = new Date(System.currentTimeMillis());
+			String completedTime = sdf.format(currentDoneTime);
 
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY hh:mm:ss");
-		Date currentDoneTime = new Date(System.currentTimeMillis());
-		String completedTime = sdf.format(currentDoneTime);
+			Date completedDate = sdf.parse(completedTime);
+			Date current = sdf.parse(hikingUncompleted.getDate());
 
-		Date completedDate = sdf.parse(completedTime);
-		Date current = sdf.parse(hikingUncompleted.getDate());
+			long difference = completedDate.getTime() - current.getTime();
+			long duration = (difference / 1000) / 60;
+			double pace = duration / hikingUncompleted.getTrail().getLength();
 
-		long difference = completedDate.getTime() - current.getTime();
-		long duration = (difference / 1000) / 60;
-		double pace = duration / hikingUncompleted.getTrail().getLength();
+			// Date date = new Date(difference);
+			// String duration = sdf.format(date);
+			LinkedList<String> images = new LinkedList<String>();
+			HikingHistory hikingHistory = new HikingHistory(hikingUncompleted.getTrail(), hikingUncompleted.getDate(),
+					completedTime, String.valueOf(duration), images, String.valueOf(pace));
 
-		// Date date = new Date(difference);
-		// String duration = sdf.format(date);
-		LinkedList<String> images = new LinkedList<String>();
-		HikingHistory hikingHistory = new HikingHistory(hikingUncompleted.getTrail(), hikingUncompleted.getDate(),
-				completedTime, String.valueOf(duration), images, String.valueOf(pace));
+			user.getHikingHistorySet().add(hikingHistory);
+			user.getHikingUncompletedSet().removeIf(
+					e -> e.getTrail().getTrailName().compareTo(hikingUncompleted.getTrail().getTrailName()) == 0);
 
-		user.getHikingHistorySet().add(hikingHistory);
-		user.getHikingUncompletedSet()
-				.removeIf(e -> e.getTrail().getTrailName().compareTo(hikingUncompleted.getTrail().getTrailName()) == 0);
-
-		tableUncompleted.getItems().remove(tableUncompleted.getSelectionModel().getSelectedItem());
-		selectedTrailUncompleted.setText("Trail Completed!");
+			tableUncompleted.getItems().remove(tableUncompleted.getSelectionModel().getSelectedItem());
+			selectedTrailUncompleted.setText("Trail Completed!");
+		}
 	}
 
 	public void searchForTrailsUncompleted(ActionEvent event) {
 		trailUncompleted.clear();
-		String search = searchFieldUncompleted.getText();
+		String search = searchFieldUncompleted.getText().toLowerCase();
 
 		List<HikingUncompleted> firstResult = user.getHikingUncompletedSet().stream()
-				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().contains(search))
+				.filter(hikingUncompleted -> hikingUncompleted.getTrail().getTrailName().toLowerCase().contains(search))
 				.collect(Collectors.toList());
 		List<HikingUncompleted> difficultyResult = null;
 		List<HikingUncompleted> typeResult = null;
@@ -326,15 +328,15 @@ public class Controller2 implements Initializable {
 		ObservableList<Level> difficultyList = difficultyBoxUncompleted.getCheckModel().getCheckedItems();
 		if (difficultyList.size() == 2) {
 
-			difficultyResult = firstResult.stream()
-					.filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(difficultyList.get(0))
+			difficultyResult = firstResult.stream().filter(
+					hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(difficultyList.get(0))
 							|| hikingUncompleted.getTrail().getDifficulty().equals(difficultyList.get(1)))
 					.collect(Collectors.toList());
 
 		} else if (difficultyList.size() == 1) {
-			
-			difficultyResult = firstResult.stream()
-					.filter(hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(difficultyList.get(0)))
+
+			difficultyResult = firstResult.stream().filter(
+					hikingUncompleted -> hikingUncompleted.getTrail().getDifficulty().equals(difficultyList.get(0)))
 					.collect(Collectors.toList());
 
 		} else {
@@ -403,25 +405,28 @@ public class Controller2 implements Initializable {
 	}
 
 	public void startTrail(ActionEvent event) {
-		Trail trail = table.getSelectionModel().getSelectedItem();
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY hh:mm:ss");
-		Date currentTime = new Date(System.currentTimeMillis());
-		String current = sdf.format(currentTime);
 
-		HikingUncompleted hikingUncompleted = new HikingUncompleted(current, trail);
-		user.getHikingUncompletedSet().add(hikingUncompleted);
-		table.getItems().remove(table.getSelectionModel().getSelectedItem());
-		selectedTrail.setText("Trail Started!");
+		Trail trail = table.getSelectionModel().getSelectedItem();
+		if (trail != null) {
+			SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/YYYY hh:mm:ss");
+			Date currentTime = new Date(System.currentTimeMillis());
+			String current = sdf.format(currentTime);
+
+			HikingUncompleted hikingUncompleted = new HikingUncompleted(current, trail);
+			user.getHikingUncompletedSet().add(hikingUncompleted);
+			table.getItems().remove(table.getSelectionModel().getSelectedItem());
+			selectedTrail.setText("Trail Started!");
+		}
 
 	}
 
 	public void keyPressed(KeyEvent event) {
 		trail.clear();
-		String search = searchField.getText();
+		String search = searchField.getText().toLowerCase();
 
 		if (!search.contentEquals("")) {
-			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().contains(search))
-					.collect(Collectors.toList());
+			List<Trail> firstResult = trailSet.stream()
+					.filter(trail -> trail.getTrailName().toLowerCase().contains(search)).collect(Collectors.toList());
 			List<Trail> difficultyResult = null;
 			List<Trail> typeResult = null;
 			List<Trail> rangeResult;
@@ -439,7 +444,7 @@ public class Controller2 implements Initializable {
 			} else {
 				difficultyResult = firstResult;
 			}
-			
+
 			ObservableList<HikeType> typeList = typeBox.getCheckModel().getCheckedItems();
 			if (typeList.size() == 2) {
 				typeResult = difficultyResult.stream().filter(
@@ -479,11 +484,11 @@ public class Controller2 implements Initializable {
 
 	public void searchForTrails(ActionEvent event) {
 		trail.clear();
-		String search = searchField.getText();
+		String search = searchField.getText().toLowerCase();
 
 		if (!search.contentEquals("")) {
-			List<Trail> firstResult = trailSet.stream().filter(trail -> trail.getTrailName().contains(search))
-					.collect(Collectors.toList());
+			List<Trail> firstResult = trailSet.stream()
+					.filter(trail -> trail.getTrailName().toLowerCase().contains(search)).collect(Collectors.toList());
 			List<Trail> difficultyResult = null;
 			List<Trail> typeResult = null;
 			List<Trail> rangeResult;
@@ -557,7 +562,7 @@ public class Controller2 implements Initializable {
 	}
 
 	// edit tab
-	public void changeImage(MouseEvent event) {
+	public void changeImage(MouseEvent event) throws IOException {
 		Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		fileChooser = new FileChooser();
 
@@ -568,10 +573,16 @@ public class Controller2 implements Initializable {
 			BufferedImage bufferedImage = ImageIO.read(filePath);
 			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
 			imageField.setImage(image);
-		} catch (IOException e) {
-			System.out.println(e.getMessage());
+		} catch (IllegalArgumentException e) {
+			//
+		} catch (NullPointerException e) {
+			
 		}
-		userMap.get(username).setImage(filePath.getPath());
+		try {
+			userMap.get(username).setImage(filePath.getPath());
+		} catch (NullPointerException e) {
+			//
+		}
 	}
 
 	public void logOutPane(ActionEvent event) throws IOException {
@@ -587,8 +598,29 @@ public class Controller2 implements Initializable {
 		tid.setHeaderText("Edit Password");
 		tid.showAndWait();
 		String password = tid.getEditor().getText();
-		user.setPassword(password);
-		passwordField.setText(password);
+		boolean hasDigit = false;
+
+		if (password.length() >= 8) {
+			for (int i = 0; i < password.length(); i++) {
+				if (password.charAt(i) >= '0' && password.charAt(i) <= '9') {
+					hasDigit = true;
+					break;
+				}
+			}
+		} else {
+			hasDigit = false;
+		}
+
+		if (hasDigit) {
+			user.setPassword(password);
+			passwordField.setText(password);
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Your password needs to be 8 char long and contain atleast one number");
+			alert.setTitle("PASSWORD ERROR");
+			alert.setHeaderText("Your password is weak");
+			alert.showAndWait();
+		}
 	}
 
 	public void editFirstname(ActionEvent event) {
@@ -614,8 +646,43 @@ public class Controller2 implements Initializable {
 		tid.setHeaderText("Edit Phonenumber");
 		tid.showAndWait();
 		String phonenumber = tid.getEditor().getText();
-		user.setPhoneNumber(phonenumber);
-		phonenumberField.setText(phonenumber);
+		boolean isFormatted = false;
+
+		if (phonenumber.length() == 12) {
+			for (int i = 0; i < phonenumber.length(); i++) {
+				if (!(i == 3 || i == 7)) {
+					if (!(phonenumber.charAt(i) >= '0' && phonenumber.charAt(i) <= '9')) {
+						isFormatted = false;
+						break;
+					} else {
+						isFormatted = true;
+					}
+				} else {
+					if (phonenumber.charAt(i) == '-') {
+						isFormatted = true;
+					}
+				}
+			}
+
+			if (isFormatted && phonenumber.charAt(3) == '-' && phonenumber.charAt(7) == '-') {
+				isFormatted = true;
+
+			} else {
+				isFormatted = false;
+			}
+		}
+
+		if (isFormatted) {
+			user.setPhoneNumber(phonenumber);
+			phonenumberField.setText(phonenumber);
+		} else {
+			Alert alert = new Alert(AlertType.ERROR);
+			alert.setContentText("Format: ###-###-####");
+			alert.setTitle("PHONENUMBER ERROR");
+			alert.setHeaderText("Phonenumber needs to formatted correctly");
+			alert.showAndWait();
+		}
+
 	}
 
 	// initialize variables
