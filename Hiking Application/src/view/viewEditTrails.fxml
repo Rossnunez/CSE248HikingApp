@@ -15,7 +15,7 @@
 <?import javafx.scene.text.Text?>
 <?import org.controlsfx.control.CheckComboBox?>
 
-<AnchorPane prefHeight="500.0" prefWidth="800.0" stylesheets="WalkinWithStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerEditTrails">
+<AnchorPane prefHeight="500.0" prefWidth="820.0" stylesheets="WalkinWithStyle.css" xmlns="http://javafx.com/javafx/15.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllerEditTrails">
    <children>
       <TabPane layoutX="77.0" layoutY="32.0" prefHeight="500.0" prefWidth="500.0" tabClosingPolicy="UNAVAILABLE" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <tabs>
@@ -23,14 +23,15 @@
                <content>
                   <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Text layoutX="14.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Select Trails to Edit" wrappingWidth="278.1366882324219">
+                        <Pane prefHeight="58.0" prefWidth="820.0" styleClass="pane" />
+                        <Text layoutX="8.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Select Trails to Edit" wrappingWidth="402.1366882324219">
                            <font>
-                              <Font name="Microsoft JhengHei Light" size="29.0" />
+                              <Font name="Microsoft JhengHei Light" size="34.0" />
                            </font>
                         </Text>
-                        <TextField fx:id="searchField" layoutX="14.0" layoutY="81.0" onKeyTyped="#keyPressed" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" />
+                        <TextField fx:id="searchField" layoutX="14.0" layoutY="81.0" onKeyTyped="#keyPressed" prefHeight="25.0" prefWidth="191.0" promptText="Search for Trails" styleClass="searchbar" />
                         <Separator layoutY="57.0" prefHeight="3.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="57.0" />
-                        <Button layoutX="212.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchForTrails" prefHeight="25.0" prefWidth="76.0" text="Search">
+                        <Button layoutX="212.0" layoutY="81.0" mnemonicParsing="false" onAction="#searchForTrails" prefHeight="25.0" prefWidth="75.0" text="Search">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="12.0" />
                            </font>
@@ -58,26 +59,26 @@
                               <Font name="Microsoft JhengHei Bold" size="17.0" />
                            </font>
                         </Text>
-                        <CheckComboBox fx:id="difficultyCheckBox" layoutX="302.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
-                        <CheckComboBox fx:id="typeCheckBox" layoutX="412.0" layoutY="81.0" prefHeight="25.0" prefWidth="68.0" title="Type" />
-                        <Slider fx:id="lengthSlider" layoutX="503.0" layoutY="89.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
-                        <Slider fx:id="evelationSlider" layoutX="657.0" layoutY="89.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
-                        <Text layoutX="512.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
+                        <CheckComboBox fx:id="difficultyCheckBox" layoutX="316.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Difficulty" />
+                        <CheckComboBox fx:id="typeCheckBox" layoutX="434.0" layoutY="81.0" prefHeight="25.0" prefWidth="90.0" title="Type" />
+                        <Slider fx:id="lengthSlider" layoutX="546.0" layoutY="83.0" prefHeight="14.0" prefWidth="113.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Slider fx:id="evelationSlider" layoutX="691.0" layoutY="83.0" prefHeight="14.0" prefWidth="114.0" showTickLabels="true" showTickMarks="true" value="100.0" />
+                        <Text layoutX="554.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Length(mi)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
+                           <font>
+                              <Font name="Microsoft JhengHei Light" size="12.0" />
+                           </font>
+                        </Text>
+                        <Text layoutX="699.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
                         </Text>
-                        <Text layoutX="663.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Evelation Gain(ft)" textAlignment="CENTER" wrappingWidth="100.42816162109375">
-                           <font>
-                              <Font name="Microsoft JhengHei" size="12.0" />
-                           </font>
-                        </Text>
-                        <Button layoutX="676.0" layoutY="416.0" mnemonicParsing="false" onAction="#goBackPane" prefHeight="23.0" prefWidth="81.0" text="Go Back">
+                        <Button layoutX="724.0" layoutY="439.0" mnemonicParsing="false" onAction="#goBackPane" prefHeight="23.0" prefWidth="81.0" text="Go Back">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="11.0" />
                            </font>
                         </Button>
-                        <Button layoutX="440.0" layoutY="414.0" mnemonicParsing="false" onAction="#removeTrail" prefHeight="28.0" prefWidth="81.0" text="Remove">
+                        <Button layoutX="724.0" layoutY="407.0" mnemonicParsing="false" onAction="#removeTrail" prefHeight="6.0" prefWidth="81.0" text="Remove">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="11.0" />
                            </font>
@@ -90,7 +91,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Pane layoutY="-1.0" prefHeight="78.0" prefWidth="800.0" styleClass="pane" />
+                        <Pane layoutY="-1.0" prefHeight="78.0" prefWidth="820.0" styleClass="pane" />
                         <Text layoutX="215.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="text-header" text="Create a Hiking Trail" textAlignment="CENTER" wrappingWidth="352.876953125">
                            <font>
                               <Font name="Microsoft JhengHei Light" size="36.0" />

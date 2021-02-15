@@ -68,6 +68,10 @@
     -fx-background-color: linear-gradient(#9E9E9E, #757575);
 }
 
+.completetrail-button .text{
+	-fx-font-size:11px;
+}
+
 /* buttons ABOVE */
 
 .text-field:focused{
@@ -102,6 +106,13 @@
 	-fx-min-height: 26;
 	-fx-font-size: 13px;
 	-fx-max-width:350px;
+}
+
+.edittrail-bar{
+	-fx-background-radius: 15px;
+	-fx-min-height: 26;
+	-fx-font-size: 13px;
+	-fx-max-width: 600px;
 }
 
 /* text field and searchbar ABOVE */

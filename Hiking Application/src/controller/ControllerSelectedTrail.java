@@ -10,22 +10,29 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.TilePane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Modality;
 import javafx.stage.Popup;
@@ -96,8 +103,8 @@ public class ControllerSelectedTrail implements Initializable {
 	}
 
 	public void editDifficulty(ActionEvent event) {
+		
 		Stage primaryStage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-
 		final Stage dialog = new Stage();
 		dialog.initModality(Modality.APPLICATION_MODAL);
 		dialog.initOwner(primaryStage);
@@ -105,6 +112,14 @@ public class ControllerSelectedTrail implements Initializable {
 		TilePane tilePane = new TilePane();
 		
 		Label label = new Label("Select Trail Difficulty");
+	    label.setFont(new Font("Microsoft JhengHei", 18));
+	    label.setTextFill(Color.web("#58872e"));
+	    label.setAlignment(Pos.TOP_CENTER);
+	    label.setPadding(new Insets(0,0,0,0));
+
+	    BackgroundFill bg = new BackgroundFill(Color.web("#DCEDC8"), null, null);
+	    Background backGround = new Background(bg);
+	    tilePane.setBackground(backGround);
 		
 		ToggleGroup toggleGroup = new ToggleGroup();
 		
@@ -112,6 +127,13 @@ public class ControllerSelectedTrail implements Initializable {
 		RadioButton rModerate = new RadioButton("MODERATE");
 		RadioButton rEasy = new RadioButton("EASY");
 		
+		rHard.setFont(new Font(14));
+		rModerate.setFont(new Font(14));
+		rEasy.setFont(new Font(14));
+		
+		rHard.setPadding(new Insets(5,5,5,5));
+		rModerate.setPadding(new Insets(5,5,5,5));
+		rEasy.setPadding(new Insets(5,5,5,5));
 		
 		rHard.setToggleGroup(toggleGroup);
 		rModerate.setToggleGroup(toggleGroup);
@@ -120,7 +142,7 @@ public class ControllerSelectedTrail implements Initializable {
 		label.setAlignment(Pos.TOP_CENTER);
 		tilePane.setAlignment(Pos.CENTER);
 		tilePane.getChildren().addAll(label, rHard,rModerate,rEasy);
-		Scene sc = new Scene(tilePane, 200,200);
+		Scene sc = new Scene(tilePane, 250,200);
 		
 		toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ob, Toggle o, Toggle n)
@@ -136,8 +158,11 @@ public class ControllerSelectedTrail implements Initializable {
 			}
 		});
 		
+		dialog.getIcons().add(new Image("file:RawData/hiking.png"));
+		dialog.setTitle("Level");
 		dialog.setScene(sc);
 		dialog.show();
+		
 	}
 
 	public void editType(ActionEvent event) {
@@ -150,12 +175,28 @@ public class ControllerSelectedTrail implements Initializable {
 		TilePane tilePane = new TilePane();
 		
 		Label label = new Label("Select Trail Type");
+	    label.setFont(new Font("Microsoft JhengHei", 18));
+	    label.setTextFill(Color.web("#58872e"));
+	    label.setAlignment(Pos.TOP_CENTER);
+	    label.setPadding(new Insets(0,0,0,0));
+
+	    BackgroundFill bg = new BackgroundFill(Color.web("#DCEDC8"), null, null);
+	    Background backGround = new Background(bg);
+	    tilePane.setBackground(backGround);
 		
 		ToggleGroup toggleGroup = new ToggleGroup();
 		
 		RadioButton rPoint = new RadioButton("POINT_TO_POINT");
 		RadioButton rLoop = new RadioButton("LOOP");
 		RadioButton rOut = new RadioButton("OUT_AND_BACK");
+		
+		rPoint.setFont(new Font(14));
+		rLoop.setFont(new Font(14));
+		rOut.setFont(new Font(14));
+		
+		rPoint.setPadding(new Insets(5,5,5,5));
+		rLoop.setPadding(new Insets(5,5,5,5));
+		rOut.setPadding(new Insets(5,5,5,5));
 		
 		rPoint.setToggleGroup(toggleGroup);
 		rLoop.setToggleGroup(toggleGroup);
@@ -164,7 +205,7 @@ public class ControllerSelectedTrail implements Initializable {
 		tilePane.setAlignment(Pos.CENTER);
 		label.setAlignment(Pos.TOP_CENTER);
 		tilePane.getChildren().addAll(label, rPoint, rLoop, rOut);
-		Scene sc = new Scene(tilePane, 200,200);
+		Scene sc = new Scene(tilePane, 250,200);
 		
 		toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 			public void changed(ObservableValue<? extends Toggle> ob, Toggle o, Toggle n)
@@ -179,9 +220,9 @@ public class ControllerSelectedTrail implements Initializable {
 			}
 		});
 		
+		dialog.setTitle("Trail Type");
 		dialog.setScene(sc);
 		dialog.show();
-		
 	}
 
 	@Override

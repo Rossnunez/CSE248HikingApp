@@ -309,6 +309,7 @@ public class Controller2 implements Initializable {
 				.removeIf(e -> e.getTrail().getTrailName().compareTo(hikingUncompleted.getTrail().getTrailName()) == 0);
 
 		tableUncompleted.getItems().remove(tableUncompleted.getSelectionModel().getSelectedItem());
+		selectedTrailUncompleted.setText("Trail Completed!");
 	}
 
 	public void searchForTrailsUncompleted(ActionEvent event) {
@@ -410,6 +411,7 @@ public class Controller2 implements Initializable {
 		HikingUncompleted hikingUncompleted = new HikingUncompleted(current, trail);
 		user.getHikingUncompletedSet().add(hikingUncompleted);
 		table.getItems().remove(table.getSelectionModel().getSelectedItem());
+		selectedTrail.setText("Trail Started!");
 
 	}
 
