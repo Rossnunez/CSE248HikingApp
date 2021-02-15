@@ -9,6 +9,8 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import javax.imageio.ImageIO;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
@@ -53,346 +55,185 @@ public class ControllerImageView implements Initializable {
 
 	//
 	public void removeImage1(MouseEvent event) {
-		if(one.getImage() != null) {
-			Stage window = new Stage();
-			window.initModality(Modality.APPLICATION_MODAL);
-			window.setTitle("Remove Image");
-			window.setMinWidth(250);
-			Label label = new Label();
-			label.setText("Would you like to remove this image?");
-			label.setAlignment(Pos.TOP_CENTER);
-			
-			//two buttons!!! :D
-			Button yesBtn = new Button("Yes");
-			Button noBtn = new Button("No");
-			
-			yesBtn.setOnAction(e ->{
+		if (one.getImage() != null) {
+
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this Image?", "Remove Image",
+					JOptionPane.YES_NO_OPTION);
+
+			if (n == JOptionPane.YES_OPTION) {
 				one.setImage(null);
 				hikingHistory.getImages().remove(0);
-				System.out.println("Image removed!");
-				window.close();
 				refreshPage();
-				
-			});
-			
-			noBtn.setOnAction(e ->{
-				System.out.println("Image not removed!");
-				window.close();
-			});
-			
-			VBox layout = new VBox(10);
-			layout.getChildren().addAll(label,yesBtn,noBtn);
-			layout.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(layout);
-			window.setScene(scene);
-			window.showAndWait();
-		}	
+
+			} else if (n == JOptionPane.NO_OPTION) {
+				//
+			}
+		}
 	}
-	
+
 	public void removeImage2(MouseEvent event) {
-		if(two.getImage() != null) {
-			Stage window = new Stage();
-			window.initModality(Modality.APPLICATION_MODAL);
-			window.setTitle("Remove Image");
-			window.setMinWidth(250);
-			Label label = new Label();
-			label.setText("Would you like to remove this image?");
-			label.setAlignment(Pos.TOP_CENTER);
-			
-			//two buttons!!! :D
-			Button yesBtn = new Button("Yes");
-			Button noBtn = new Button("No");
-			
-			yesBtn.setOnAction(e ->{
+		if (two.getImage() != null) {
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this Image?", "Remove Image",
+					JOptionPane.YES_NO_OPTION);
+
+			if (n == JOptionPane.YES_OPTION) {
 				two.setImage(null);
 				hikingHistory.getImages().remove(1);
-				System.out.println("Image removed!");
-				window.close();
 				refreshPage();
-				
-			});
-			
-			noBtn.setOnAction(e ->{
-				System.out.println("Image not removed!");
-				window.close();
-			});
-			
-			VBox layout = new VBox(10);
-			layout.getChildren().addAll(label,yesBtn,noBtn);
-			layout.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(layout);
-			window.setScene(scene);
-			window.showAndWait();
-		}	
+
+			} else if (n == JOptionPane.NO_OPTION) {
+				//
+			}
+		}
 	}
-	
+
 	public void removeImage3(MouseEvent event) {
-		if(three.getImage() != null) {
-			Stage window = new Stage();
-			window.initModality(Modality.APPLICATION_MODAL);
-			window.setTitle("Remove Image");
-			window.setMinWidth(250);
-			Label label = new Label();
-			label.setText("Would you like to remove this image?");
-			label.setAlignment(Pos.TOP_CENTER);
-			
-			//two buttons!!! :D
-			Button yesBtn = new Button("Yes");
-			Button noBtn = new Button("No");
-			
-			yesBtn.setOnAction(e ->{
+		if (three.getImage() != null) {
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this Image?", "Remove Image",
+					JOptionPane.YES_NO_OPTION);
+
+			if (n == JOptionPane.YES_OPTION) {
 				three.setImage(null);
 				hikingHistory.getImages().remove(2);
-				System.out.println("Image removed!");
-				window.close();
 				refreshPage();
-				
-			});
-			
-			noBtn.setOnAction(e ->{
-				System.out.println("Image not removed!");
-				window.close();
-			});
-			
-			VBox layout = new VBox(10);
-			layout.getChildren().addAll(label,yesBtn,noBtn);
-			layout.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(layout);
-			window.setScene(scene);
-			window.showAndWait();
-		}	
+
+			} else if (n == JOptionPane.NO_OPTION) {
+				//
+			}
+		}
 	}
-	
+
 	public void removeImage4(MouseEvent event) {
-		if(four.getImage() != null) {
-			Stage window = new Stage();
-			window.initModality(Modality.APPLICATION_MODAL);
-			window.setTitle("Remove Image");
-			window.setMinWidth(250);
-			Label label = new Label();
-			label.setText("Would you like to remove this image?");
-			label.setAlignment(Pos.TOP_CENTER);
-			
-			//two buttons!!! :D
-			Button yesBtn = new Button("Yes");
-			Button noBtn = new Button("No");
-			
-			yesBtn.setOnAction(e ->{
+		if (four.getImage() != null) {
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this Image?", "Remove Image",
+					JOptionPane.YES_NO_OPTION);
+
+			if (n == JOptionPane.YES_OPTION) {
 				four.setImage(null);
 				hikingHistory.getImages().remove(3);
-				System.out.println("Image removed!");
-				window.close();
 				refreshPage();
-				
-			});
-			
-			noBtn.setOnAction(e ->{
-				System.out.println("Image not removed!");
-				window.close();
-			});
-			
-			VBox layout = new VBox(10);
-			layout.getChildren().addAll(label,yesBtn,noBtn);
-			layout.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(layout);
-			window.setScene(scene);
-			window.showAndWait();
-		}	
+
+			} else if (n == JOptionPane.NO_OPTION) {
+				//
+			}
+		}
 	}
-	
+
 	public void removeImage5(MouseEvent event) {
-		if(five.getImage() != null) {
-			Stage window = new Stage();
-			window.initModality(Modality.APPLICATION_MODAL);
-			window.setTitle("Remove Image");
-			window.setMinWidth(250);
-			Label label = new Label();
-			label.setText("Would you like to remove this image?");
-			label.setAlignment(Pos.TOP_CENTER);
-			
-			//two buttons!!! :D
-			Button yesBtn = new Button("Yes");
-			Button noBtn = new Button("No");
-			
-			yesBtn.setOnAction(e ->{
+		if (five.getImage() != null) {
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this Image?", "Remove Image",
+					JOptionPane.YES_NO_OPTION);
+
+			if (n == JOptionPane.YES_OPTION) {
 				five.setImage(null);
 				hikingHistory.getImages().remove(4);
-				System.out.println("Image removed!");
-				window.close();
 				refreshPage();
-				
-			});
-			
-			noBtn.setOnAction(e ->{
-				System.out.println("Image not removed!");
-				window.close();
-			});
-			
-			VBox layout = new VBox(10);
-			layout.getChildren().addAll(label,yesBtn,noBtn);
-			layout.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(layout);
-			window.setScene(scene);
-			window.showAndWait();
-		}	
+
+			} else if (n == JOptionPane.NO_OPTION) {
+				//
+			}
+		}
 	}
-	
+
 	public void removeImage6(MouseEvent event) {
-		if(six.getImage() != null) {
-			Stage window = new Stage();
-			window.initModality(Modality.APPLICATION_MODAL);
-			window.setTitle("Remove Image");
-			window.setMinWidth(250);
-			Label label = new Label();
-			label.setText("Would you like to remove this image?");
-			label.setAlignment(Pos.TOP_CENTER);
-			
-			//two buttons!!! :D
-			Button yesBtn = new Button("Yes");
-			Button noBtn = new Button("No");
-			
-			yesBtn.setOnAction(e ->{
+		if (six.getImage() != null) {
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this Image?", "Remove Image",
+					JOptionPane.YES_NO_OPTION);
+
+			if (n == JOptionPane.YES_OPTION) {
 				six.setImage(null);
 				hikingHistory.getImages().remove(5);
-				System.out.println("Image removed!");
-				window.close();
 				refreshPage();
-				
-			});
-			
-			noBtn.setOnAction(e ->{
-				System.out.println("Image not removed!");
-				window.close();
-			});
-			
-			VBox layout = new VBox(10);
-			layout.getChildren().addAll(label,yesBtn,noBtn);
-			layout.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(layout);
-			window.setScene(scene);
-			window.showAndWait();
-		}	
+
+			} else if (n == JOptionPane.NO_OPTION) {
+				//
+			}
+		}
 	}
-	
+
 	public void removeImage7(MouseEvent event) {
-		if(seven.getImage() != null) {
-			Stage window = new Stage();
-			window.initModality(Modality.APPLICATION_MODAL);
-			window.setTitle("Remove Image");
-			window.setMinWidth(250);
-			Label label = new Label();
-			label.setText("Would you like to remove this image?");
-			label.setAlignment(Pos.TOP_CENTER);
-			
-			//two buttons!!! :D
-			Button yesBtn = new Button("Yes");
-			Button noBtn = new Button("No");
-			
-			yesBtn.setOnAction(e ->{
+		if (seven.getImage() != null) {
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this Image?", "Remove Image",
+					JOptionPane.YES_NO_OPTION);
+
+			if (n == JOptionPane.YES_OPTION) {
 				seven.setImage(null);
-				hikingHistory.getImages().remove(6);
-				System.out.println("Image removed!");
-				window.close();
+				hikingHistory.getImages().remove(5);
 				refreshPage();
-				
-			});
-			
-			noBtn.setOnAction(e ->{
-				System.out.println("Image not removed!");
-				window.close();
-			});
-			
-			VBox layout = new VBox(10);
-			layout.getChildren().addAll(label,yesBtn,noBtn);
-			layout.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(layout);
-			window.setScene(scene);
-			window.showAndWait();
-		}	
+
+			} else if (n == JOptionPane.NO_OPTION) {
+				//
+			}
+		}
 	}
-	
+
 	public void removeImage8(MouseEvent event) {
-		if(eight.getImage() != null) {
-			Stage window = new Stage();
-			window.initModality(Modality.APPLICATION_MODAL);
-			window.setTitle("Remove Image");
-			window.setMinWidth(250);
-			Label label = new Label();
-			label.setText("Would you like to remove this image?");
-			label.setAlignment(Pos.TOP_CENTER);
-			
-			//two buttons!!! :D
-			Button yesBtn = new Button("Yes");
-			Button noBtn = new Button("No");
-			
-			yesBtn.setOnAction(e ->{
+		if (eight.getImage() != null) {
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this Image?", "Remove Image",
+					JOptionPane.YES_NO_OPTION);
+
+			if (n == JOptionPane.YES_OPTION) {
 				eight.setImage(null);
 				hikingHistory.getImages().remove(7);
-				System.out.println("Image removed!");
-				window.close();
 				refreshPage();
-				
-			});
-			
-			noBtn.setOnAction(e ->{
-				System.out.println("Image not removed!");
-				window.close();
-			});
-			
-			VBox layout = new VBox(10);
-			layout.getChildren().addAll(label,yesBtn,noBtn);
-			layout.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(layout);
-			window.setScene(scene);
-			window.showAndWait();
-		}	
+
+			} else if (n == JOptionPane.NO_OPTION) {
+				//
+			}
+		}
 	}
-	
+
 	public void removeImage9(MouseEvent event) {
-		if(nine.getImage() != null) {
-			Stage window = new Stage();
-			window.initModality(Modality.APPLICATION_MODAL);
-			window.setTitle("Remove Image");
-			window.setMinWidth(250);
-			Label label = new Label();
-			label.setText("Would you like to remove this image?");
-			label.setAlignment(Pos.TOP_CENTER);
-			
-			//two buttons!!! :D
-			Button yesBtn = new Button("Yes");
-			Button noBtn = new Button("No");
-			
-			yesBtn.setOnAction(e ->{
+		if (nine.getImage() != null) {
+			JFrame frame = new JFrame("FrameDemo");
+			frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+			int n = JOptionPane.showConfirmDialog(frame, "Do you want to remove this Image?", "Remove Image",
+					JOptionPane.YES_NO_OPTION);
+
+			if (n == JOptionPane.YES_OPTION) {
 				nine.setImage(null);
 				hikingHistory.getImages().remove(8);
-				System.out.println("Image removed!");
-				window.close();
 				refreshPage();
-				
-			});
-			
-			noBtn.setOnAction(e ->{
-				System.out.println("Image not removed!");
-				window.close();
-			});
-			
-			VBox layout = new VBox(10);
-			layout.getChildren().addAll(label,yesBtn,noBtn);
-			layout.setAlignment(Pos.CENTER);
-			Scene scene = new Scene(layout);
-			window.setScene(scene);
-			window.showAndWait();
-		}	
+
+			} else if (n == JOptionPane.NO_OPTION) {
+				//
+			}
+		}
 	}
-	
+
 	public void goBackPane(ActionEvent event) throws IOException {
 		Parent secondRoot = FXMLLoader.load(getClass().getResource("/view/view2.fxml"));
 		Scene secondScene = new Scene(secondRoot);
-		Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+		Stage window = (Stage) ((Node) event.getSource()).getScene().getWindow();
 		window.setScene(secondScene);
 		window.show();
 	}
-	
+
 	public void refreshPage() {
 		int i = 0;
 		one.setImage(null);
@@ -405,17 +246,17 @@ public class ControllerImageView implements Initializable {
 		eight.setImage(null);
 		nine.setImage(null);
 		for (String string : hikingHistory.getImages()) {
-				File file = new File(string);
-				setFilePath(file);
+			File file = new File(string);
+			setFilePath(file);
 
-				try {
-					bufferedImage = ImageIO.read(filePath);
-				} catch (IOException e) {
-					System.out.println("ERROR");
-				}
-				Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-				list.get(i).setImage(image);
-				i++;
+			try {
+				bufferedImage = ImageIO.read(filePath);
+			} catch (IOException e) {
+				System.out.println("ERROR");
+			}
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			list.get(i).setImage(image);
+			i++;
 		}
 	}
 
@@ -442,20 +283,20 @@ public class ControllerImageView implements Initializable {
 		list.add(seven);
 		list.add(eight);
 		list.add(nine);
-		
+
 		int i = 0;
 		for (String string : hikingHistory.getImages()) {
-				File file = new File(string);
-				setFilePath(file);
+			File file = new File(string);
+			setFilePath(file);
 
-				try {
-					bufferedImage = ImageIO.read(filePath);
-				} catch (IOException e) {
-					System.out.println("ERROR");
-				}
-				Image image = SwingFXUtils.toFXImage(bufferedImage, null);
-				list.get(i).setImage(image);
-				i++;
+			try {
+				bufferedImage = ImageIO.read(filePath);
+			} catch (IOException e) {
+				System.out.println("ERROR");
+			}
+			Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+			list.get(i).setImage(image);
+			i++;
 		}
 	}
 }

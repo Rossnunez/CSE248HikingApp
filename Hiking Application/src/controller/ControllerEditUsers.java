@@ -123,7 +123,7 @@ public class ControllerEditUsers implements Initializable {
 					userTable.getItems().remove(userTable.getSelectionModel().getSelectedItem());
 
 				} else if (n == JOptionPane.NO_OPTION) {
-					System.out.println("no");
+					//
 				}
 			}
 

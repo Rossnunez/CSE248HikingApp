@@ -22,7 +22,7 @@
             </Text>
          </children>
       </Pane>
-      <Pane id="pane" layoutX="29.0" layoutY="105.0" prefHeight="364.0" prefWidth="199.0" styleClass="pane" />
+      <Pane layoutX="29.0" layoutY="105.0" prefHeight="364.0" prefWidth="199.0" styleClass="login-pane" />
       <Separator layoutY="73.0" prefHeight="30.0" prefWidth="500.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="73.0" />
       <TextField fx:id="usernameField" layoutX="47.0" layoutY="155.0" promptText="Username" />
       <TextField fx:id="firstnameField" layoutX="47.0" layoutY="266.0" promptText="First Name" />

@@ -125,6 +125,10 @@
 	-fx-background-color: #f5fced;
 }
 
+.login-pane{
+	-fx-background-color:rgba(139,195,74,0.4);
+}
+
 /* pane ABOVE */
 
 .image-view:hover{
